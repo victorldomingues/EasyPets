@@ -30,12 +30,16 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{asset('')}}template/index2.html"><b>Easy</b>Pets</a>
+    <a href="{{asset('')}}"><b>Easy</b>Pets</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     
     @yield('content')
+
+    <br />
+    <a href="{{asset('')}}">Voltar para a loja</a>
+
   </div>
   <!-- /.login-box-body -->
 </div>
