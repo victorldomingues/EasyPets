@@ -30,7 +30,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{asset('')}}"><b>Easy</b>Pets</a>
+    <a href="{{asset('')}}"> <em class="fa fa-shopping-bag" > </em> <b>Easy</b>Pets </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

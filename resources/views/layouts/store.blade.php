@@ -42,7 +42,8 @@
                 <div class="container">
                     <div class="navbar-header">
                         <a href="{{asset('')}}" class="navbar-brand">
-                            <b>Easy</b>Pets</a>
+                            <em class="fa fa-shopping-bag"> </em>
+                            <b>Easy</b>Pets </a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -52,37 +53,20 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a href="#">Link
+                                <a href="#">Produtos
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Link</a>
+                                <a href="#">Serviços </a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                                    <span class="caret"></span>
+                            <li>
+                                <a href="#">Adoção
+                                    <em class="fa fa-paw"></em>
+                                    <span class="sr-only">(current)</span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="#">Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Something else here</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">Separated link</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">One more separated link</a>
-                                    </li>
-                                </ul>
                             </li>
+
                         </ul>
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
@@ -95,7 +79,8 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
 
-
+                           @component('shared.header.cart')
+                           @endcomponent
 
                             @guest
                             <li>
@@ -215,51 +200,9 @@
                                 </ul>
                             </li>
                             <!-- User Account Menu -->
-                            <li class="dropdown user user-menu">
-                                <!-- Menu Toggle Button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <!-- The user image in the navbar-->
-                                    <img src="{{asset('')}}template/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                    <span class="hidden-xs">Alexander Pierce</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- The user image in the menu -->
-                                    <li class="user-header">
-                                        <img src="{{asset('')}}template/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                        <p>
-                                            Alexander Pierce - Web Developer
-                                            <small>Member since Nov. 2012</small>
-                                        </p>
-                                    </li>
-                                    <!-- Menu Body -->
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </li>
-                                    <!-- Menu Footer-->
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            @endguest
+                           @component('shared.header.profile')
+                           @endcomponent
+                        @endguest
                         </ul>
                     </div>
                     <!-- /.navbar-custom-menu -->
