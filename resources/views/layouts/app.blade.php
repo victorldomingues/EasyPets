@@ -291,20 +291,25 @@
     </header>
 
 
+    @component('shared.menus.sidebarleft')
+    @endcomponent
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       @yield('content')
     </div>
+
+
     <!-- /.content-wrapper -->
     <footer class="main-footer">
       @component('shared.footer.footer')
       @endcomponent
     </footer>
 
-
-    @component('shared.menus.sidebar')
+    @component('shared.menus.sidebarright')
     @endcomponent
+
   </div>
   <!-- ./wrapper -->
 

@@ -36,7 +36,7 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="{{route('home')}}" class="btn btn-default btn-flat">Minha conta</a>
+                <a href="{{route('manager')}}" class="btn btn-default btn-flat">Minha conta</a>
             </div>
             <div class="pull-right">
                 <a href="{{ route('logout') }}"
