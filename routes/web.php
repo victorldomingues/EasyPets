@@ -19,6 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/products', 'ProductsController@index')->name('products');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/services', 'ServicesController@index')->name('services');
+
+Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
+
+Route::get('/adoption/pets', 'PetsController@index')->name('pets');
+

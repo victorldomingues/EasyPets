@@ -53,20 +53,20 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a href="#">Página inicial
+                                <a href="{{asset('')}}">Página inicial
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Produtos
+                                <a href="{{route('products')}}">Produtos
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Serviços </a>
+                                <a href="{{route('services')}}">Serviços </a>
                             </li>
                             <li>
-                                <a href="#">Adoção
+                                <a href="{{route('adoption')}}">Adoção
                                     <em class="fa fa-paw"></em>
                                     <span class="sr-only">(current)</span>
                                 </a>
@@ -141,32 +141,8 @@
                             </li>
                             <!-- /.messages-menu -->
 
-                            <!-- Notifications Menu -->
-                            <li class="dropdown notifications-menu">
-                                <!-- Menu toggle button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
-                                    <li>
-                                        <!-- Inner Menu: contains the notifications -->
-                                        <ul class="menu">
-                                            <li>
-                                                <!-- start notification -->
-                                                <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                                </a>
-                                            </li>
-                                            <!-- end notification -->
-                                        </ul>
-                                    </li>
-                                    <li class="footer">
-                                        <a href="#">View all</a>
-                                    </li>
-                                </ul>
-                            </li>
+
+                            
                             <!-- Tasks Menu -->
                             <li class="dropdown tasks-menu">
                                 <!-- Menu Toggle Button -->
