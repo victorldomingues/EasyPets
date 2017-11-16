@@ -27,7 +27,7 @@
                     <a href="">Carrinho</a>
                 </div>
                 <div class="col-xs-4 text-center">
-                    <a href="">Pedidos</a>
+                    <a href="">Compras</a>
                 </div>
 
             </div>
