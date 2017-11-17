@@ -21,7 +21,13 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Cores de produto cadastradas</h3>
+                    <h3 class="box-title">Cores de produto cadastradas </h3>
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <a href="{{route('manager.colors.new')}}" type="button" class="btn bg-olive btn-sm" data-toggle="tooltip" title="Cadastrar nova cor">
+                            <i class="fa fa-plus"></i> Novo
+                        </a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -35,17 +41,23 @@
                         <tbody>
                             <tr>
                                 <td>Nome da cor x.y.z</td>
-                                <td><button class="btn btn-info"> Ações</button></td>
+                                <td>
+                                    <button class="btn btn-default  btn-sm"> Ações</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Nome da cor x.y.z</td>
-                                <td><button class="btn btn-info"> Ações</button></td>
+                                <td>
+                                    <button class="btn btn-defaultinfo  btn-sm"> Ações</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Nome da cor x.y.z</td>
-                                <td><button class="btn btn-info"> Ações</button></td>
+                                <td>
+                                    <button class="btn btn-default  btn-sm"> Ações</button>
+                                </td>
                             </tr>
-                            
+
                         </tbody>
                         <tfoot>
                             <tr>

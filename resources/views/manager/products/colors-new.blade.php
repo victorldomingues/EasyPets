@@ -11,7 +11,11 @@
       <a href="{{route('manager')}}">
         <i class="fa fa-shopping-bag "></i> Visão Geral</a>
     </li>
-    <li class="active">Cores</li>
+    <li>
+      <a href="{{route('manager.colors')}}">
+      Cores </a>
+    </li>
+    <li class="active">Nova cor</li>
   </ol>
 </section>
 <!-- Main content -->

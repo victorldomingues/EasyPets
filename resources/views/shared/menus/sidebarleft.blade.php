@@ -101,7 +101,7 @@
                             <i class="fa fa-circle-o"></i> Categorias</a>
                     </li>
                     <li>
-                        <a href="{{route('manager/colors')}}">
+                        <a href="{{route('manager.colors')}}">
                             <i class="fa fa-circle-o"></i> Cores</a>
                     </li>
                     <li>
