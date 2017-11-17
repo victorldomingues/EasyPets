@@ -28,4 +28,9 @@ Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
 Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 
 Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('manager.colors');
+
 Route::get('/manager/colors/new', 'Manager\Products\ColorsController@create')->name('manager.colors.new');
+
+Route::post('/manager/colors/new', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
+
+

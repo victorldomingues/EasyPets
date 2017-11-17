@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Manager\Products;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Manager\Products;
+use App\Http\Requests\Manager\Products\ColorRequest;
 use Illuminate\Http\Request;
+use App\Models\Productcolor;
+
+use Illuminate\Support\Facades\Auth;
 
 class ColorsController extends Controller
 {
@@ -40,9 +43,13 @@ class ColorsController extends Controller
     public function store(ColorRequest $request)
     {
         $color = new Productcolor;
-        $color->name        = $request->name;
+        $color->name          = $request->name;
+        $color->description   = $request->description;
+        $color->deleted       = $request->deleted;
+        $color->created_by    = Auth::user()->id;
+        $color->status        = 1;
         $color->save();
-        return redirect()->route('mangaer.products.colors')->with('message', 'Cor cadastrada com sucesso!');
+        return redirect()->route('manager.colors')->with('message', 'Cor cadastrada com sucesso!');
     }
   
     public function show($id)
@@ -68,6 +75,6 @@ class ColorsController extends Controller
     {
         $color = Productcolor::findOrFail($id);
         $color->delete();
-        return redirect()->route('manager.products.colors')->with('alert-success', 'Cor removida com sucesso!');
+        return redirect()->route('manager.colors')->with('alert-success', 'Cor removida com sucesso!');
     }
 }

@@ -13,7 +13,7 @@ class ColorRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,4 +27,10 @@ class ColorRequest extends FormRequest
             //
         ];
     }
+
+    protected $fillable = [
+		'Name',
+		'Description',
+		'Deleted'
+	];
 }

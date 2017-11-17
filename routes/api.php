@@ -21,3 +21,5 @@ Route::group(['namespace' => 'api'], function () {
     Route::post('/login', 'UserController@login');
     Route::get('/details', 'UserController@details')->middleware('auth:api');
 });
+
+
