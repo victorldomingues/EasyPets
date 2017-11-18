@@ -11,9 +11,13 @@
         git clone https://github.com/victorldomingues/EasyPets.git
     </li>
     <li>
-        Após o processo aparecerá a pasta EasyPets, entre nela e clique novamente com o botão direito e no "GIT BASH HERE" e escreve a seguinte comando: <br>
+        Após o processo aparecerá a pasta EasyPets, entre nela e clique novamente clique com o botão direito e va no "GIT BASH HERE" e escreve o seguinte comando: <br>
         composer install<br>
         Irá baixar e instalar todo o pacote
+    </li>
+    <li>
+        Para rodar o servidor escreve na litnha de comando na basta ou se tiver o git bash here aberto:<br>
+        php artisan serve
     </li>
 </ol>
 
