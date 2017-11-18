@@ -129,7 +129,7 @@
                             <i class="fa fa-circle-o"></i> Adoções</a>
                     </li>
                     <li>
-                        <a href="index.html">
+                        <a href="{{route('manager.pets')}}">
                             <i class="fa fa-circle-o"></i> Pets</a>
                     </li>
                 </ul>

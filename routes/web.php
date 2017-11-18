@@ -57,6 +57,10 @@ Route::get('/manager/categories/new', 'Manager\Products\CategoriesController@cre
 Route::post('/manager/categories/new', 'Manager\Products\CategoriesController@store')->name('manager.categories.store');
 
 
-
-
 // Manager adoption
+
+Route::get('/manager/pets', 'Manager\Adoptions\AdoptionsController@index')->name('manager.pets');
+
+Route::get('/manager/pets/new', 'Manager\Adoptions\AdoptionsController@create')->name('manager.pets.new');
+
+Route::post('/manager/pets/new', 'Manager\Adoptions\AdoptionsController@store')->name('manager.pets.store');
