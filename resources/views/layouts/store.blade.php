@@ -53,15 +53,20 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a href="#">Produtos
+                                <a href="{{asset('')}}">Página inicial
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Serviços </a>
+                                <a href="{{route('products')}}">Produtos
+                                    <span class="sr-only">(current)</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#">Adoção
+                                <a href="{{route('services')}}">Serviços </a>
+                            </li>
+                            <li>
+                                <a href="{{route('adoption')}}">Adoção
                                     <em class="fa fa-paw"></em>
                                     <span class="sr-only">(current)</span>
                                 </a>
@@ -162,6 +167,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                             <!-- Tasks Menu -->
                             <li class="dropdown tasks-menu">
                                 <!-- Menu Toggle Button -->
@@ -213,17 +219,15 @@
         <!-- Full Width Column -->
         <div class="content-wrapper">
             <div class="container">
-                @yield('content')</div>
+                @yield('content')
+            </div>
             <!-- /.container -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="container">
-                <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.4.0
-                </div>
-                <strong>Copyright &copy; 2014-2016
-                    <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
+                @component('shared.footer.footer')
+                @endcomponent
             </div>
             <!-- /.container -->
         </footer>

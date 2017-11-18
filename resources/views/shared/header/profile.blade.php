@@ -27,7 +27,7 @@
                     <a href="">Carrinho</a>
                 </div>
                 <div class="col-xs-4 text-center">
-                    <a href="">Pedidos</a>
+                    <a href="">Compras</a>
                 </div>
 
             </div>
@@ -36,10 +36,16 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="{{route('home')}}" class="btn btn-default btn-flat">Minha conta</a>
+                <a href="{{route('manager')}}" class="btn btn-default btn-flat">Minha conta</a>
             </div>
             <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();" 
+                   class="btn btn-default btn-flat">Sair</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
         </li>
     </ul>

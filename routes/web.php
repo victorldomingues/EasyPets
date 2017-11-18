@@ -17,8 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/manager', 'HomeController@index')->name('manager');
 
-Auth::routes();
+Route::get('/products', 'ProductsController@index')->name('products');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/services', 'ServicesController@index')->name('services');
+
+Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
+
+Route::get('/adoption/pets', 'PetsController@index')->name('pets');
+
+Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('manager.colors');
+
+Route::get('/manager/colors/new', 'Manager\Products\ColorsController@create')->name('manager.colors.new');
+
+Route::post('/manager/colors/new', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
+
+
