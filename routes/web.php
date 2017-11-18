@@ -17,17 +17,29 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/manager', 'HomeController@index')->name('manager');
+// Store products
 
 Route::get('/products', 'ProductsController@index')->name('products');
 
+
+// Store Serviçes
+
 Route::get('/services', 'ServicesController@index')->name('services');
 
+
+// Store Adoption
 
 Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
 
 Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 
+
+// Manager
+
+Route::get('/manager', 'HomeController@index')->name('manager');
+
+
+// Manager product colors
 
 Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('manager.colors');
 
@@ -36,6 +48,8 @@ Route::get('/manager/colors/new', 'Manager\Products\ColorsController@create')->n
 Route::post('/manager/colors/new', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
 
 
+// Manager product categories
+
 Route::get('/manager/categories', 'Manager\Products\CategoriesController@index')->name('manager.categories');
 
 Route::get('/manager/categories/new', 'Manager\Products\CategoriesController@create')->name('manager.categories.new');
@@ -43,3 +57,6 @@ Route::get('/manager/categories/new', 'Manager\Products\CategoriesController@cre
 Route::post('/manager/categories/new', 'Manager\Products\CategoriesController@store')->name('manager.categories.store');
 
 
+
+
+// Manager adoption
