@@ -30,7 +30,7 @@ class Productcolor extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
 	protected $primaryKey = 'Id';
-
+	public $timestamps = false;
 	protected $casts = [
 		'created_by' => 'int',
 		'updated_by' => 'int',
