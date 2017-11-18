@@ -26,7 +26,7 @@ class ColorsController extends Controller
 
     public function index()
     {
-        $colors = Productcolor::ordphpBy('created_at', 'desc')->get();
+        $colors = Productcolor::orderBy('created_at', 'desc')->get();
 
         return view('manager.products.colors', ['colors' => $colors]);
     }

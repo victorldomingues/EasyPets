@@ -97,7 +97,7 @@
                             <i class="fa fa-circle-o"></i> Produtos</a>
                     </li>
                     <li>
-                        <a href="index2.html">
+                        <a href="{{route('manager.categories')}}">
                             <i class="fa fa-circle-o"></i> Categorias</a>
                     </li>
                     <li>
