@@ -47,6 +47,12 @@ Route::get('/manager/colors/new', 'Manager\Products\ColorsController@create')->n
 
 Route::post('/manager/colors/new', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
 
+Route::get('/manager/colors/{id}', 'Manager\Products\ColorsController@show')->name('manager.colors.show');
+
+Route::get('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@edit')->name('manager.colors.edit');
+
+Route::post('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@update')->name('manager.colors.update');
+
 
 // Manager product categories
 

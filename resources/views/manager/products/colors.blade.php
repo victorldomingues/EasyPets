@@ -45,17 +45,17 @@
 								<td> {{ $color->Name }} </td>
 								<td>
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-default">Visualizar</button>
+										<a href="{!! route('manager.colors.show', ['id'=>$color->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
 										<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a href="#">Visualizar</a>
+												<a href="{!! route('manager.colors.show', ['id'=>$color->Id])  !!}">Visualizar</a>
 											</li>
 											<li>
-												<a href="#">Editar</a>
+												<a href="{!! route('manager.colors.edit', ['id'=>$color->Id])  !!}">Editar</a>
 											</li>
 											<li class="divider"></li>
 											<li>

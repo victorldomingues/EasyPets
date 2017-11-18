@@ -56,21 +56,26 @@ class ColorsController extends Controller
   
     public function show($id)
     {
-        //
+        $color = Productcolor::findOrFail($id);
+        return view('manager.products.colors-show', compact('color'));
     }
   
     public function edit($id)
     {
         $color = Productcolor::findOrFail($id);
-        return view('manager.products.colors.edit', compact('product'));
+        return view('manager.products.colors-new', compact('color'));
     }
   
     public function update(ColorRequest $request, $id)
     {
         $color = Productcolor::findOrFail($id);
-        $color->name        = $request->name;
+        $color->name          = $request->name;
+        $color->description   = $request->description;
+        $color->deleted       = $request->deleted;
+        $color->deleted_at    = null;
+        $color->updated_by    = Auth::user()->id;
         $color->save();
-        return redirect()->route('manager.products.colors')->with('message', 'Cor atualizada com sucesso!');
+        return redirect()->route('manager.colors')->with('message', 'Cor atualizada com sucesso!');
     }
   
     public function destroy($id)

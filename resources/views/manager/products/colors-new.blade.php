@@ -30,22 +30,22 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form role="form" method="POST" action="{{route('manager.colors.store')}}">
-         			{{ csrf_field() }}
+				<form role="form" method="POST" @isset($color) action="{!! route('manager.colors.update', ['id'=>$color->Id])  !!}" @endisset @empty($color) action="{{route('manager.colors.store')}}" @endempty>
+					{{ csrf_field() }}
 					<div class="box-body">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Nome da cor</label>
-							<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" required>
+							<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)"  @isset($color) value="{{$color->Name}}" @endisset   required>
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Descrição</label>
-							<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" required>
+							<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)"  @isset($color) value="{{$color->Description}}" @endisset   >
 						</div>
 
 						<div class="checkbox">
 							<label>
-								<input type="checkbox" id="deleted" name="deleted"> Inativo
+								<input type="checkbox" id="deleted" name="deleted"  @isset($color) @if($color->deleted) checked="checked" @endif value="{{$color->deleted}}" @endisset> Inativo
 							</label>
 						</div>
 					</div>
@@ -53,7 +53,13 @@
 
 					<div class="box-footer">
 						<button type="submit" class="btn btn-primary">Salvar</button>
+						@isset($color) 
+							<button type="button" class="btn btn-danger"> Remover </button>
+						@endisset
 					</div>
+
+
+
 				</form>
 			</div>
 			<!-- /.box -->
