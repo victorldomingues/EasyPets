@@ -1,5 +1,4 @@
-@extends('layouts.app') 
-@section('content')
+@extends('layouts.app') @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
@@ -31,11 +30,11 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form role="form" method="POST" @isset($product) action="{!! route('manager.products.update', ['id'=>$product->Id])  !!}" @endisset
-				 @empty($product) action="{{route('manager.products.store')}}" @endempty>
+				<form role="form" method="POST" @isset($product) action="{!! route('manager.products.update', ['id'=>$product->Id])  !!}"
+				 @endisset @empty($product) action="{{route('manager.products.store')}}" @endempty>
 					{{ csrf_field() }}
 					<div class="box-body">
-						
+
 
 						<div class="form-group">
 							<label for="">Nome do produto</label>
@@ -43,38 +42,93 @@
 							 @endisset required>
 						</div>
 
-						 <div class="row">
-                			<div class="col-xs-6">
+						<div class="row">
+							<div class="col-xs-6">
 								<div class="form-group">
 									<label for="">Preço</label>
-									<input type="number" class="form-control" id="unitprice" name="unitprice" placeholder="(Obrigatório)" @isset($product) value="{{$product->UnitPrice}}"
-									@endisset required>
+									<input type="text" class="form-control" id="unitprice" name="unitprice" placeholder="(Obrigatório)" @isset($product) value="{{$product->UnitPrice}}"
+									 @endisset required>
 								</div>
 							</div>
 							<div class="col-xs-6">
 								<div class="form-group">
-									<label for="">Preço</label>
-									<input type="number" class="form-control" id="unitprice" name="unitprice" placeholder="(Obrigatório)" @isset($product) value="{{$product->UnitPrice}}"
-									@endisset required>
+									<label for="">Fornecedor</label>
+									<select class="form-control select2" id="providerid" name="providerid" style="width: 100%;" @isset($product) value="{{$product->ProviderId}}"
+									 @endisset required>
+									 	{{--  <option> (Obrigatório) </option>  --}}
+										@foreach ($providers as $provider)
+										<option 
+										value="{{$provider->Id}}" 
+										@isset($product) 
+										@if($product->ProviderId == $provider->Id) 
+										selected="selected" 
+										@endif 
+										@endisset> 
+										{{ $provider->Name }}
+										</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 						</div>
 
-						
+						<div class="row">
+
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="">Categoria</label>
+									<select class="form-control select2" id="productcategoryid" name="productcategoryid" style="width: 100%;" @isset($product)
+									 value="{{$product->ProductCategoryId}}" @endisset required>
+									 	{{--  <option> (Obrigatório) </option>  --}}
+										@foreach ($categories as $category)
+										<option value="{{$category->Id}}" @isset($product) @if($product->ProductCategoryId == $category->Id) selected="selected" @endif @endisset>{{$category->Name}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="">Modelo</label>
+									<select class="form-control select2" id="productmodelid" name="productmodelid" style="width: 100%;" @isset($product)
+									 value="{{$product->ProductModelId}}" @endisset required>
+									 	{{--  <option> (Obrigatório) </option>  --}}
+										@foreach ($models as $model)
+										<option value="{{$model->Id}}" @isset($product) @if($product->ProductModelId == $model->Id) selected="selected" @endif @endisset>{{$model->Name}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+
+							<div class="col-xs-4">
+								<div class="form-group">
+									<label for="">Cor</label>
+									<select class="form-control select2" id="productcolorid" name="productcolorid" style="width: 100%;" @isset($product)
+									 value="{{$product->ProductCategoryId}}" @endisset required>
+									 	{{--  <option> (Obrigatório) </option>  --}}
+										@foreach ($colors as $color)
+										<option value="{{$color->Id}}" @isset($product) @if($product->ProductColorId == $color->Id) selected="selected" @endif @endisset>{{$color->Name}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+						</div>
 
 						<div class="form-group">
 							<label for="">Descrição</label>
-							<textarea type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($product) value="{{$product->Description}}"
-							 @endisset> </textarea>
+							<textarea type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($product)
+							 value="{{$product->Description}}" @endisset> </textarea>
 						</div>
 
 						<!-- radio -->
 						<div class="form-group">
 							<label>
-								<input type="radio" name="status" class="flat-red" value="1"  @empty($product) checked @endempty @isset($product) @if($product->Status == 1) checked @endif  @endisset > Ativo
+								<input type="radio" name="status" class="flat-red" value="1" @empty($product) checked @endempty @isset($product) @if($product->Status == 1) checked @endif @endisset > Ativo
 							</label>
 							<label>
-								<input type="radio" name="status" class="flat-red" value="0"  @isset($product) @if($product->Status == 0) checked @endif  @endisset > Inativo
+								<input type="radio" name="status" class="flat-red" value="0" @isset($product) @if($product->Status == 0) checked @endif @endisset > Inativo
 							</label>
 						</div>
 
@@ -100,6 +154,7 @@
 	</div>
 	<!-- /.row -->
 </section>
+
 @isset($product)
 <div class="modal modal-danger fade" id="modal-danger">
 	<div class="modal-dialog">
@@ -128,16 +183,12 @@
 <!-- /.modal -->
 
 
-@endisset 
-
-@endsection
-
-@section('scripts')
+@endisset @endsection @section('scripts')
 <!-- Page script -->
 <script>
-  $(function () {
+	$(function () {
     
-   
+    $('.select2').select2()
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -157,6 +208,7 @@
 
    
   })
+
 </script>
 
 @endsection

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\Products\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Provider;
+use App\Models\Productcolor;
+use App\Models\Productcategory;
+use App\Models\Productmodel;
 use DateTime;
 
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +35,11 @@ class ProductsController extends Controller
   
     public function create()
     {
-        return view('manager.products.products-new');
+        $providers  =  Provider::orderBy('Name', 'asc')->get();
+        $colors  =  Productcolor::orderBy('Name', 'asc')->get();
+        $categories  =  Productcategory::orderBy('Name', 'asc')->get();
+        $models  =  Productmodel::orderBy('Name', 'asc')->get();
+        return view('manager.products.products-new', ['providers' => $providers, 'colors' => $colors, 'categories' => $categories, 'models' => $models  ]);
     }
   
     public function store(ProductRequest $request)
@@ -45,7 +53,9 @@ class ProductsController extends Controller
         $product->productcolorid        = $request->productcolorid;
         $product->providerid            = $request->providerid;
         $product->unitprice             = $request->unitprice;
+
         $product->deleted               = 0;
+        
         $product->created_by            = Auth::user()->id;
         
         $product->save();
@@ -61,7 +71,11 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('manager.products.products-new', compact('product'));
+        $providers  =  Provider::orderBy('Name', 'asc')->get();
+        $colors  =  Productcolor::orderBy('Name', 'asc')->get();
+        $categories  =  Productcategory::orderBy('Name', 'asc')->get();
+        $models  =  Productmodel::orderBy('Name', 'asc')->get();
+        return view('manager.products.products-new', ['product' => $product , 'providers' => $providers, 'colors' => $colors, 'categories' => $categories, 'models' => $models  ]);
     }
   
     public function update(ProductRequest $request, $id)

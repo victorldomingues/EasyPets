@@ -122,7 +122,7 @@
 <script>
 	$(function () {
     
-   
+    $('.select2').select2();
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

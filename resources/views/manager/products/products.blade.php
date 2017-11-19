@@ -45,7 +45,7 @@
 							@foreach ($products as $product)
 							<tr>
 								<td> {{ $product->Name }} </td>
-                                <td> {{ $product->Name }} </td>
+                                <td> </td>
                                 <td> {{ $product->UnitPrice }} </td>
 								<td>
 									<div class="btn-group">
