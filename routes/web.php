@@ -126,6 +126,10 @@ Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersContr
 
 
 
-
-
 // Manager adoption
+
+Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('manager.pets');
+
+Route::get('/manager/pets/new', 'Manager\Adoptions\PetsController@create')->name('manager.pets.new');
+
+Route::post('/manager/pets/new', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');

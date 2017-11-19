@@ -11,4 +11,5 @@ class AdoptionFormController extends Controller
     {
         return view('adoption.form');
     }
+
 }
