@@ -133,3 +133,12 @@ Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('man
 Route::get('/manager/pets/new', 'Manager\Adoptions\PetsController@create')->name('manager.pets.new');
 
 Route::post('/manager/pets/new', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');
+
+
+// Manager Custumer
+
+Route::get('/manager/custumers', 'Manager\Custumers\CustumerController@index')->name('manager.custumers');
+
+Route::get('/manager/custumers/new', 'Manager\Custumers\CustumerController@create')->name('manager.custumers.new');
+
+Route::post('/manager/custumers/new', 'Manager\Custumers\CustumerController@store')->name('manager.custumers.store');

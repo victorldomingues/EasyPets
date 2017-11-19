@@ -11,3 +11,4 @@ npm-debug.log
 yarn-error.log
 /uploads
 /public/uploads
+/nbproject/private/
