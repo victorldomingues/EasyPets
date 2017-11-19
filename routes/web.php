@@ -39,6 +39,23 @@ Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 Route::get('/manager', 'HomeController@index')->name('manager');
 
 
+// Manager product
+
+Route::get('/manager/products', 'Manager\Products\ProductsController@index')->name('manager.products');
+
+Route::get('/manager/products/new', 'Manager\Products\ProductsController@create')->name('manager.products.new');
+
+Route::post('/manager/products/store', 'Manager\Products\ProductsController@store')->name('manager.products.store');
+
+Route::get('/manager/products/{id}', 'Manager\Products\ProductsController@show')->name('manager.products.show');
+
+Route::get('/manager/products/{id}/edit', 'Manager\Products\ProductsController@edit')->name('manager.products.edit');
+
+Route::post('/manager/products/{id}/update', 'Manager\Products\ProductsController@update')->name('manager.products.update');
+
+Route::post('/manager/products/{id}/destory', 'Manager\Products\ProductsController@destroy')->name('manager.products.destroy');
+
+
 // Manager product colors
 
 Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('manager.colors');
