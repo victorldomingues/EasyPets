@@ -149,6 +149,12 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{route('manager.providers')}}">
+                    <i class="fa fa-id-card-o text-blue"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
 
         </ul>
     </section>

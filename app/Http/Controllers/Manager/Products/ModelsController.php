@@ -43,7 +43,7 @@ class ModelsController extends Controller
         $model->created_by    = Auth::user()->id;
         $model->status        = $request->status;
         $model->save();
-        return redirect()->route('manager.models')->with('message', 'Cor cadastrada com sucesso!');
+        return redirect()->route('manager.models')->with('message', 'Modelo cadastrada com sucesso!');
     }
   
     public function show($id)
@@ -66,7 +66,7 @@ class ModelsController extends Controller
         $model->updated_by    = Auth::user()->id;
         $model->status        = $request->status;
         $model->save();
-        return redirect()->route('manager.models')->with('message', 'Cor atualizada com sucesso!');
+        return redirect()->route('manager.models')->with('message', 'Modelo atualizada com sucesso!');
     }
   
     public function destroy($id)
@@ -77,6 +77,6 @@ class ModelsController extends Controller
         $model->deleted       = 1;
         $model->deleted_at    = new DateTime();
         $model->save();
-        return redirect()->route('manager.models')->with('alert-success', 'Cor removida com sucesso!');
+        return redirect()->route('manager.models')->with('alert-success', 'Modelo removida com sucesso!');
     }
 }

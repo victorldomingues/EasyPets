@@ -48,7 +48,7 @@ class CategoriesController extends Controller
         $category->deleted       = 0;
         $category->status        = $request->status;
         $category->save();
-        return redirect()->route('manager.categories')->with('message', 'Cor cadastrada com sucesso!');
+        return redirect()->route('manager.categories')->with('message', 'Categoria cadastrada com sucesso!');
     }
   
     public function show($id)
@@ -71,7 +71,7 @@ class CategoriesController extends Controller
         $category->updated_by    = Auth::user()->id;
         $category->status        = $request->status;
         $category->save();
-        return redirect()->route('manager.categories')->with('message', 'Cor atualizada com sucesso!');
+        return redirect()->route('manager.categories')->with('message', 'Categoria atualizada com sucesso!');
     }
   
     public function destroy($id)
@@ -82,6 +82,6 @@ class CategoriesController extends Controller
         $category->deleted       = 1;
         $category->deleted_at    = new DateTime();
         $category->save();
-        return redirect()->route('manager.categories')->with('alert-success', 'Cor removida com sucesso!');
+        return redirect()->route('manager.categories')->with('alert-success', 'Categoria removida com sucesso!');
     }
 }

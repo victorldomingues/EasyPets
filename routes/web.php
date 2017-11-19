@@ -91,6 +91,24 @@ Route::post('/manager/categories/{id}/update', 'Manager\Products\CategoriesContr
 Route::post('/manager/categories/{id}/destory', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
 
 
+// Manager provider
+
+Route::get('/manager/providers', 'Manager\Providers\ProvidersController@index')->name('manager.providers');
+
+Route::get('/manager/providers/new', 'Manager\Providers\ProvidersController@create')->name('manager.providers.new');
+
+Route::post('/manager/providers/store', 'Manager\Providers\ProvidersController@store')->name('manager.providers.store');
+
+Route::get('/manager/providers/{id}', 'Manager\Providers\ProvidersController@show')->name('manager.providers.show');
+
+Route::get('/manager/providers/{id}/edit', 'Manager\Providers\ProvidersController@edit')->name('manager.providers.edit');
+
+Route::post('/manager/providers/{id}/update', 'Manager\Providers\ProvidersController@update')->name('manager.providers.update');
+
+Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
+
+
+
 
 
 // Manager adoption
