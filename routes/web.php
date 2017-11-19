@@ -45,13 +45,15 @@ Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('
 
 Route::get('/manager/colors/new', 'Manager\Products\ColorsController@create')->name('manager.colors.new');
 
-Route::post('/manager/colors/new', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
+Route::post('/manager/colors/store', 'Manager\Products\ColorsController@store')->name('manager.colors.store');
 
 Route::get('/manager/colors/{id}', 'Manager\Products\ColorsController@show')->name('manager.colors.show');
 
 Route::get('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@edit')->name('manager.colors.edit');
 
-Route::post('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@update')->name('manager.colors.update');
+Route::post('/manager/colors/{id}/update', 'Manager\Products\ColorsController@update')->name('manager.colors.update');
+
+Route::post('/manager/colors/{id}/destory', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
 
 
 // Manager product categories
@@ -60,7 +62,7 @@ Route::get('/manager/categories', 'Manager\Products\CategoriesController@index')
 
 Route::get('/manager/categories/new', 'Manager\Products\CategoriesController@create')->name('manager.categories.new');
 
-Route::post('/manager/categories/new', 'Manager\Products\CategoriesController@store')->name('manager.categories.store');
+Route::post('/manager/categories/store', 'Manager\Products\CategoriesController@store')->name('manager.categories.store');
 
 
 

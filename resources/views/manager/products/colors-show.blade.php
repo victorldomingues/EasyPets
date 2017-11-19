@@ -33,6 +33,15 @@
 
 					<h3 class="profile-username text-center">{{$color->Name}}</h3>
 
+                    	<p class="text-muted text-center"> 
+                        <b>Status: </b>
+                            @if( $color->Status == 1 )
+                             <i class="fa fa-circle text-success"></i>   Ativo
+                            @else
+                                <i class="fa fa-circle text-danger"></i>   Inativo
+                            @endif
+                        </p>
+
 					<p class="text-muted text-center">{{$color->Description}}</p>
 
 					<a href="{!! route('manager.colors.edit', ['id'=>$color->Id])  !!}" class="btn btn-primary btn-block">
