@@ -48,23 +48,24 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-default">Visualizar</button>
+                                       <a href="{!! route('manager.categories.show', ['id'=>$category->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
                                         <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">Visualizar</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Editar</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="#">Excluir</a>
-                                            </li>
-                                        </ul>
+											<li>
+												<a href="{!! route('manager.categories.show', ['id'=>$category->Id])  !!}">Visualizar</a>
+											</li>
+											<li>
+												<a href="{!! route('manager.categories.edit', ['id'=>$category->Id])  !!}">Editar</a>
+											</li>
+											<li class="divider"></li>
+											<li>
+												<a href="#">Excluir</a>
+											</li>
+
+										</ul>
                                     </div>
                                 </td>
                             </tr>

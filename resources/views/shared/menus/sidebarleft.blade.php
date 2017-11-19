@@ -105,7 +105,7 @@
                             <i class="fa fa-circle-o"></i> Cores</a>
                     </li>
                     <li>
-                        <a href="index2.html">
+                        <a href="{{route('manager.models')}}">
                             <i class="fa fa-circle-o"></i> Modelos</a>
                     </li>
                 </ul>
@@ -149,6 +149,12 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{route('manager.providers')}}">
+                    <i class="fa fa-id-card-o text-blue"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
 
         </ul>
     </section>

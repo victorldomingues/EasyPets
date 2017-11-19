@@ -5,7 +5,7 @@ namespace App\Http\Requests\Manager\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class ModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,14 +32,7 @@ class ProductRequest extends FormRequest
     protected $fillable = [
 		'Name',
 		'Description',
-		'Status',
-		'Deleted',
-		'ProductCategoryId',
-		'ProductModelId',
-		'ProductColorId',
-		'UnitPrice',
-		'ProviderId'
+		'Status'
 	];
-
     
 }

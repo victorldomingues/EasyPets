@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\Products\ColorRequest;
 use Illuminate\Http\Request;
 use App\Models\Productcolor;
+use DateTime;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -47,9 +48,9 @@ class ColorsController extends Controller
         $color = new Productcolor;
         $color->name          = $request->name;
         $color->description   = $request->description;
-        $color->deleted       = $request->deleted;
+        $color->deleted       = 0;
         $color->created_by    = Auth::user()->id;
-        $color->status        = 1;
+        $color->status        = $request->status;
         $color->save();
         return redirect()->route('manager.colors')->with('message', 'Cor cadastrada com sucesso!');
     }
@@ -71,9 +72,8 @@ class ColorsController extends Controller
         $color = Productcolor::findOrFail($id);
         $color->name          = $request->name;
         $color->description   = $request->description;
-        $color->deleted       = $request->deleted;
-        $color->deleted_at    = null;
         $color->updated_by    = Auth::user()->id;
+        $color->status        = $request->status;
         $color->save();
         return redirect()->route('manager.colors')->with('message', 'Cor atualizada com sucesso!');
     }
@@ -81,7 +81,11 @@ class ColorsController extends Controller
     public function destroy($id)
     {
         $color = Productcolor::findOrFail($id);
-        $color->delete();
+        $color->updated_by    = Auth::user()->id;
+        $color->deleted_by    = Auth::user()->id;
+        $color->deleted       = 1;
+        $color->deleted_at    = new DateTime();
+        $color->save();
         return redirect()->route('manager.colors')->with('alert-success', 'Cor removida com sucesso!');
     }
 }

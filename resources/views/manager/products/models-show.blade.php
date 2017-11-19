@@ -3,8 +3,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Cores
-		<small> {{$color->Name}} </small>
+		Modelos
+		<small> {{$model->Name}} </small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -12,12 +12,12 @@
 				<i class="fa fa-shopping-bag "></i> Visão Geral</a>
 		</li>
 		<li>
-			<a href="{{route('manager.colors')}}">
-				Cores </a>
+			<a href="{{route('manager.models')}}">
+				Modelos </a>
 		</li>
 
 		<li class="active">
-			{{$color->Name}}
+			{{$model->Name}}
 		</li>
 
 	</ol>
@@ -31,20 +31,20 @@
 				<div class="box-body box-profile">
 					
 
-					<h3 class="profile-username text-center">{{$color->Name}}</h3>
+					<h3 class="profile-username text-center">{{$model->Name}}</h3>
 
                     	<p class="text-muted text-center"> 
                         <b>Status: </b>
-                            @if( $color->Status == 1 )
+                            @if( $model->Status == 1 )
                              <i class="fa fa-circle text-success"></i>   Ativo
                             @else
                                 <i class="fa fa-circle text-danger"></i>   Inativo
                             @endif
                         </p>
 
-					<p class="text-muted text-center">{{$color->Description}}</p>
+					<p class="text-muted text-center">{{$model->Description}}</p>
 
-					<a href="{!! route('manager.colors.edit', ['id'=>$color->Id])  !!}" class="btn btn-primary btn-block">
+					<a href="{!! route('manager.models.edit', ['id'=>$model->Id])  !!}" class="btn btn-primary btn-block">
 						<b>Editar</b>
 					</a>
 				</div>
