@@ -64,6 +64,14 @@ Route::get('/manager/categories/new', 'Manager\Products\CategoriesController@cre
 
 Route::post('/manager/categories/store', 'Manager\Products\CategoriesController@store')->name('manager.categories.store');
 
+Route::get('/manager/categories/{id}', 'Manager\Products\CategoriesController@show')->name('manager.categories.show');
+
+Route::get('/manager/categories/{id}/edit', 'Manager\Products\CategoriesController@edit')->name('manager.categories.edit');
+
+Route::post('/manager/categories/{id}/update', 'Manager\Products\CategoriesController@update')->name('manager.categories.update');
+
+Route::post('/manager/categories/{id}/destory', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
+
 
 
 

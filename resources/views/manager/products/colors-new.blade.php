@@ -36,6 +36,8 @@
 				 @empty($color) action="{{route('manager.colors.store')}}" @endempty>
 					{{ csrf_field() }}
 					<div class="box-body">
+						
+
 						<div class="form-group">
 							<label for="exampleInputEmail1">Nome da cor</label>
 							<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($color) value="{{$color->Name}}"
@@ -57,6 +59,8 @@
 								<input type="radio" name="status" class="flat-red" value="0"  @isset($color) @if($color->Status == 0) checked @endif  @endisset > Inativo
 							</label>
 						</div>
+
+
 					</div>
 
 					<!-- /.box-body -->

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\Products\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Productcategory;
-
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
@@ -44,36 +44,44 @@ class CategoriesController extends Controller
         $category = new Productcategory;
         $category->name          = $request->name;
         $category->description   = $request->description;
-        $category->deleted       = $request->deleted;
         $category->created_by    = Auth::user()->id;
-        $category->status        = 1;
+        $category->deleted       = 0;
+        $category->status        = $request->status;
         $category->save();
         return redirect()->route('manager.categories')->with('message', 'Cor cadastrada com sucesso!');
     }
   
     public function show($id)
     {
-        //
+        $category = Productcategory::findOrFail($id);
+        return view('manager.products.category-show', compact('category'));
     }
   
     public function edit($id)
     {
         $category = Productcategory::findOrFail($id);
-        return view('manager.products.categories.edit', compact('product'));
+        return view('manager.products.category-new', compact('category'));
     }
   
-    public function update(ColorRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = Productcategory::findOrFail($id);
-        $category->name        = $request->name;
+        $category->name          = $request->name;
+        $category->description   = $request->description;
+        $category->updated_by    = Auth::user()->id;
+        $category->status        = $request->status;
         $category->save();
-        return redirect()->route('manager.products.categories')->with('message', 'Cor atualizada com sucesso!');
+        return redirect()->route('manager.categories')->with('message', 'Cor atualizada com sucesso!');
     }
   
     public function destroy($id)
     {
         $category = Productcategory::findOrFail($id);
-        $category->delete();
+        $category->updated_by    = Auth::user()->id;
+        $category->deleted_by    = Auth::user()->id;
+        $category->deleted       = 1;
+        $category->deleted_at    = new DateTime();
+        $category->save();
         return redirect()->route('manager.categories')->with('alert-success', 'Cor removida com sucesso!');
     }
 }
