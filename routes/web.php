@@ -65,8 +65,8 @@ Route::post('/manager/categories/new', 'Manager\Products\CategoriesController@st
 
 // Manager adoption
 
-Route::get('/manager/pets', 'Manager\Adoptions\AdoptionsController@index')->name('manager.pets');
+Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('manager.pets');
 
-Route::get('/manager/pets/new', 'Manager\Adoptions\AdoptionsController@create')->name('manager.pets.new');
+Route::get('/manager/pets/new', 'Manager\Adoptions\PetsController@create')->name('manager.pets.new');
 
-Route::post('/manager/pets/new', 'Manager\Adoptions\AdoptionsController@store')->name('manager.pets.store');
+Route::post('/manager/pets/new', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');
