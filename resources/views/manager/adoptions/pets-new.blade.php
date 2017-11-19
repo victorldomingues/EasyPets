@@ -85,10 +85,9 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Tipo</label>
-												<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
-													<option selected="selected">Grande</option>
-													<option>Médio</option>
-													<option>Pequeno</option>
+												<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="type">
+													<option value="0" selected="selected">Cão</option>
+													<option value="1" >Gato</option>
 												</select>
 											</div>
 										</div>
@@ -155,10 +154,10 @@
 
 							<div class="form-group">
 								<label>
-									<input type="radio" name="status" class="flat-red" value="1" @empty($color) checked @endempty @isset($color) @if($color->Status == 1) checked @endif @endisset > Ativo
+									<input type="radio" name="status" class="flat-red" value="1" @empty($pet) checked @endempty @isset($pet) @if($pet->Status == 1) checked @endif @endisset > Ativo
 								</label>
 								<label>
-									<input type="radio" name="status" class="flat-red" value="0" @isset($color) @if($color->Status == 0) checked @endif @endisset > Inativo
+									<input type="radio" name="status" class="flat-red" value="0" @isset($pet) @if($pet->Status == 0) checked @endif @endisset > Inativo
 								</label>
 							</div>
 
@@ -168,7 +167,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Salvar</button>
-							@isset($color)
+							@isset($pet)
 							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"> Remover </button>
 							@endisset
 						</div>
@@ -181,26 +180,58 @@
 		</div>
 		<!-- /.row -->
 </section>
+
+@isset($pet)
+<div class="modal modal-danger fade" id="modal-danger">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form role="form" method="POST" action="{!! route('manager.pets.destroy', ['id'=>$pet->Id])  !!}">
+				{{ csrf_field() }}
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Atenção !!!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Deseja realmente remover a cor " {{ $pet->Name }} "</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-outline">Remover</button>
+				</div>
+			</form>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+@endisset 
+
 @endsection
+
 
 @section('scripts')
 <!-- Page script -->
 <script>
   $(function () {
     
-   
+$('.select2').select2();
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass   : 'iradio_minimal-blue'
     })
-    //Red color scheme for iCheck
+    //Red pet scheme for iCheck
     $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
       checkboxClass: 'icheckbox_minimal-red',
       radioClass   : 'iradio_minimal-red'
     })
-    //Flat red color scheme for iCheck
+    //Flat red pet scheme for iCheck
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',
       radioClass   : 'iradio_flat-green'

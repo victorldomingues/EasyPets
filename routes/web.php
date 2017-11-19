@@ -133,3 +133,11 @@ Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('man
 Route::get('/manager/pets/new', 'Manager\Adoptions\PetsController@create')->name('manager.pets.new');
 
 Route::post('/manager/pets/new', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');
+
+Route::get('/manager/pets/{id}', 'Manager\Adoptions\PetsController@show')->name('manager.pets.show');
+
+Route::get('/manager/pets/{id}/edit', 'Manager\Adoptions\PetsController@edit')->name('manager.pets.edit');
+
+Route::post('/manager/pets/{id}/update', 'Manager\Adoptions\PetsController@update')->name('manager.pets.update');
+
+Route::post('/manager/pets/{id}/destory', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');

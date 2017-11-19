@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\Adoptions\PetsRequest;
 use Illuminate\Http\Request;
 use App\Models\Pet;
+use DateTime;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -52,7 +53,7 @@ class PetsController extends Controller
         $pet->age           = $request->age;
         $pet->deleted       = $request->deleted;
         $pet->created_by    = Auth::user()->id;
-        $pet->status        = 1;
+        $pet->status        = $request->status;
         $pet->save();
         return redirect()->route('manager.pets')->with('message', 'Pet cadastrado com sucesso!');
     }
@@ -60,10 +61,16 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        return view('manager.adoption.pets-show', compact('pet'));
+        return view('manager.adoptions.pets-show', compact('pet'));
     }
   
-    public function update(ColorRequest $request, $id)
+    public function edit($id)
+    {
+        $pet = Pet::findOrFail($id);
+        return view('manager.adoptions.pets-new', compact('pet'));
+    }
+
+    public function update(PetsRequest $request, $id)
     {
         $pet = Pet::findOrFail($id);
         $pet->name          = $request->name;
@@ -73,6 +80,8 @@ class PetsController extends Controller
         $pet->deleted       = $request->deleted;
         $pet->deleted_at    = null;
         $pet->updated_by    = Auth::user()->id;
+        $pet->status        = $request->status;
+
         $pet->save();
         return redirect()->route('manager.pets')->with('message', 'Pet atualizado com sucesso!');
     }
