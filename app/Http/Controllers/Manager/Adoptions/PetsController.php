@@ -46,7 +46,10 @@ class PetsController extends Controller
     {
         $pet = new Pet;
         $pet->name          = $request->name;
-        $pet->description   = $request->description;
+        $pet->race          = $request->race;
+        $pet->type          = $request->type;
+        // $pet->description   = $request->description;
+        $pet->age           = $request->age;
         $pet->deleted       = $request->deleted;
         $pet->created_by    = Auth::user()->id;
         $pet->status        = 1;
@@ -56,32 +59,32 @@ class PetsController extends Controller
   
     public function show($id)
     {
-        $color = Productcolor::findOrFail($id);
-        return view('manager.products.colors-show', compact('color'));
-    }
-  
-    public function edit($id)
-    {
-        $color = Productcolor::findOrFail($id);
-        return view('manager.products.colors-new', compact('color'));
+        $pet = Pet::findOrFail($id);
+        return view('manager.adoption.pets-show', compact('pet'));
     }
   
     public function update(ColorRequest $request, $id)
     {
-        $color = Productcolor::findOrFail($id);
-        $color->name          = $request->name;
-        $color->description   = $request->description;
-        $color->deleted       = $request->deleted;
-        $color->deleted_at    = null;
-        $color->updated_by    = Auth::user()->id;
-        $color->save();
-        return redirect()->route('manager.colors')->with('message', 'Cor atualizada com sucesso!');
+        $pet = Pet::findOrFail($id);
+        $pet->name          = $request->name;
+        // $pet->description   = $request->description;
+        $pet->type          = $request->type;
+        $pet->age           = $request->age;
+        $pet->deleted       = $request->deleted;
+        $pet->deleted_at    = null;
+        $pet->updated_by    = Auth::user()->id;
+        $pet->save();
+        return redirect()->route('manager.pets')->with('message', 'Pet atualizado com sucesso!');
     }
   
     public function destroy($id)
     {
-        $color = Productcolor::findOrFail($id);
-        $color->delete();
-        return redirect()->route('manager.colors')->with('alert-success', 'Cor removida com sucesso!');
+        $pet = Pet::findOrFail($id);
+        $pet->updated_by    = Auth::user()->id;
+        $pet->deleted_by    = Auth::user()->id;
+        $pet->deleted       = 1;
+        $pet->deleted_at    = new DateTime();
+        $pet->save();
+        return redirect()->route('manager.pets')->with('alert-success', 'Pet removido com sucesso!');
     }
 }
