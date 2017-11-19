@@ -49,6 +49,11 @@ class Product extends Eloquent
 		'ProviderId' => 'int'
 	];
 
+	public function productCategories()
+    {
+        return $this->belongsTo('App\Models\Productcategory');
+    }
+
 	protected $fillable = [
 		'Name',
 		'Description',

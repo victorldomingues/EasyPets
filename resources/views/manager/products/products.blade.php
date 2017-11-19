@@ -45,8 +45,8 @@
 							@foreach ($products as $product)
 							<tr>
 								<td> {{ $product->Name }} </td>
-                                <td> </td>
-                                <td> {{ $product->UnitPrice }} </td>
+                                <td> {{$product->CategoryName}}</td>
+                                <td> {{  'R$ '.number_format($product->UnitPrice, 2, ',', '.') }}  </td>
 								<td>
 									<div class="btn-group">
 										<a href="{!! route('manager.products.show', ['id'=>$product->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
