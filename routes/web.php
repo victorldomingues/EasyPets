@@ -56,6 +56,24 @@ Route::post('/manager/colors/{id}/update', 'Manager\Products\ColorsController@up
 Route::post('/manager/colors/{id}/destory', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
 
 
+// Manager product models
+
+Route::get('/manager/models', 'Manager\Products\ModelsController@index')->name('manager.models');
+
+Route::get('/manager/models/new', 'Manager\Products\ModelsController@create')->name('manager.models.new');
+
+Route::post('/manager/models/store', 'Manager\Products\ModelsController@store')->name('manager.models.store');
+
+Route::get('/manager/models/{id}', 'Manager\Products\ModelsController@show')->name('manager.models.show');
+
+Route::get('/manager/models/{id}/edit', 'Manager\Products\ModelsController@edit')->name('manager.models.edit');
+
+Route::post('/manager/models/{id}/update', 'Manager\Products\ModelsController@update')->name('manager.models.update');
+
+Route::post('/manager/models/{id}/destory', 'Manager\Products\ModelsController@destroy')->name('manager.models.destroy');
+
+
+
 // Manager product categories
 
 Route::get('/manager/categories', 'Manager\Products\CategoriesController@index')->name('manager.categories');

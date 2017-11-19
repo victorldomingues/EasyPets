@@ -1,5 +1,4 @@
-@extends('layouts.app') 
-@section('content')
+@extends('layouts.app') @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
@@ -29,18 +28,16 @@
 			<!-- Profile Image -->
 			<div class="box box-primary">
 				<div class="box-body box-profile">
-					
+
 
 					<h3 class="profile-username text-center">{{$category->Name}}</h3>
 
-                    	<p class="text-muted text-center"> 
-                        <b>Status: </b>
-                            @if( $category->Status == 1 )
-                             <i class="fa fa-circle text-success"></i>   Ativa
-                            @else
-                                <i class="fa fa-circle text-danger"></i>   Inativa
-                            @endif
-                        </p>
+					<p class="text-muted text-center">
+						<b>Status: </b>
+						@if( $category->Status == 1 )
+						<i class="fa fa-circle text-success"></i> Ativa @else
+						<i class="fa fa-circle text-danger"></i> Inativa @endif
+					</p>
 
 					<p class="text-muted text-center">{{$category->Description}}</p>
 
