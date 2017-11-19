@@ -38,15 +38,34 @@
 						
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">Nome do produto</label>
+							<label for="">Nome do produto</label>
 							<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($product) value="{{$product->Name}}"
 							 @endisset required>
 						</div>
 
+						 <div class="row">
+                			<div class="col-xs-6">
+								<div class="form-group">
+									<label for="">Preço</label>
+									<input type="number" class="form-control" id="unitprice" name="unitprice" placeholder="(Obrigatório)" @isset($product) value="{{$product->UnitPrice}}"
+									@endisset required>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="">Preço</label>
+									<input type="number" class="form-control" id="unitprice" name="unitprice" placeholder="(Obrigatório)" @isset($product) value="{{$product->UnitPrice}}"
+									@endisset required>
+								</div>
+							</div>
+						</div>
+
+						
+
 						<div class="form-group">
-							<label for="exampleInputEmail1">Descrição</label>
-							<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($product) value="{{$product->Description}}"
-							 @endisset>
+							<label for="">Descrição</label>
+							<textarea type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($product) value="{{$product->Description}}"
+							 @endisset> </textarea>
 						</div>
 
 						<!-- radio -->

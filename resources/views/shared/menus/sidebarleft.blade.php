@@ -93,7 +93,7 @@
                             <i class="fa fa-circle-o"></i> Visão Geral</a>
                     </li>
                     <li>
-                        <a href="index.html">
+                        <a href="{{route('manager.products')}}">
                             <i class="fa fa-circle-o"></i> Produtos</a>
                     </li>
                     <li>
