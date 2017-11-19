@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Manager\Adoptions;
+namespace App\Http\Requests\Manager\Custumers;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PetsRequest extends FormRequest
+class CustumersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +29,18 @@ class PetsRequest extends FormRequest
     }
 
     protected $fillable = [
-		'CustomerId',
-		'PetId',
-		'Status',
-		'Deleted',
-		'MainActivity',
-		'WhoWillSupport',
-		'AdultsInTheHouse',
-		'AllowPets'
+		'Id',
+		'Birthday',
+		'PublicPlace',
+		'ZipCode',
+		'Number',
+		'Neighborhood',
+		'City',
+		'State',
+		'Country',
+		'Complement',
+		'Lat',
+		'Long',
+		'PaymentPreference'
 	];
 }

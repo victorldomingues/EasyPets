@@ -126,7 +126,7 @@ Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersContr
 
 
 
-// Manager adoption
+// Manager pets
 
 Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('manager.pets');
 
@@ -141,3 +141,21 @@ Route::get('/manager/pets/{id}/edit', 'Manager\Adoptions\PetsController@edit')->
 Route::post('/manager/pets/{id}/update', 'Manager\Adoptions\PetsController@update')->name('manager.pets.update');
 
 Route::post('/manager/pets/{id}/destory', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');
+
+
+
+// Manager adoptions
+
+Route::get('/manager/adoptions', 'Manager\Adoptions\AdoptionsController@index')->name('manager.adoptions');
+
+Route::get('/manager/adoptions/new', 'Manager\Adoptions\AdoptionsController@create')->name('manager.adoptions.new');
+
+Route::post('/manager/adoptions/new', 'Manager\Adoptions\AdoptionsController@store')->name('manager.adoptions.store');
+
+Route::get('/manager/adoptions/{id}', 'Manager\Adoptions\AdoptionsController@show')->name('manager.adoptions.show');
+
+Route::get('/manager/adoptions/{id}/edit', 'Manager\Adoptions\AdoptionsController@edit')->name('manager.adoptions.edit');
+
+Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsController@update')->name('manager.adoptions.update');
+
+Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');

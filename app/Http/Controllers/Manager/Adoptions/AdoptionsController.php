@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Manager\Adoptions;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Manager\Products\ColorRequest;
+use App\Http\Requests\Manager\Adoptions\AdoptionResquest;
 use Illuminate\Http\Request;
-use App\Models\Productcolor;
+use App\Models\Adoption;
+use DateTime;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,9 +27,9 @@ class AdoptionsController extends Controller
 
     public function index()
     {
-        $colors = Productcolor::orderBy('created_at', 'desc')->get();
+        $adoptions = Adoption::orderBy('created_at', 'desc')->get();
 
-        return view('manager.pets', ['pets' => $pets]);
+        return view('manager.adoptions.adoptions', ['adoptions' => $adoptions]);
     }
 
     // public function index()
@@ -39,49 +40,56 @@ class AdoptionsController extends Controller
   
     public function create()
     {
-        return view('manager.products.colors-new');
+        return view('manager.adoptions.adoptions');
     }
   
-    public function store(ColorRequest $request)
-    {
-        $color = new Productcolor;
-        $color->name          = $request->name;
-        $color->description   = $request->description;
-        $color->deleted       = $request->deleted;
-        $color->created_by    = Auth::user()->id;
-        $color->status        = 1;
-        $color->save();
-        return redirect()->route('manager.colors')->with('message', 'Cor cadastrada com sucesso!');
-    }
+    // public function store(Adoptions $request)
+    // {
+    //     $adoptions = new Adoption;
+    //     $adoptions->name          = $request->name;
+    //     $adoptions->race          = $request->race;
+    //     $adoptions->type          = $request->type;
+    //     // $adoptions->description   = $request->description;
+    //     $adoptions->age           = $request->age;
+    //     $adoptions->deleted       = $request->deleted;
+    //     $adoptions->created_by    = Auth::user()->id;
+    //     $adoptions->status        = $request->status;
+    //     $adoptions->save();
+    //     return redirect()->route('manager.adoptions')->with('message', 'Adoção cadastrada com sucesso!');
+    // }
   
     public function show($id)
     {
-        $color = Productcolor::findOrFail($id);
-        return view('manager.products.colors-show', compact('color'));
+        $adoptions = Adoption::findOrFail($id);
+        return view('manager.adoptions.adoptions-show', compact('adoption'));
     }
   
     public function edit($id)
     {
-        $color = Productcolor::findOrFail($id);
-        return view('manager.products.colors-new', compact('color'));
+        $adoption = Adoptions::findOrFail($id);
+        return view('manager.adoptions.adoptions-new', compact('pet'));
     }
-  
-    public function update(ColorRequest $request, $id)
+
+    public function update(PetsRequest $request, $id)
     {
-        $color = Productcolor::findOrFail($id);
-        $color->name          = $request->name;
-        $color->description   = $request->description;
-        $color->deleted       = $request->deleted;
-        $color->deleted_at    = null;
-        $color->updated_by    = Auth::user()->id;
-        $color->save();
-        return redirect()->route('manager.colors')->with('message', 'Cor atualizada com sucesso!');
+        $adoption = Adoption::findOrFail($id);
+        $adoption->deleted       = $request->deleted;
+        $adoption->deleted_at    = null;
+        $adoption->updated_by    = Auth::user()->id;
+        $adoption->status        = $request->status;
+
+        $adoption->save();
+        return redirect()->route('manager.adoptions')->with('message', 'Status de adoção atualizado com sucesso!');
     }
   
     public function destroy($id)
     {
-        $color = Productcolor::findOrFail($id);
-        $color->delete();
-        return redirect()->route('manager.colors')->with('alert-success', 'Cor removida com sucesso!');
+        $pet = Pet::findOrFail($id);
+        $pet->updated_by    = Auth::user()->id;
+        $pet->deleted_by    = Auth::user()->id;
+        $pet->deleted       = 1;
+        $pet->deleted_at    = new DateTime();
+        $pet->save();
+        return redirect()->route('manager.pets')->with('alert-success', 'Pet removido com sucesso!');
     }
 }
