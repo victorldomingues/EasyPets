@@ -159,3 +159,11 @@ Route::get('/manager/adoptions/{id}/edit', 'Manager\Adoptions\AdoptionsControlle
 Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsController@update')->name('manager.adoptions.update');
 
 Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
+
+// Manager Custumer
+
+Route::get('/manager/custumers', 'Manager\Custumers\CustumerController@index')->name('manager.custumers');
+
+Route::get('/manager/custumers/new', 'Manager\Custumers\CustumerController@create')->name('manager.custumers.new');
+
+Route::post('/manager/custumers/new', 'Manager\Custumers\CustumerController@store')->name('manager.custumers.store');

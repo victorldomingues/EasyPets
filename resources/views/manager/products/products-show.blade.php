@@ -1,5 +1,4 @@
-@extends('layouts.app') 
-@section('content')
+@extends('layouts.app') @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
@@ -29,18 +28,49 @@
 			<!-- Profile Image -->
 			<div class="box box-primary">
 				<div class="box-body box-profile">
-					
+
 
 					<h3 class="profile-username text-center">{{$product->Name}}</h3>
 
-                    	<p class="text-muted text-center"> 
-                        <b>Status: </b>
-                            @if( $product->Status == 1 )
-                             <i class="fa fa-circle text-success"></i>   Ativo
-                            @else
-                                <i class="fa fa-circle text-danger"></i>   Inativo
-                            @endif
-                        </p>
+					<p class="text-muted text-center">
+						<b>Status: </b>
+						@if( $product->Status == 1 )
+						<i class="fa fa-circle text-success"></i> Ativo @else
+						<i class="fa fa-circle text-danger"></i> Inativo @endif
+					</p>
+
+					<p class="text-muted text-center">
+
+						<b> Fornecedor: </b>
+						{{$product->ProviderName}}
+
+					</p>
+
+					<p class="text-muted text-center">
+
+						<b> Categoria: </b>
+						{{$product->CategoryName}}
+
+					</p>
+
+					<p class="text-muted text-center">
+
+						<b> Modelo: </b> {{$product->ModelName}}
+
+					</p>
+
+
+					<p class="text-muted text-center">
+
+						<b> Cor: </b> {{ $product->ColorName }}
+
+					</p>
+
+					<h3 class="text-muted text-center">
+
+						<b> Preço: </b> {{ 'R$ '.number_format($product->UnitPrice, 2, ',', '.') }}
+
+					</h3>
 
 					<p class="text-muted text-center">{{$product->Description}}</p>
 

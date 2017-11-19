@@ -39,6 +39,11 @@ class Productcategory extends Eloquent
 		'Deleted' => 'bool'
 	];
 
+	public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
+
 	protected $fillable = [
 		'Name',
 		'Description',
