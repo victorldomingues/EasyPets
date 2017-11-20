@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $Path
  * @property string $Extension
  * @property string $Description
- * @property int $PetsId
+ * @property int $PetId
  * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property int $updated_by
@@ -36,7 +36,7 @@ class Petimage extends Eloquent
 	protected $primaryKey = 'Id';
 
 	protected $casts = [
-		'PetsId' => 'int',
+		'PetId' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
 		'deleted_by' => 'int',
@@ -50,7 +50,7 @@ class Petimage extends Eloquent
 		'Path',
 		'Extension',
 		'Description',
-		'PetsId',
+		'PetId',
 		'created_by',
 		'updated_by',
 		'deleted_by',
