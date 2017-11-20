@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 08 Nov 2017 22:56:50 +0000.
+ * Date: Mon, 20 Nov 2017 01:48:24 +0000.
  */
 
 namespace App\Models;
@@ -30,7 +30,7 @@ class Productcolor extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
 	protected $primaryKey = 'Id';
-	public $timestamps = false;
+
 	protected $casts = [
 		'created_by' => 'int',
 		'updated_by' => 'int',

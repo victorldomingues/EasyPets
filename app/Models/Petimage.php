@@ -10,7 +10,7 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Productimage
+ * Class Petimage
  * 
  * @property int $Id
  * @property string $OriginalName
@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $Path
  * @property string $Extension
  * @property string $Description
- * @property int $ProductId
+ * @property int $PetId
  * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property int $updated_by
@@ -30,13 +30,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Productimage extends Eloquent
+class Petimage extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
 	protected $primaryKey = 'Id';
 
 	protected $casts = [
-		'ProductId' => 'int',
+		'PetId' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
 		'deleted_by' => 'int',
@@ -50,7 +50,7 @@ class Productimage extends Eloquent
 		'Path',
 		'Extension',
 		'Description',
-		'ProductId',
+		'PetId',
 		'created_by',
 		'updated_by',
 		'deleted_by',

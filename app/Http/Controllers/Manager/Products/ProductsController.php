@@ -56,6 +56,7 @@ class ProductsController extends Controller
     }
 
     private function saveImage($product){
+        
         if($product == null) return;
 
         $file = Input::file('file'); 
@@ -86,6 +87,38 @@ class ProductsController extends Controller
         ->select('products.Id', 'products.Name', 'products.Description', 'products.Status', 'products.UnitPrice', 'productcategories.Name as CategoryName')
         ->orderBy('products.created_at', 'desc')
         ->get();
+
+        
+
+        // $products = DB::select("
+        //                 SELECT
+        //                         cards.id_card,
+        //                         cards.hash_card,
+        //                         cards.`table`,
+        //                         users.name,
+        //                         0 as total,
+        //                         cards.card_status,
+        //                         cards.created_at as last_update
+        //                     FROM cards
+        //                     LEFT JOIN users
+        //                     ON users.id_user = cards.id_user
+        //                     WHERE hash_card NOT IN ( SELECT orders.hash_card FROM orders )
+        //                     UNION
+        //                     SELECT
+        //                         cards.id_card,
+        //                         orders.hash_card,
+        //                         cards.`table`,
+        //                         users.name,
+        //                         sum(orders.quantity*orders.product_price) as total, 
+        //                         cards.card_status, 
+        //                         max(orders.created_at) last_update 
+        //                     FROM menu.orders
+        //                     LEFT JOIN cards
+        //                     ON cards.hash_card = orders.hash_card
+        //                     LEFT JOIN users
+        //                     ON users.id_user = cards.id_user
+        //                     GROUP BY hash_card
+        //                     ORDER BY id_card ASC");
 
         return view('manager.products.products', ['products' => $products]);
     }
@@ -118,9 +151,6 @@ class ProductsController extends Controller
         $product->created_by            = Auth::user()->id;
         
         $product->save();
-
-
-        error_log(var_dump($product));
 
         $this->saveImage($product);
 
