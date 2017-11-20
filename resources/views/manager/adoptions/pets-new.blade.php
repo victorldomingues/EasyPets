@@ -23,7 +23,7 @@
 	<!-- Small boxes (Stat box) -->
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
@@ -32,11 +32,9 @@
 				<!-- /.box-header -->
 				<!-- form start -->
 				<form role="form" method="POST" @isset($pet) action="{!! route('manager.pets.update',['id'=>$pet->Id])  !!}" @endisset @empty($pet)
-				 action="{{route('manager.pets.store')}}" @endempty>
+				 action="{{route('manager.pets.store')}}" @endempty enctype="multipart/form-data">
 					{{ csrf_field() }}
 					<div class="box-body">
-						Informações do pet
-
 
 						<div class="row">
 							<div class="col-md-4">
@@ -96,7 +94,7 @@
 
 								<div class="form-group">
 									<label for="">Raça</label>
-									<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)" @isset($pet) value="{{$pet->Race}}"
+									<input type="text" class="form-control" id="race" name="race" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Race}}"
 									 @endisset required>
 								</div>
 
@@ -104,7 +102,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">Idade</label>
-											<input type="text" class="form-control" id="age" name="age" placeholder="(Opcional)" @isset($pet) value="{{$pet->Age}}" @endisset
+											<input type="text" class="form-control" id="age" name="age" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Age}}" @endisset
 											 required>
 										</div>
 									</div>

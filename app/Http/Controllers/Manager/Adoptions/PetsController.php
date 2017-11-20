@@ -53,6 +53,7 @@ class PetsController extends Controller
     }
 
     private function saveImage($pet){
+        
         if($pet == null) return;
 
         $file = Input::file('file'); 
