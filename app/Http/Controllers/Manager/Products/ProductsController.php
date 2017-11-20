@@ -88,6 +88,10 @@ class ProductsController extends Controller
         ->orderBy('products.created_at', 'desc')
         ->get();
 
+        
+
+
+
         return view('manager.products.products', ['products' => $products]);
     }
   
