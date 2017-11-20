@@ -37,132 +37,154 @@
 					<div class="box-body">
 						Informações do pet
 
-						
-							<div class="row">
-								<div class="col-md-4">
+
+						<div class="row">
+							<div class="col-md-4">
+								<br>
+
+								<div class="form-group">
+									<label for="">Nova imagem</label>
+									<input type="file" id="file" name="file">
+
+									<p class="help-block">clique para adicionar uma nova imagem</p>
+								</div>
+
+								<div class="form-group">
+									<label for="">Imagens</label>
+
+									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+										<ol class="carousel-indicators">
+											<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+											{{--
+											<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+											<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li> --}}
+										</ol>
+										<div class="carousel-inner">
+											<div class="item active">
+												<img src="{{asset('')}}template/dist/img/photo1.png" alt="First slide">
+
+												<div class="carousel-caption">
+													<button type="button" class="btn btn-small btn-danger">
+														<em class="fa fa-trash-o"></em>
+													</button>
+												</div>
+											</div>
+
+										</div>
+										<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+											<span class="fa fa-angle-left"></span>
+										</a>
+										<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+											<span class="fa fa-angle-right"></span>
+										</a>
+									</div>
+
+								</div>
+
+							</div>
+
+
+
+							<div class="col-md-8">
+
+								<div class="form-group">
 									<br>
-									<div>
-										<img src="http://placehold.it/150x100" alt="Pet image" class="margin">
-									</div>
-
-									<div class="form-group">
-										<label for="">Upload</label>
-										<input id="InputFile" type="file">
-
-										<p class="help-block">Insira aqui a foto do Pet</p>
-									</div>
-
-
-
+									<label for="">Nome</label>
+									<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Name}}"
+									 @endisset required>
 								</div>
 
+								<div class="form-group">
+									<label for="">Raça</label>
+									<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)" @isset($pet) value="{{$pet->Race}}"
+									 @endisset required>
+								</div>
 
-
-								<div class="col-md-8">
-
-									<div class="form-group">
-										<br>
-										<label for="">Nome</label>
-										<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Name}}"
-										 @endisset required>
-									</div>
-
-									<div class="form-group">
-										<label for="">Raça</label>
-										<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)" @isset($pet) value="{{$pet->Race}}"
-										 @endisset required>
-									</div>
-
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label for="">Idade</label>
-												<input type="text" class="form-control" id="age" name="age" placeholder="(Opcional)" @isset($pet) value="{{$pet->Age}}"
-										 @endisset required>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Tipo</label>
-												<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="type">
-													<option value="0" selected="selected">Cão</option>
-													<option value="1" >Gato</option>
-												</select>
-											</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Idade</label>
+											<input type="text" class="form-control" id="age" name="age" placeholder="(Opcional)" @isset($pet) value="{{$pet->Age}}" @endisset
+											 required>
 										</div>
 									</div>
 
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Tipo</label>
+											<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="type">
+												<option value="0" selected="selected">Cão</option>
+												<option value="1">Gato</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label>
+										<input type="radio" name="status" class="flat-red" value="1" @empty($pet) checked @endempty @isset($pet) @if($pet->Status == 1) checked @endif @endisset > Ativo
+									</label>
+									<label>
+										<input type="radio" name="status" class="flat-red" value="0" @isset($pet) @if($pet->Status == 0) checked @endif @endisset > Inativo
+									</label>
 								</div>
 
 							</div>
 
-							{{--  <div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="">Descrição</label>
-										<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)"@isset($pet) value="{{$pet->Name}}">
-										 @endisset required>
-									</div>
+						</div>
 
-
-								</div>
-							</div>  --}}
-
-
-
-
-
-							{{--
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="">Endereco</label>
-										<input type="text" class="form-control" id="adress" name="address" placeholder="(Opcional)">
-									</div>
-
-									<div class="form-group">
-										<label for="">Cidade</label>
-										<input type="text" class="form-control" id="city" name="city" placeholder="(Opcional)">
-									</div>
+						{{--
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="">Descrição</label>
+									<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($pet) value="{{$pet->Name}}"> @endisset required>
 								</div>
 
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="">Bairro</label>
-										<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)">
-									</div>
 
-									<div class="form-group">
-										<label for="">Estado</label>
-										<input type="text" class="form-control" id="district" name="district" placeholder="(Opcional)">
-									</div>
+							</div>
+						</div> --}} {{--
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="">Endereco</label>
+									<input type="text" class="form-control" id="adress" name="address" placeholder="(Opcional)">
 								</div>
 
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="">Numero</label>
-										<input type="text" class="form-control" id="number" name="number" placeholder="(Opcional)">
-									</div>
+								<div class="form-group">
+									<label for="">Cidade</label>
+									<input type="text" class="form-control" id="city" name="city" placeholder="(Opcional)">
 								</div>
-							</div> --}}
-
-
-
-
-							<!-- radio -->
-
-							<div class="form-group">
-								<label>
-									<input type="radio" name="status" class="flat-red" value="1" @empty($pet) checked @endempty @isset($pet) @if($pet->Status == 1) checked @endif @endisset > Ativo
-								</label>
-								<label>
-									<input type="radio" name="status" class="flat-red" value="0" @isset($pet) @if($pet->Status == 0) checked @endif @endisset > Inativo
-								</label>
 							</div>
 
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="">Bairro</label>
+									<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)">
+								</div>
 
-						
+								<div class="form-group">
+									<label for="">Estado</label>
+									<input type="text" class="form-control" id="district" name="district" placeholder="(Opcional)">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="">Numero</label>
+									<input type="text" class="form-control" id="number" name="number" placeholder="(Opcional)">
+								</div>
+							</div>
+						</div> --}}
+
+
+
+
+						<!-- radio -->
+
+
+
+
 						<!-- /.box-body -->
 
 						<div class="box-footer">
@@ -209,15 +231,10 @@
 <!-- /.modal -->
 
 
-@endisset 
-
-@endsection
-
-
-@section('scripts')
+@endisset @endsection @section('scripts')
 <!-- Page script -->
 <script>
-  $(function () {
+	$(function () {
     
 $('.select2').select2();
 
@@ -239,6 +256,7 @@ $('.select2').select2();
 
    
   })
+
 </script>
 
 @endsection

@@ -7,6 +7,9 @@ use App\Http\Requests\Manager\Adoptions\PetsRequest;
 use Illuminate\Http\Request;
 use App\Models\Pet;
 use DateTime;
+use App\Models\Petimage;
+
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -104,6 +107,9 @@ class PetsController extends Controller
         $pet->created_by    = Auth::user()->id;
         $pet->status        = $request->status;
         $pet->save();
+
+        $this->saveImage($pet);
+
         return redirect()->route('manager.pets')->with('message', 'Pet cadastrado com sucesso!');
     }
   
@@ -132,6 +138,9 @@ class PetsController extends Controller
         $pet->status        = $request->status;
 
         $pet->save();
+
+        $this->saveImage($pet);
+
         return redirect()->route('manager.pets')->with('message', 'Pet atualizado com sucesso!');
     }
   
