@@ -14,9 +14,7 @@ use App\Models\Productimage;
 use DateTime;
 use DB;
 use Illuminate\Support\Facades\Input;
-
 use Illuminate\Support\Facades\Auth;
-
 class ProductsController extends Controller
 {
     /**
@@ -87,7 +85,7 @@ class ProductsController extends Controller
         // ->select('products.Id', 'products.Name', 'products.Description', 'products.Status', 'products.UnitPrice', 'productcategories.Name as CategoryName')
         // ->orderBy('products.created_at', 'desc')
         // ->get();
-
+        
         $products = DB::select("
         select 
             p.Id,

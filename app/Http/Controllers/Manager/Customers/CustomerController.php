@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\User;
 use DateTime;
-
+use Mail;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -22,9 +23,6 @@ class CustomerController extends Controller
     {
         $this->middleware('auth');
     }
-
-
-
 
     public function index()
     {
@@ -46,6 +44,28 @@ class CustomerController extends Controller
   
     public function store(CustomerRequest $request)
     {
+
+        $password  =  "aa";
+        
+        Mail::send('emails.share',  [], function (Message $message) {
+            $message
+                ->subject('Bem vindo ao EasyPets')
+                ->to('victor@atrace.com.br', 'EasyPets <noreply@easypets.com.br>')
+                ->from($user->Email, $user->Name)
+                ->embedData([
+                    'personalizations' => [[
+                        'substitutions' => [
+                            '<%first_name%>' =>  $user->Name,
+                            '<%email%>' =>  $user->Email,
+                            '<%password%>' =>  $password,
+                            '<%host%>' => $request->getSchemeAndHttpHost()
+                        ]
+                    ]
+                    ],
+                    'template_id' => 'f702e656-3030-4ed5-a3a2-aae253bac2cc'
+                ], 'sendgrid/x-smtpapi');
+        });
+
         $user = new User;
         $customer = new Customer;
         $user->name              = $request->name;
@@ -68,6 +88,10 @@ class CustomerController extends Controller
         $customer->long              = $request->long;
         $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
+        
+
+
+
         return redirect()->route('manager.customers')->with('message', 'Cliente cadastrado com sucesso!');
     }
   
