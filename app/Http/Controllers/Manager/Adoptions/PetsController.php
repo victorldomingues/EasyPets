@@ -23,6 +23,55 @@ class PetsController extends Controller
     }
 
 
+    private function guid(){
+        if (function_exists('com_create_guid')){
+            $uuid  =   com_create_guid();
+            $uuid = str_replace("{","",$uuid);
+            $uuid = str_replace("}","",$uuid);
+            return $uuid;
+        }else{
+            mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
+            $charid = strtoupper(md5(uniqid(rand(), true)));
+            $hyphen = chr(45);// "-"
+
+            $uuid = chr(123)// "{"
+                    .substr($charid, 0, 8).$hyphen
+                    .substr($charid, 8, 4).$hyphen
+                    .substr($charid,12, 4).$hyphen
+                    .substr($charid,16, 4).$hyphen
+                    .substr($charid,20,12)
+                    .chr(125);// "}"
+
+            $uuid = str_replace("{","",$uuid);
+            $uuid = str_replace("}","",$uuid);
+
+            return $uuid;
+        }
+    }
+
+    private function saveImage($pet){
+        if($pet == null) return;
+
+        $file = Input::file('file'); 
+    
+        if(Input::hasFile('file')){
+            $path = 'uploads'.DIRECTORY_SEPARATOR.'pets';
+            $destinationPath = public_path().DIRECTORY_SEPARATOR.$path;
+            $fileName = $this->guid().".".$file->getClientOriginalExtension() ;
+            $finalPath = $destinationPath.DIRECTORY_SEPARATOR.$fileName;
+            $file->move($destinationPath, $fileName);
+            $image  = new Petimage;
+            $image->originalname = $file->getClientOriginalName();
+            $image->petid   = $pet->Id;
+            $image->servername  = $fileName ;
+            $image->extension   = $file->getClientOriginalExtension() ;
+            $image->path        = $path;
+            $image->status      = 1 ;
+            $image->deleted     = 0 ;
+            $image->created_by  = Auth::user()->id;
+            $image->save();
+        }
+    }
 
 
     public function index()
@@ -51,7 +100,7 @@ class PetsController extends Controller
         $pet->type          = $request->type;
         // $pet->description   = $request->description;
         $pet->age           = $request->age;
-        $pet->deleted       = $request->deleted;
+        $pet->deleted       = 0;
         $pet->created_by    = Auth::user()->id;
         $pet->status        = $request->status;
         $pet->save();
