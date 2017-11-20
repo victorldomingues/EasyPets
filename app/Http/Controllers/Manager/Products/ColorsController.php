@@ -23,20 +23,12 @@ class ColorsController extends Controller
     }
 
 
-
-
     public function index()
     {
         $colors = Productcolor::orderBy('created_at', 'desc')->get();
 
         return view('manager.products.colors', ['colors' => $colors]);
     }
-
-    // public function index()
-    // {
-    //     $colors = Productcolor::orderBy('created_at', 'desc')->paginate(10);
-    //     return view('manager.products.colors.index',['manager.products.colors' => $colors]);
-    // }
   
     public function create()
     {

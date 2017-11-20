@@ -56,6 +56,7 @@ class ProductsController extends Controller
     }
 
     private function saveImage($product){
+        
         if($product == null) return;
 
         $file = Input::file('file'); 
@@ -118,9 +119,6 @@ class ProductsController extends Controller
         $product->created_by            = Auth::user()->id;
         
         $product->save();
-
-
-        error_log(var_dump($product));
 
         $this->saveImage($product);
 
