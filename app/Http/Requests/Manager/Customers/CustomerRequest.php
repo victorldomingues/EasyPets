@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Manager\Custumers;
+namespace App\Http\Requests\Manager\Customers;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustumerRequest extends FormRequest
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,6 +29,9 @@ class CustumerRequest extends FormRequest
     }
 
     protected $fillable = [
+        'Name',
+        'Email',
+        'Cpf',
         'Id',
 		'Birthday',
 		'PublicPlace',

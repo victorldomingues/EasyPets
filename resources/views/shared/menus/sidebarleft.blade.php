@@ -136,7 +136,7 @@
             </li>
 
             <li>
-                <a href="{{route('manager.custumers')}}">
+                <a href="{{route('manager.customers')}}">
                     <i class="fa fa-address-card text-green"></i>
                     <span>Clientes</span>
                 </a>

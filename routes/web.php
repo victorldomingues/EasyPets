@@ -180,9 +180,17 @@ Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsContr
 
 // Manager Customer
 
-Route::get('/manager/custumers', 'Manager\Custumers\CustumerController@index')->name('manager.custumers');
+Route::get('/manager/customers', 'Manager\Customers\CustomerController@index')->name('manager.customers');
 
-Route::get('/manager/custumers/new', 'Manager\Custumers\CustumerController@create')->name('manager.custumers.new');
+Route::get('/manager/customers/new', 'Manager\Customers\CustomerController@create')->name('manager.customers.new');
 
-Route::post('/manager/custumers/new', 'Manager\Custumers\CustumerController@store')->name('manager.custumers.store');
+Route::post('/manager/customers/new', 'Manager\Customers\CustomerController@store')->name('manager.customers.store');
+
+Route::get('/manager/customers/{id}', 'Manager\Customers\CustomerController@show')->name('manager.customers.show');
+
+Route::get('/manager/customers/{id}/edit', 'Manager\Customers\CustomerController@edit')->name('manager.customers.edit');
+
+Route::post('/manager/customers/{id}/update', 'Manager\Customers\CustomerController@update')->name('manager.customers.update');
+
+Route::post('/manager/customers/{id}/destory', 'Manager\Customers\CustomerController@destroy')->name('manager.customers.destroy');
 
