@@ -1,7 +1,10 @@
 @extends('layouts.app') @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
+
+
 	<h1>
+
 		Clientes
 		<small> {{$customer->Name}} </small>
 	</h1>
@@ -29,7 +32,7 @@
 			<div class="box box-primary">
 				<div class="box-body box-profile">
 
-
+		
 					<h3 class="profile-username text-center">{{$customer->Name}}</h3>
 
 					<p class="text-muted text-center">

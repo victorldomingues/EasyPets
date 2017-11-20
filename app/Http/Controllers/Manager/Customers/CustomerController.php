@@ -79,7 +79,7 @@ class CustomerController extends Controller
   
     public function edit($id)
     {
-        $customer = Productcolor::findOrFail($id);
+        $customer = Customer::findOrFail($id);
         return view('manager.customers.customers-new', compact('customers'));
     }
   
