@@ -39,6 +39,8 @@ Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 Route::get('/manager', 'HomeController@index')->name('manager');
 
 
+
+
 // Manager product
 
 Route::get('/manager/products', 'Manager\Products\ProductsController@index')->name('manager.products');
@@ -56,6 +58,7 @@ Route::post('/manager/products/{id}/update', 'Manager\Products\ProductsControlle
 Route::post('/manager/products/{id}/destory', 'Manager\Products\ProductsController@destroy')->name('manager.products.destroy');
 
 
+
 // Manager product colors
 
 Route::get('/manager/colors', 'Manager\Products\ColorsController@index')->name('manager.colors');
@@ -71,6 +74,7 @@ Route::get('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@edit'
 Route::post('/manager/colors/{id}/update', 'Manager\Products\ColorsController@update')->name('manager.colors.update');
 
 Route::post('/manager/colors/{id}/destory', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
+
 
 
 // Manager product models
@@ -91,6 +95,7 @@ Route::post('/manager/models/{id}/destory', 'Manager\Products\ModelsController@d
 
 
 
+
 // Manager product categories
 
 Route::get('/manager/categories', 'Manager\Products\CategoriesController@index')->name('manager.categories');
@@ -108,6 +113,7 @@ Route::post('/manager/categories/{id}/update', 'Manager\Products\CategoriesContr
 Route::post('/manager/categories/{id}/destory', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
 
 
+
 // Manager provider
 
 Route::get('/manager/providers', 'Manager\Providers\ProvidersController@index')->name('manager.providers');
@@ -123,6 +129,7 @@ Route::get('/manager/providers/{id}/edit', 'Manager\Providers\ProvidersControlle
 Route::post('/manager/providers/{id}/update', 'Manager\Providers\ProvidersController@update')->name('manager.providers.update');
 
 Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
+
 
 
 
@@ -144,6 +151,7 @@ Route::post('/manager/pets/{id}/destory', 'Manager\Adoptions\PetsController@dest
 
 
 
+
 // Manager adoptions
 
 Route::get('/manager/adoptions', 'Manager\Adoptions\AdoptionsController@index')->name('manager.adoptions');
@@ -160,10 +168,21 @@ Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsContro
 
 Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
 
-// Manager Custumer
+
+// Manager Employees
+
+
+
+
+
+
+
+
+// Manager Customer
 
 Route::get('/manager/custumers', 'Manager\Custumers\CustumerController@index')->name('manager.custumers');
 
 Route::get('/manager/custumers/new', 'Manager\Custumers\CustumerController@create')->name('manager.custumers.new');
 
 Route::post('/manager/custumers/new', 'Manager\Custumers\CustumerController@store')->name('manager.custumers.store');
+
