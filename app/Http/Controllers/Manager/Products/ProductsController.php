@@ -82,43 +82,41 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = DB::table('products')
-        ->leftJoin('productcategories', 'productcategories.id', '=', 'products.productcategoryid')
-        ->select('products.Id', 'products.Name', 'products.Description', 'products.Status', 'products.UnitPrice', 'productcategories.Name as CategoryName')
-        ->orderBy('products.created_at', 'desc')
-        ->get();
+        // $products = DB::table('products')
+        // ->leftJoin('productcategories', 'productcategories.id', '=', 'products.productcategoryid')
+        // ->select('products.Id', 'products.Name', 'products.Description', 'products.Status', 'products.UnitPrice', 'productcategories.Name as CategoryName')
+        // ->orderBy('products.created_at', 'desc')
+        // ->get();
 
-        
-
-        // $products = DB::select("
-        //                 SELECT
-        //                         cards.id_card,
-        //                         cards.hash_card,
-        //                         cards.`table`,
-        //                         users.name,
-        //                         0 as total,
-        //                         cards.card_status,
-        //                         cards.created_at as last_update
-        //                     FROM cards
-        //                     LEFT JOIN users
-        //                     ON users.id_user = cards.id_user
-        //                     WHERE hash_card NOT IN ( SELECT orders.hash_card FROM orders )
-        //                     UNION
-        //                     SELECT
-        //                         cards.id_card,
-        //                         orders.hash_card,
-        //                         cards.`table`,
-        //                         users.name,
-        //                         sum(orders.quantity*orders.product_price) as total, 
-        //                         cards.card_status, 
-        //                         max(orders.created_at) last_update 
-        //                     FROM menu.orders
-        //                     LEFT JOIN cards
-        //                     ON cards.hash_card = orders.hash_card
-        //                     LEFT JOIN users
-        //                     ON users.id_user = cards.id_user
-        //                     GROUP BY hash_card
-        //                     ORDER BY id_card ASC");
+        $products = DB::select("
+        select 
+            p.Id,
+            p.Name,
+            p.Description,
+            p.created_at,
+            p.updated_at,
+            p.UnitPrice,
+            p.`Status`,
+            p.ProductCategoryId,
+            p.ProductColorId,
+            p.ProductModelId,
+            pm.Name as 'ModelName',
+            pc.Name as 'CategoryName',
+            pco.Name as 'ColorName',
+            pv.Name as 'ProviderName',
+            (
+                SELECT pi.ServerName from productimages pi where pi.deleted_at is null and pi.`Status` = 1 and pi.ProductId = p.Id LIMIT 1
+            )as 'Image'
+        from 
+            Products p 
+            left join Productmodels pm on pm.id = p.ProductModelId 
+            left join productcategories pc on pc.id = p.ProductCategoryId
+            left join productcolors pco on pco.id = p.ProductColorId
+            left join Providers pv on pv.id = p.ProviderId
+        where 
+            p.deleted_at is null 
+        order by 
+            p.created_at desc ");
 
         return view('manager.products.products', ['products' => $products]);
     }
@@ -177,7 +175,8 @@ class ProductsController extends Controller
         ->orderBy('products.created_at', 'desc')
         ->where('products.id', "=", $id)
         ->first();
-        return view('manager.products.products-show', compact('product'));
+        $images  =  Productimage::where("ProductId", "=", $id)->get();
+        return view('manager.products.products-show', ['product' => $product, 'images' =>  $images]);
     }
   
     public function edit($id)
@@ -187,7 +186,8 @@ class ProductsController extends Controller
         $colors  =  Productcolor::orderBy('Name', 'asc')->get();
         $categories  =  Productcategory::orderBy('Name', 'asc')->get();
         $models  =  Productmodel::orderBy('Name', 'asc')->get();
-        return view('manager.products.products-new', ['product' => $product , 'providers' => $providers, 'colors' => $colors, 'categories' => $categories, 'models' => $models  ]);
+        $images  =   Productimage::where("ProductId", "=", $id)->get();
+        return view('manager.products.products-new', ['product' => $product , 'providers' => $providers, 'colors' => $colors, 'categories' => $categories, 'models' => $models , 'images' => $images ]);
     }
   
     public function update(ProductRequest $request, $id)

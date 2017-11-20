@@ -44,7 +44,18 @@
 
 							@foreach ($products as $product)
 							<tr>
-								<td> {{ $product->Name }} </td>
+								<td> 
+									<img class="direct-chat-img"  
+										style="max-width: 25px; max-height: 25px; margin-right: 10px;" 
+										@isset($product->Image) 
+											src="{{asset('')}}uploads/products/{{$product->Image}}" 
+										@endisset
+										@empty($product->Image)
+											src="{{asset('')}}template/dist/img/default-product.jpg" 
+										@endempty
+										  > 
+											{{ $product->Name }} 
+								</td>
                                 <td> {{$product->CategoryName}}</td>
                                 <td> {{  'R$ '.number_format($product->UnitPrice, 2, ',', '.') }}  </td>
 								<td>

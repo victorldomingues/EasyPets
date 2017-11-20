@@ -23,3 +23,6 @@ Route::group(['namespace' => 'api'], function () {
 });
 
 
+Route::group(['namespace' => 'api'], function () {
+    Route::get('manager/products/removeimage/{id}', 'Manager\Products\ProductImageController@removeimage');
+});

@@ -27,10 +27,36 @@
 
 			<!-- Profile Image -->
 			<div class="box box-primary">
+
+				@isset($images)
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						@foreach($images as $image)
+						<li data-target="#carousel-example-generic" data-slide-to="{{$loop->iteration}}" @if($loop->iteration == 1) class="active" @endif ></li>
+						@endforeach
+					</ol>
+					<div class="carousel-inner">
+						@foreach($images as $image )
+						<div class="item  @if($loop->iteration == 1)  active @endif">
+							<img src="{{asset('')}}uploads/products/{{$image->ServerName}}">
+						</div>
+						@endforeach
+
+					</div>
+					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+						<span class="fa fa-angle-left"></span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+						<span class="fa fa-angle-right"></span>
+					</a>
+				</div>
+				@endisset
 				<div class="box-body box-profile">
 
 
 					<h3 class="profile-username text-center">{{$product->Name}}</h3>
+
+					<hr>
 
 					<p class="text-muted text-center">
 						<b>Status: </b>
@@ -65,12 +91,13 @@
 						<b> Cor: </b> {{ $product->ColorName }}
 
 					</p>
-
+					<hr>
 					<h3 class="text-muted text-center">
 
 						<b> Preço: </b> {{ 'R$ '.number_format($product->UnitPrice, 2, ',', '.') }}
 
 					</h3>
+					<hr>
 
 					<p class="text-muted text-center">{{$product->Description}}</p>
 

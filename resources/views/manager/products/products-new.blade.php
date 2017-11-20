@@ -34,7 +34,7 @@
 				<!-- /.box-header -->
 				<!-- form start -->
 				<form role="form" method="POST" @isset($product) action="{!! route('manager.products.update', ['id'=>$product->Id])  !!}"
-				 @endisset @empty($product) action="{{route('manager.products.store')}}"  @endempty enctype="multipart/form-data">
+				 @endisset @empty($product) action="{{route('manager.products.store')}}" @endempty enctype="multipart/form-data">
 					{{ csrf_field() }}
 
 					<div class="box-body">
@@ -49,27 +49,32 @@
 
 									<p class="help-block">clique para adicionar uma nova imagem</p>
 								</div>
-
+								@isset($images)
 								<div class="form-group">
-									<label for="">Imagens</label>
 
+									<label for="">Imagens</label>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
-											<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-											{{--
-											<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-											<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li> --}}
+											@foreach($images as $image)
+											<li data-target="#carousel-example-generic" data-slide-to="{{$loop->iteration}}" class=" circle-image circle-image-{{$image->Id}} @if($loop->iteration == 1) active @endif  "></li>
+											@endforeach
 										</ol>
 										<div class="carousel-inner">
-											<div class="item active">
-												<img src="{{asset('')}}template/dist/img/photo1.png" alt="First slide">
+											@foreach($images as $image )
+											<div class="item element-image element-image-{{$image->Id}}  @if($loop->iteration == 1)  active @endif">
+
+												<img src="{{asset('')}}uploads/products/{{$image->ServerName}}">
 
 												<div class="carousel-caption">
-													<button type="button" class="btn btn-small btn-danger">
-														<em class="fa fa-trash-o"></em>
+													<button type="button" e-id="{{$image->Id}}" class="btn btn-small btn-danger remove-image">
+														<em class=" fa fa-trash-o"></em>
+														<div style="display:  none" class="spin">
+															<em class="fa fa-refresh fa-spin" style="color:#fff; font-size:14px"></em>
+														</div>
 													</button>
 												</div>
 											</div>
+											@endforeach
 
 										</div>
 										<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -80,7 +85,9 @@
 										</a>
 									</div>
 
+
 								</div>
+								@endisset
 
 							</div>
 
@@ -283,6 +290,42 @@
       checkboxClass: 'icheckbox_flat-green',
       radioClass   : 'iradio_flat-green'
     })
+
+	$('body').on('click', '.remove-image', function(e){
+		e.preventDefault();
+
+		var t =  $(this);
+		var id  =  t.attr("e-id");
+
+		$(".remove-image .fa-trash-o").attr("style", "display: none");
+
+		$(".remove-image .spin").attr("style", "");
+
+		$.get("{{asset('')}}api/manager/products/removeimage/" + id, function( data ) {
+
+			$(".remove-image .spin ").attr("style", "display: none");
+
+			$(".remove-image .fa-trash-o ").attr("style", "");
+
+			$('.element-image-' + id).remove();
+			$('.circle-image-' + id).remove();
+
+			$(".circle-image").each(function(a , e) {
+				if(a == 0){
+					$(e).addClass('active');
+					return;
+				}
+			});
+			$(".element-image").each(function(a , e) {
+				if(a == 0){
+					$(e).addClass('active');
+					return;
+				}
+			});
+
+		});
+		
+	});
 
    
   })
