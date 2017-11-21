@@ -40,7 +40,7 @@ class ProductsController extends Controller
             p.deleted_at is null 
         order by 
             p.created_at desc
-        LIMIT 4 ");
+        ");
 
         
 
