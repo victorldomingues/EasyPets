@@ -59,7 +59,7 @@ class CustomerController extends Controller
         $user->type              = 1;
         $user->cpf               = $request->cpf;
         $user->save();
-        $customer->id                = $user->Id;
+        $customer->id                = $user->id;
         $customer->birthday          = $request->birthday;
         $customer->publicplace       = $request->publicplace;
         $customer->zipcode           = $request->zipcode;
@@ -74,19 +74,28 @@ class CustomerController extends Controller
         $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
 
-        $client = new PostmarkClient("1d369082-6fee-4557-9dbf-f3b036013df1");
+        try{
+
+            // try code
+    
+            $client = new PostmarkClient("1d369082-6fee-4557-9dbf-f3b036013df1");
         
-        // Send an email:
-        $sendResult = $client->sendEmailWithTemplate(
-          "victor@atrace.com.br",
-          $request->email,
-          3982421,
-          [
-          "first_name" => $request->name,
-          "email" => $request->email,
-          "password" => $password,
-          "host" => $request->getSchemeAndHttpHost(),
-        ]);
+            // Send an email:
+            $sendResult = $client->sendEmailWithTemplate(
+            "victor@atrace.com.br",
+            $request->email,
+            3982421,
+            [
+            "first_name" => $request->name,
+            "email" => $request->email,
+            "password" => $password,
+            "host" => $request->getSchemeAndHttpHost(),
+            ]);
+
+        } 
+        catch(\Exception $e){
+        // catch code
+        }
 
         return redirect()->route('manager.customers')->with('message', 'Cliente cadastrado com sucesso!');
     }
