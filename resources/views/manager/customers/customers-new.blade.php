@@ -32,8 +32,11 @@
 				<!-- form start -->
 				<form role="form" method="POST" @isset($customer) action="{!! route('manager.customers.update', ['id'=>$customer->Id])  !!}"
 				 @endisset @empty($customer) action="{{route('manager.customers.store')}}" @endempty>
-					{{ csrf_field() }}
+
+
 					<div class="box-body">
+
+						{{ csrf_field() }}
 
 
 						<div class="form-group">
@@ -59,11 +62,11 @@
 							<input type="date" class="form-control" id="birthday" name="birthday" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Birthday}}"
 							 @endisset required>
 						</div>
-		
+
 						<div class="form-group">
 							<label for="">Logradouro</label>
-							<input type="text" class="form-control" id="publicplace" name="publicplace" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->PublicPlace}}"
-							 @endisset required>
+							<input type="text" class="form-control" id="publicplace" name="publicplace" placeholder="(Obrigatório)" @isset($customer)
+							 value="{{$customer->PublicPlace}}" @endisset required>
 						</div>
 
 						<div class="form-group">
@@ -72,11 +75,11 @@
 							 @endisset required>
 						</div>
 
-						<div class="form-group">						
+						<div class="form-group">
 							<label for="">Complemento</label>
 							<input type="text" class="form-control" id="complement" name="complement" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Complement}}"
 							 @endisset required>
-						</div>						
+						</div>
 
 						<div class="form-group">
 							<label for="">CEP</label>
@@ -86,8 +89,8 @@
 
 						<div class="form-group">
 							<label for="">Bairro</label>
-							<input type="text" class="form-control" id="neighborhood" name="neighborhood" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Neighborhood}}"
-							 @endisset required>
+							<input type="text" class="form-control" id="neighborhood" name="neighborhood" placeholder="(Obrigatório)" @isset($customer)
+							 value="{{$customer->Neighborhood}}" @endisset required>
 						</div>
 
 						<div class="form-group">
@@ -107,18 +110,19 @@
 							<input type="text" class="form-control" id="coutry" name="country" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Country}}"
 							 @endisset required>
 						</div>
-						
-						<div class="form-group">						
+
+						{{--
+						<div class="form-group">
 							<label for="">Latitude</label>
 							<input type="text" class="form-control" id="lat" name="lat" placeholder="(Opcional)" @isset($customer) value="{{$customer->Lat}}"
 							 @endisset>
 						</div>
 
-						<div class="form-group">						
+						<div class="form-group">
 							<label for="">Longitude</label>
 							<input type="text" class="form-control" id="long" name="long" placeholder="(Opcional)" @isset($customer) value="{{$customer->Long}}"
 							 @endisset>
-						</div>
+						</div> --}}
 
 						<!-- <div class="form-group">						
 							<label for="">Forma de Pagamento</label>
@@ -170,5 +174,4 @@
 <!-- /.modal -->
 
 
-@endisset
-@endsection
+@endisset @endsection

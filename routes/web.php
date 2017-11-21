@@ -139,7 +139,7 @@ Route::get('/manager/pets', 'Manager\Adoptions\PetsController@index')->name('man
 
 Route::get('/manager/pets/new', 'Manager\Adoptions\PetsController@create')->name('manager.pets.new');
 
-Route::post('/manager/pets/new', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');
+Route::post('/manager/pets/store', 'Manager\Adoptions\PetsController@store')->name('manager.pets.store');
 
 Route::get('/manager/pets/{id}', 'Manager\Adoptions\PetsController@show')->name('manager.pets.show');
 
@@ -158,7 +158,7 @@ Route::get('/manager/adoptions', 'Manager\Adoptions\AdoptionsController@index')-
 
 Route::get('/manager/adoptions/new', 'Manager\Adoptions\AdoptionsController@create')->name('manager.adoptions.new');
 
-Route::post('/manager/adoptions/new', 'Manager\Adoptions\AdoptionsController@store')->name('manager.adoptions.store');
+Route::post('/manager/adoptions/store', 'Manager\Adoptions\AdoptionsController@store')->name('manager.adoptions.store');
 
 Route::get('/manager/adoptions/{id}', 'Manager\Adoptions\AdoptionsController@show')->name('manager.adoptions.show');
 
@@ -184,7 +184,7 @@ Route::get('/manager/customers', 'Manager\Customers\CustomerController@index')->
 
 Route::get('/manager/customers/new', 'Manager\Customers\CustomerController@create')->name('manager.customers.new');
 
-Route::post('/manager/customers/new', 'Manager\Customers\CustomerController@store')->name('manager.customers.store');
+Route::post('/manager/customers/store', 'Manager\Customers\CustomerController@store')->name('manager.customers.store');
 
 Route::get('/manager/customers/{id}', 'Manager\Customers\CustomerController@show')->name('manager.customers.show');
 

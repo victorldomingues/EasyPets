@@ -11,6 +11,9 @@ use DateTime;
 use Mail;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Db;
+use App\Helpers\GuidHelper;
 
 class CustomerController extends Controller
 {
@@ -44,37 +47,17 @@ class CustomerController extends Controller
   
     public function store(CustomerRequest $request)
     {
-
-        $password  =  "aa";
-        
-        Mail::send('emails.share',  [], function (Message $message) {
-            $message
-                ->subject('Bem vindo ao EasyPets')
-                ->to('victor@atrace.com.br', 'EasyPets <noreply@easypets.com.br>')
-                ->from($user->Email, $user->Name)
-                ->embedData([
-                    'personalizations' => [[
-                        'substitutions' => [
-                            '<%first_name%>' =>  $user->Name,
-                            '<%email%>' =>  $user->Email,
-                            '<%password%>' =>  $password,
-                            '<%host%>' => $request->getSchemeAndHttpHost()
-                        ]
-                    ]
-                    ],
-                    'template_id' => 'f702e656-3030-4ed5-a3a2-aae253bac2cc'
-                ], 'sendgrid/x-smtpapi');
-        });
+        $password  =  GuidHelper::short();
 
         $user = new User;
         $customer = new Customer;
         $user->name              = $request->name;
         $user->email             = $request->email;
-        $user->password          = "aaa";
+        $user->password          = Hash::make($password);
         $user->type              = 1;
         $user->cpf               = $request->cpf;
         $user->save();
-        $customer->id                = $user->id;
+        $customer->id                = $user->Id;
         $customer->birthday          = $request->birthday;
         $customer->publicplace       = $request->publicplace;
         $customer->zipcode           = $request->zipcode;
@@ -88,7 +71,32 @@ class CustomerController extends Controller
         $customer->long              = $request->long;
         $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
+
+        $data = array(
+            'name'=>$request->name, 
+            'email'=>$request->email, 
+            'password'=>$password,
+            'host'=>  $request->getSchemeAndHttpHost()
+        );
         
+        Mail::send('emails.share',  $data, function (Message $message) use($data){
+            $message
+                ->subject('Bem vindo ao EasyPets')
+                ->to('victor@atrace.com.br', 'EasyPets')
+                ->from( $data['email'], $data['name'])
+                ->embedData([
+                    'personalizations' => [[
+                        'substitutions' => [
+                            '<%first_name%>' =>  $data['name'],
+                            '<%email%>' =>  $data['email'],
+                            '<%password%>' =>  $data['password'],
+                            '<%host%>' => $data['host']
+                        ]
+                    ]
+                    ],
+                    'template_id' => 'f702e656-3030-4ed5-a3a2-aae253bac2cc'
+                ], 'sendgrid/x-smtpapi');
+        });
 
 
 
