@@ -78,7 +78,7 @@ class CustomerController extends Controller
 
             // try code
     
-            $client = new PostmarkClient("1d369082-6fee-4557-9dbf-f3b036013df1");
+            $client = new PostmarkClient(env("POSTMARK_API_KEY"));
         
             // Send an email:
             $sendResult = $client->sendEmailWithTemplate(
