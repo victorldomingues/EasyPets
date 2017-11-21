@@ -22,7 +22,7 @@
 <section class="row">
 
 	<div class="col-md-12">
-		@component('products.components.promotions') @endcomponent
+		@include('products.components.promotions', array('products'=> $products))
 	</div>
 
 </section>
@@ -30,7 +30,7 @@
 <section class="row">
 	@foreach($products as $product)
 	<div class="col-md-3">
-		@component('products.components.card') @endcomponent
+		@include('products.components.card', array('product'=> $product))
 	</div>
 	@endforeach
 
