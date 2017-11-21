@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Db;
 use App\Helpers\GuidHelper;
+// Import the Postmark Client Class:
+use Postmark\PostmarkClient;
 
 class CustomerController extends Controller
 {
@@ -72,33 +74,19 @@ class CustomerController extends Controller
         $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
 
-        $data = array(
-            'name'=>$request->name, 
-            'email'=>$request->email, 
-            'password'=>$password,
-            'host'=>  $request->getSchemeAndHttpHost()
-        );
+        $client = new PostmarkClient("1d369082-6fee-4557-9dbf-f3b036013df1");
         
-        Mail::send('emails.share',  $data, function (Message $message) use($data){
-            $message
-                ->subject('Bem vindo ao EasyPets')
-                ->to('victor@atrace.com.br', 'EasyPets')
-                ->from( $data['email'], $data['name'])
-                ->embedData([
-                    'personalizations' => [[
-                        'substitutions' => [
-                            '<%first_name%>' =>  $data['name'],
-                            '<%email%>' =>  $data['email'],
-                            '<%password%>' =>  $data['password'],
-                            '<%host%>' => $data['host']
-                        ]
-                    ]
-                    ],
-                    'template_id' => 'f702e656-3030-4ed5-a3a2-aae253bac2cc'
-                ], 'sendgrid/x-smtpapi');
-        });
-
-
+        // Send an email:
+        $sendResult = $client->sendEmailWithTemplate(
+          "victor@atrace.com.br",
+          $request->email,
+          3982421,
+          [
+          "first_name" => $request->name,
+          "email" => $request->email,
+          "password" => $password,
+          "host" => $request->getSchemeAndHttpHost(),
+        ]);
 
         return redirect()->route('manager.customers')->with('message', 'Cliente cadastrado com sucesso!');
     }
