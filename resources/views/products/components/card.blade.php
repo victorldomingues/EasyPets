@@ -19,11 +19,11 @@
 			</li>
 			<li>
 				<a href="#">
-					<i class="fa fa-circle-o text-yellow"></i> {{$product->ColorName}} </a>
+					<i class="fa fa-paint-brush "></i> {{$product->ColorName}} </a>
 			</li>
 			<li>
 				<a href="#">
-					<i class="fa fa-circle-o text-red"></i> {{$product->CategoryName}}</a>
+					<i class="fa fa-circle-o "></i> {{$product->CategoryName}}</a>
 			</li>
 			<li style="text-align: right">
 
