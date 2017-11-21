@@ -37,7 +37,7 @@
             </ul>
         </li>
         <li class="footer">
-            <a href="#">Ver todos</a>
+            <a href="/cart">Ver todos</a>
         </li>
     </ul>
 </li>
