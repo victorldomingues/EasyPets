@@ -63,7 +63,7 @@
 
             <section class="content-header" style="margin-top: -30px; padding-top:0px">
         
-                <h3> <small class="pull-right"> <a href="#" > Ver todos </a> </small> </h3> 
+                <h3> <small class="pull-right"> <a href="{{route('products')}}" > Ver todos </a> </small> </h3> 
               
             </section>
 
@@ -106,7 +106,7 @@
 
             <section class="content-header" style="margin-top: -30px; padding-top:0px">
 
-                   <h3> <small class="pull-right"> <a href="#" > Ver todos </a> </small> </h3> 
+                   <h3> <small class="pull-right"> <a href="{{route('services')}}" > Ver todos </a> </small> </h3> 
                 
             </section>
 

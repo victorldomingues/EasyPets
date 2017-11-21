@@ -16,7 +16,7 @@
         Irá baixar e instalar todo o pacote
     </li>
     <li>
-        Para rodar o servidor escreve na litnha de comando na basta ou se tiver o git bash here aberto:<br>
+        Para rodar o servidor escreve na linha de comando dentro da pasta ou se tiver o git bash here aberto:<br>
         php artisan serve
     </li>
 </ol>
