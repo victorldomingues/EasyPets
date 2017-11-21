@@ -34,6 +34,17 @@ Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
 Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 
 
+// Store Cart
+
+Route::get('/cart', 'CartController@index')->name('cart');
+
+// Store Checkout
+
+Route::get('/checkout', 'CheckoutController@index')->name('checkout');
+Route::get('/checkout/location', 'CheckoutController@location')->name('location');
+Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
+
+
 // Manager
 
 Route::get('/manager', 'HomeController@index')->name('manager');
@@ -170,9 +181,6 @@ Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsContr
 
 
 // Manager Employees
-
-
-
 
 
 

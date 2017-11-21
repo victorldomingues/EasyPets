@@ -2,7 +2,7 @@
     <div class="widget-user-header bg-black" style="background: url('{{asset('')}}template/dist/img/photo1.png') center center; height:150px">
     </div>
     <div class="box-header with-border">
-        <h3 class="box-title" style="padding-right:60px; height:40px"> Titulo do produto Titulo do produto </h3>
+        <h3 class="box-title" style="padding-right:60px; height:40px"> Titulo </h3>
 
         <div class="box-tools">
             <button class="btn btn-box-tool" type="button">
