@@ -10,7 +10,9 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "reliese/laravel": "^0.0.13"
+        "reliese/laravel": "^0.0.13",
+        "s-ichikawa/laravel-sendgrid-driver": "^2.0",
+        "wildbit/postmark-php": "^2.4"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

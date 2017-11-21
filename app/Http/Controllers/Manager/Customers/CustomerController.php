@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\User;
 use DateTime;
-
+use Mail;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Db;
+use App\Helpers\GuidHelper;
+// Import the Postmark Client Class:
+use Postmark\PostmarkClient;
 
 class CustomerController extends Controller
 {
@@ -22,9 +28,6 @@ class CustomerController extends Controller
     {
         $this->middleware('auth');
     }
-
-
-
 
     public function index()
     {
@@ -46,11 +49,13 @@ class CustomerController extends Controller
   
     public function store(CustomerRequest $request)
     {
+        $password  =  GuidHelper::short();
+
         $user = new User;
         $customer = new Customer;
         $user->name              = $request->name;
         $user->email             = $request->email;
-        $user->password          = "aaa";
+        $user->password          = Hash::make($password);
         $user->type              = 1;
         $user->cpf               = $request->cpf;
         $user->save();
@@ -68,6 +73,30 @@ class CustomerController extends Controller
         $customer->long              = $request->long;
         $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
+
+        try{
+
+            // try code
+    
+            $client = new PostmarkClient("1d369082-6fee-4557-9dbf-f3b036013df1");
+        
+            // Send an email:
+            $sendResult = $client->sendEmailWithTemplate(
+            "victor@atrace.com.br",
+            $request->email,
+            3982421,
+            [
+            "first_name" => $request->name,
+            "email" => $request->email,
+            "password" => $password,
+            "host" => $request->getSchemeAndHttpHost(),
+            ]);
+
+        } 
+        catch(\Exception $e){
+        // catch code
+        }
+
         return redirect()->route('manager.customers')->with('message', 'Cliente cadastrado com sucesso!');
     }
   
@@ -79,7 +108,7 @@ class CustomerController extends Controller
   
     public function edit($id)
     {
-        $customer = Productcolor::findOrFail($id);
+        $customer = Customer::findOrFail($id);
         return view('manager.customers.customers-new', compact('customers'));
     }
   

@@ -165,7 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
-
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
         /*
          * Package Service Providers...
          */
