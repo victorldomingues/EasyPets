@@ -91,7 +91,8 @@ class ProductsController extends Controller
         where 
             p.deleted_at is null 
         order by 
-            p.created_at desc ");
+            p.created_at desc 
+            ");
 
         return view('manager.products.products', ['products' => $products]);
     }
