@@ -1,5 +1,5 @@
 <!-- Notifications: style can be found in dropdown.less -->
-<li class="dropdown notifications-menu">
+<li class="dropdown notifications-menu {{ App\Helpers\ActiveLink::isActiveRoute('cart') }}">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-shopping-cart "></i>
         <span class="label label-warning">10</span>
@@ -37,7 +37,7 @@
             </ul>
         </li>
         <li class="footer">
-            <a href="/cart">Ver todos</a>
+            <a href="{{route('cart')}}">Ver todos</a>
         </li>
     </ul>
 </li>

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','WelcomeController@index')->name('home');
 
 Auth::routes();
 
@@ -179,9 +177,6 @@ Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsContr
 
 
 // Manager Employees
-
-
-
 
 
 
