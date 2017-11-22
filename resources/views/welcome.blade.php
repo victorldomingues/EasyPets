@@ -65,7 +65,7 @@
 
 </section>
 
-<section class="products container">
+<section class="products row">
 
 	<section class="content-header">
 		<h3>

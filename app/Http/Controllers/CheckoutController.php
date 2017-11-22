@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ProductsController;
 
 class CheckoutController extends Controller
 {
@@ -13,7 +14,7 @@ class CheckoutController extends Controller
     }
     public function cart()
     {
-        return view('checkout.cart');
+        return view('checkout.cart',['products' => ProductsController::similar(false,false,false,false)]);
     }
     public function payment()
     {

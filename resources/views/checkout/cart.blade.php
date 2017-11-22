@@ -19,9 +19,7 @@
 
 	<div class="form">
 
-		@component('checkout.components.itemsTable') @endcomponent {{--
-		<a class="btn btn-success checkout" href="checkoutSucesso.jsp" role="button">Finalizar compra</a>
-		<span class="cart-price pull-right">Total: R$ 100,00 </span> --}}
+		@component('checkout.components.itemsTable') @endcomponent
 
 	</div>
 
@@ -50,20 +48,11 @@
 		</h1>
 	</section>
 
-	<div class="item col-md-3 col-xs-6">
-		@component('products.components.card') @endcomponent
+	{{-- @foreach($products as $product)
+	<div class="col-md-3">
+		@include('products.components.card', array('product'=> $product))
 	</div>
-
-	<div class="item col-md-3 col-xs-6">
-		@component('products.components.card') @endcomponent
-	</div>
-	<div class="item col-md-3 col-xs-6">
-		@component('products.components.card') @endcomponent
-	</div>
-
-	<div class="item col-md-3 col-xs-6">
-		@component('products.components.card') @endcomponent
-	</div>
+	@endforeach --}}
 
 </section>
 
