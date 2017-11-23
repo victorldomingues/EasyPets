@@ -33,7 +33,7 @@ class CartItemsController extends Controller
         $user  =  Auth::user();
         $product  = Product::findOrFail($request->productid);
         $quantity  =  ($request->quantity != null && $request->quantity > 0 ) ? $request->quantity : 1;
-       $currentCartItem  = $this->getOrderItemByProductId($product->Id);
+       $currentCartItem  = $this->getOrderItemByProductId($product->Id, $order->Id);
        $cartItem  =  new OrderItem;
        if($currentCartItem  !=  null){
         $cartItem  =  OrderItem::FindOrFail($currentCartItem->Id);
@@ -108,9 +108,10 @@ class CartItemsController extends Controller
         return $order;
     }
 
-    private function getOrderItemByProductId ($productId){
+    private function getOrderItemByProductId ($productId, $orderId){
         return   DB::table("orderitems")
         ->where('ProductId', '=', $productId)
+        ->where('OrderId', '=', $orderId)
         ->select('orderitems.*')
         ->first() ?? null;
     }

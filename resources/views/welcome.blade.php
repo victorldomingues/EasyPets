@@ -90,7 +90,7 @@
 	<div class="row">
 		<div class="col-md-12">
 
-			<section class="content-header" style="margin-top: -30px; padding-top:0px">
+			<section class="content-header" style="margin-top: -30px; padding-top:0px ; padding-bottom:40px">
 
 				<h3>
 					<small class="pull-right">

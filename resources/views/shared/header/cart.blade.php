@@ -5,7 +5,7 @@
         <span class="label label-warning cart-counter ">0</span>
     </a>
     <ul class="dropdown-menu">
-        <li class="header">Você tem <span class="cart-counter"></span> itens no carrinho</li>
+        <li class="header">Você tem <span class="cart-counter">0</span> itens no carrinho</li>
         <li>
             <!-- inner menu: contains the actual data -->
             <ul id="cart-list" class="menu">

@@ -21,12 +21,12 @@ $(function() {
     },
     RefreshCart: function() {
       var cart = $("#cart-list");
-      cart.html("");
+      cart.empty();
       var cartCounter = $(".cart-counter");
       $.get("/cart/items", function(data) {
     
         var sum = data.reduce(function(s, a) {
-          return s + a.Quantity;
+          return parseInt(s) + parseInt(a.Quantity);
         }, 0);
 
         var listHtml  = "";
@@ -34,6 +34,7 @@ $(function() {
             listHtml += '<li> <a href="#"> <i class="fa fa-shopping-cart text-aqua"></i>' + item.Name + ' <label class="label label-info pull-right"> ' + item.Quantity + '</label></a> </li>';
         });
         cart.html(listHtml);
+        cartCounter.empty();
         cartCounter.html(sum);
       });
     },
