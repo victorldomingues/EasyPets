@@ -33,7 +33,7 @@
 
 </section>
 
-<section class="row">
+<section class="products row">
 
 	<section class="content-header">
 		<h3>
@@ -59,7 +59,7 @@
 
 				<h3>
 					<small class="pull-right">
-						<a href="#"> Ver todos </a>
+						<a href="{{route('products')}}"> Ver todos </a>
 					</small>
 				</h3>
 
@@ -70,7 +70,7 @@
 
 </section>
 
-<section class="row">
+<section class="products row">
 
 	<section class="content-header">
 		<h3>
@@ -94,7 +94,7 @@
 
 				<h3>
 					<small class="pull-right">
-						<a href="#"> Ver todos </a>
+						<a href="{{route('services')}}"> Ver todos </a>
 					</small>
 				</h3>
 

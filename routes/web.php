@@ -58,8 +58,6 @@ Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
 Route::get('/manager', 'HomeController@index')->name('manager');
 
 
-
-
 // Manager product
 
 Route::get('/manager/products', 'Manager\Products\ProductsController@index')->name('manager.products');

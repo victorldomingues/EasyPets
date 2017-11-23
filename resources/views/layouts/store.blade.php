@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -49,28 +50,29 @@
 						</button>
 					</div>
 
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="{{asset('')}}">Página inicial
-									<span class="sr-only">(current)</span>
-								</a>
-							</li>
-							<li>
-								<a href="{{route('products')}}">Produtos
-									<span class="sr-only">(current)</span>
-								</a>
-							</li>
-							<li>
-								<a href="{{route('services')}}">Serviços </a>
-							</li>
-							<li>
-								<a href="{{route('adoption')}}">Adoção
-									<em class="fa fa-paw"></em>
-									<span class="sr-only">(current)</span>
-								</a>
-							</li>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="{{ Request::is('/') ? 'active' : null }}">
+                                <a href="{{asset('')}}">Página inicial
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                             <li class="{{ App\Helpers\ActiveLink::isActiveRoute('products') }}">
+                            
+                                <a href="{{route('products')}}">Produtos
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="{{ App\Helpers\ActiveLink::isActiveRoute('services') }}">
+                                <a href="{{route('services')}}">Serviços </a>
+                            </li>
+                            <li class="{{ App\Helpers\ActiveLink::isActiveRoute('adoption') }}">
+                                <a href="{{route('adoption')}}">Adoção
+                                    <em class="fa fa-paw"></em>
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
 
 						</ul>
 						<form class="navbar-form navbar-left" role="search">

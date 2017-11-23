@@ -1,0 +1,113 @@
+.title {
+    text-align: left;
+    text-transform: none;
+}
+
+label {
+    display: block;
+    cursor: pointer;
+}
+
+input {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+}
+
+form input {
+    width: 100%;
+}
+
+form label {
+    text-transform: uppercase;
+}
+
+.form {
+    padding: 0 15px;
+}
+
+.spaces {
+    display: block;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.btn {
+    margin: 0 auto;
+}
+
+.verde {
+    background-color: #26b151;
+}
+
+label.interact {
+    float: left;
+    text-transform: none;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+label.interact input {
+    display: inline;
+    width: 20px;
+}
+
+.banner .carousel-inner img {
+    display: block;
+    margin: 0 auto;
+    height: auto;
+}
+
+.products {
+    padding: 20px 0;
+}
+
+.products .btn {
+    width: 100%;
+}
+
+footer {
+    padding: 10px 0;
+    margin: 20px 0 0;
+    border-top: 1px solid #ccc;
+}
+
+.cart-price {
+    font-size: 22px;
+}
+
+.row + .row {
+    margin-top: 30px;
+}
+
+.content-header>h1 {
+    font-size: 28px;
+}
+
+.cart .form tbody td {
+    border-right: 2px solid #e6e6e6;
+}
+
+.cart tbody>tr {
+    background-color: #fff;
+}
+
+.cart tbody > tr:nth-of-type(even) {
+    background-color: #f4f4f4;
+}
+
+.cart .form tbody td:last-child {
+    text-align: center;
+    border-right: 0;
+    cursor: pointer;
+}

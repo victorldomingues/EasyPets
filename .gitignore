@@ -12,4 +12,5 @@ yarn-error.log
 /uploads
 /public/uploads
 /nbproject/private/
+/layout
 .env
