@@ -22,7 +22,7 @@
 <section class="row">
 
 	<div class="col-md-12">
-		@include('products.components.promotions', ['products' => $services])
+		@if(sizeof($services) > 0) @include('products.components.promotions', ['products' => $services]) @endif
 	</div>
 
 </section>

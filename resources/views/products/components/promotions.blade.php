@@ -39,14 +39,16 @@
 		@endisset
 	</div>
 	@isset($products)
-	<div class="col-md-3">
+		<div class="col-md-3">
 
-		@include('products.components.card', array('product' => $products[0] ))
-	</div>
-
-	<div class="col-md-3">
-		@include('products.components.card', array('product' => $products[1] ) )
-	</div>
+			@include('products.components.card', array('product' => $products[0] ))
+		</div>
+	
+		@isset($products[1])
+		<div class="col-md-3">
+			@include('products.components.card', array('product' => $products[1] ) ) 
+		</div>
+		@endisset
 	@endisset
 
 </div>

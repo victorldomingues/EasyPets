@@ -23,9 +23,12 @@
 <section class="row">
 
 	<div class="col-md-12">
+@isset($products)
+@if(sizeof($products) > 0)
 
 		@include('products.components.promotions', array('products'=> $products))
-
+@endif
+@endisset
 	</div>
 
 </section>
@@ -39,12 +42,14 @@
 		</h3>
 
 	</section>
+	@isset($products)
 
 	@foreach($products as $product)
 	<div class="col-md-3">
 		@include('products.components.card', array('product'=> $product))
 	</div>
 	@endforeach
+	@endisset
 
 
 	<div class="row">
@@ -73,12 +78,13 @@
 			<small> Mais contrados </small>
 		</h3>
 	</section>
-
+	@isset($services) 
 	@foreach($services as $product)
 	<div class="col-md-3">
 		@include('products.components.card', array('product'=> $product))
 	</div>
-	@endforeach
+	@endforeach 
+	@endisset
 
 
 	<div class="row">

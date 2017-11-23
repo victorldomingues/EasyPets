@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 20 Nov 2017 01:48:24 +0000.
+ * Date: Thu, 23 Nov 2017 02:53:18 +0000.
  */
 
 namespace App\Models;
@@ -21,13 +21,22 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $updated_at
  * @property int $Type
  * @property string $Cpf
+ * @property string $deleted_at
+ * @property int $updated_by
+ * @property int $deleted_by
+ * @property bool $Deleted
  *
  * @package App\Models
  */
 class User extends Eloquent
 {
+	use \Illuminate\Database\Eloquent\SoftDeletes;
+
 	protected $casts = [
-		'Type' => 'int'
+		'Type' => 'int',
+		'updated_by' => 'int',
+		'deleted_by' => 'int',
+		'Deleted' => 'bool'
 	];
 
 	protected $hidden = [
@@ -41,6 +50,9 @@ class User extends Eloquent
 		'password',
 		'remember_token',
 		'Type',
-		'Cpf'
+		'Cpf',
+		'updated_by',
+		'deleted_by',
+		'Deleted'
 	];
 }

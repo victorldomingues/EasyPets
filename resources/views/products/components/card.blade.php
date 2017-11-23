@@ -6,7 +6,7 @@
 		<h3 class="box-title" style="padding-right:60px; height:40px"> {{$product->Name}} </h3>
 
 		<div class="box-tools">
-			<button class="btn btn-box-tool" type="button">
+			<button class="btn btn-box-tool add-to-cart" product="{{$product->Id}}" type="button">
 				<i class="fa fa-shopping-cart "></i> Comprar
 			</button>
 		</div>
@@ -25,7 +25,7 @@
 				<a href="#">
 					<i class="fa fa-circle-o "></i> {{$product->CategoryName}}</a>
 			</li>
-			<li style="text-align: right">
+			<li style="text-align: right" class=" add-to-cart" product="{{$product->Id}}">
 
 				<a href="#">
 					<b class="pull-left"> {{ 'R$ '.number_format($product->UnitPrice, 2, ',', '.') }}
