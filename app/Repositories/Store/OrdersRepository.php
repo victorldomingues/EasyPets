@@ -16,8 +16,7 @@ class OrdersRepository
 
     public static function storeItem(CartItemRequest $request){
         $order  =  self::getOrder();
-        error_log('AAAAAAAAAAAA ======>');
-        error_log('ORDER ID  '.  $order -> Id);
+        
         if($order->state != OrderStateHelper::$shopping){
             $order->state = OrderStateHelper::$shopping;
             $order->save();
