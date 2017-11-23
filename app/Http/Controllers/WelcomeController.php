@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class ProductsController extends Controller
+class WelcomeController extends Controller
 {
     //
     public function index()
     {
-
         $products = DB::select("
         select 
             p.Id,
@@ -40,17 +39,9 @@ class ProductsController extends Controller
             p.deleted_at is null 
         order by 
             p.created_at desc
-        ");
+        LIMIT 4 ");
 
-        
-
-        return view('products.products', ['products' => $products]);
-    }
-
-    public function similar(string $category, string $name, string $color=null, string $model=null )
-    {
-
-        $products = DB::select("
+        $services = DB::select("
         select 
             p.Id,
             p.Name,
@@ -79,8 +70,8 @@ class ProductsController extends Controller
             p.deleted_at is null 
         order by 
             p.created_at desc
-        ");
-  
-        return $products;
+        LIMIT 4 ");
+
+        return view('welcome', ['products' => $products, 'services' => $services]);
     }
 }

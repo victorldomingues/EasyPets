@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 20 Nov 2017 01:48:24 +0000.
+ * Date: Thu, 23 Nov 2017 02:53:18 +0000.
  */
 
 namespace App\Models;
@@ -30,6 +30,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Customer extends Eloquent
 {
+	protected $primaryKey = 'Id';
 	public $incrementing = false;
 	public $timestamps = false;
 
@@ -43,7 +44,6 @@ class Customer extends Eloquent
 	];
 
 	protected $fillable = [
-		'Id',
 		'Birthday',
 		'PublicPlace',
 		'ZipCode',

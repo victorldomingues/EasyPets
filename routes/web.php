@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','WelcomeController@index')->name('home');
 
 Auth::routes();
 
@@ -38,6 +36,16 @@ Route::get('/adoption/pets', 'PetsController@index')->name('pets');
 
 Route::get('/cart', 'CartController@index')->name('cart');
 
+
+// Store Cart items
+
+Route::get('/cart/items', 'CartItemsController@items')->name('cart.items');
+
+Route::post('/cart/storeitem', 'CartItemsController@storeItem')->name('cart.storeitem');
+
+Route::post('/cart/removeitem/{id}', 'CartItemsController@removeItem')->name('cart.removeItem');
+
+
 // Store Checkout
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
@@ -48,8 +56,6 @@ Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
 // Manager
 
 Route::get('/manager', 'HomeController@index')->name('manager');
-
-
 
 
 // Manager product

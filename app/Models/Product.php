@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 20 Nov 2017 01:48:24 +0000.
+ * Date: Thu, 23 Nov 2017 02:53:18 +0000.
  */
 
 namespace App\Models;
@@ -28,6 +28,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $ProductColorId
  * @property float $UnitPrice
  * @property int $ProviderId
+ * @property int $Type
  *
  * @package App\Models
  */
@@ -46,7 +47,8 @@ class Product extends Eloquent
 		'ProductModelId' => 'int',
 		'ProductColorId' => 'int',
 		'UnitPrice' => 'float',
-		'ProviderId' => 'int'
+		'ProviderId' => 'int',
+		'Type' => 'int'
 	];
 
 	protected $fillable = [
@@ -61,6 +63,7 @@ class Product extends Eloquent
 		'ProductModelId',
 		'ProductColorId',
 		'UnitPrice',
-		'ProviderId'
+		'ProviderId',
+		'Type'
 	];
 }
