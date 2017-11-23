@@ -129,14 +129,12 @@ class CustomerController extends Controller
 
         $customer = DB::table('customers')
         ->join('users', 'users.id', '=', 'customers.id')
-        ->select('users.Id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
+        ->select('users.id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
         ->where('users.id', '=', $id)
         ->first();
         
         $customer = Customer::findOrFail($id);        
-        error_log('-------------------------------------------------------');
-        error_log($customer->publicplace);
-        error_log('-------------------------------------------------------');
+        
         $user = User::findOrFail($id);        
         $user->name              = $request->name;
         $user->save();
@@ -152,6 +150,7 @@ class CustomerController extends Controller
         $customer->lat               = $request->lat;
         $customer->long              = $request->long;        
         $customer->save();
+        
         return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');
     }
   
