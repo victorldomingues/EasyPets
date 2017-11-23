@@ -35,15 +35,15 @@
 		
 					<h3 class="profile-username text-center">{{$customer->Name}}</h3>
 
+				
+
 					<p class="text-muted text-center">
-						<b>Status: </b>
-						@if( $customer->Status == 1 )
-						<i class="fa fa-circle text-success"></i> Ativo @else
-						<i class="fa fa-circle text-danger"></i> Inativo @endif
+
+						<b> Nome: </b>
+						{{$customer->Name}}
+
 					</p>
-
-					<p class="text-muted text-center"> <b>{{$customer->DocumentType}}</b>: {{$customer->Document}}</p>
-
+			
 					<a href="{!! route('manager.customers.edit', ['id'=>$customer->Id])  !!}" class="btn btn-primary btn-block">
 						<b>Editar</b>
 					</a>

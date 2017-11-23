@@ -138,6 +138,8 @@ return [
 
     'providers' => [
 
+        'Barryvdh\Debugbar\ServiceProvider',
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -178,6 +180,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
 
     ],
 
@@ -193,6 +196,8 @@ return [
     */
 
     'aliases' => [
+
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

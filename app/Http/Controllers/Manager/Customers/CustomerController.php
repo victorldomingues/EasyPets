@@ -12,7 +12,7 @@ use Mail;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Db;
+use DB;
 use App\Helpers\GuidHelper;
 // Import the Postmark Client Class:
 use Postmark\PostmarkClient;
@@ -31,7 +31,11 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::All();
+        $customers = DB::table('customers')
+        ->join('users', 'users.id', '=', 'customers.id')
+        ->select('users.Id', 'users.Name' ,'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
+        ->orderBy('users.created_at', 'desc')
+        ->get();
 
         return view('manager.customers.customers', ['customers' => $customers]);
     }
@@ -71,7 +75,6 @@ class CustomerController extends Controller
         $customer->complement        = $request->complement;
         $customer->lat               = $request->lat;
         $customer->long              = $request->long;
-        $customer->paymentpreference = $request->paymentpreference;
         $customer->save();
 
         try{
@@ -102,20 +105,41 @@ class CustomerController extends Controller
   
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('manager.customers.customers-show', compact('customers'));
+        $customer = DB::table('customers')
+        ->join('users', 'users.id', '=', 'customers.id')
+        ->select('users.Id', 'users.Name' ,'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
+    
+        ->where('users.id', '=', $id)
+        ->first();
+
+        return view('manager.customers.customers-show', ['customer' => $customer]);
     }
   
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('manager.customers.customers-new', compact('customers'));
+        $customer = DB::table('customers')
+        ->join('users', 'users.id', '=', 'customers.id')
+        ->select('users.Id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
+        ->where('users.id', '=', $id)
+        ->first();
+
+        return view('manager.customers.customers-new', ['customer' => $customer]);
     }
   
     public function update(CustomerRequest $request, $id)
     {
-        $customer = Customer::findOrFail($id);
-        $user = User::findOrFail($id);
+
+        $customer = DB::table('customers')
+        ->join('users', 'users.id', '=', 'customers.id')
+        ->select('users.Id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
+        ->where('users.id', '=', $id)
+        ->first();
+        
+        $customer = Customer::findOrFail($id);        
+        error_log('-------------------------------------------------------');
+        error_log($customer->publicplace);
+        error_log('-------------------------------------------------------');
+        $user = User::findOrFail($id);        
         $user->name              = $request->name;
         $user->save();
         $customer->birthday          = $request->birthday;
@@ -128,11 +152,9 @@ class CustomerController extends Controller
         $customer->country           = $request->country;
         $customer->complement        = $request->complement;
         $customer->lat               = $request->lat;
-        $customer->long              = $request->long;
-        $customer->paymentpreference = $request->paymentpreference;
-        $customer->updated_by        = Auth::user()->id;
+        $customer->long              = $request->long;        
         $customer->save();
-        return redirect()->route('manager.costumer')->with('message', 'Cliente atualizado com sucesso!');
+        return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');
     }
   
     public function destroy($id)
@@ -141,6 +163,6 @@ class CustomerController extends Controller
         $customer->updated_by    = Auth::user()->id;
         $customer->deleted_at    = new DateTime();
         $customer->save();
-        return redirect()->route('manager.costumer')->with('alert-success', 'Cliente removidoo com sucesso!');
+        return redirect()->route('manager.costumers')->with('alert-success', 'Cliente removidoo com sucesso!');
     }
 }

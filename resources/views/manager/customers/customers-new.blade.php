@@ -53,7 +53,7 @@
 
 						<div class="form-group">
 							<label for="">CPF</label>
-							<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Cpfe}}"
+							<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Cpf}}"
 							 @endisset required>
 						</div>
 
