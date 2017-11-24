@@ -35,12 +35,24 @@
 		
 					<h3 class="profile-username text-center">{{$customer->Name}}</h3>
 
-				
+					<p class="text-muted text-center">
+
+						<b> Data de Nascimento: </b>
+						{{$customer->Birthday}}
+
+					</p>
 
 					<p class="text-muted text-center">
 
-						<b> Nome: </b>
-						{{$customer->Name}}
+						<b> CPF: </b>
+						{{$customer->Cpf}}
+
+					</p>
+
+					<p class="text-muted text-center">
+
+						<b> CEP: </b>
+						{{$customer->ZipCode}}
 
 					</p>
 			

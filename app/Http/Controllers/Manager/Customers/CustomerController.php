@@ -105,7 +105,7 @@ class CustomerController extends Controller
     {
         $customer = DB::table('customers')
         ->join('users', 'users.id', '=', 'customers.id')
-        ->select('users.Id', 'users.Name' ,'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
+        ->select('users.Id', 'users.Name' ,'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
     
         ->where('users.id', '=', $id)
         ->first();
