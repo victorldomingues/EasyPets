@@ -5,7 +5,7 @@
 	<section class="content-header">
 		<h1>
 			Serviços
-			<small>Disponíveis</small>
+			<small>Todos os serviços</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li>

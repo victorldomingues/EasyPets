@@ -53,6 +53,11 @@ Route::get('/checkout/location', 'CheckoutController@location')->name('location'
 Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
 
 
+
+// Store Order
+
+Route::post('/order/finish', 'OrderController@finish')->name('order.finish');
+
 // Manager
 
 Route::get('/manager', 'HomeController@index')->name('manager');

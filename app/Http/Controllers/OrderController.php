@@ -11,32 +11,21 @@ use DB;
 use App\Models\PurchaseOrder;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\User;
 use DateTime;
 use App\Http\Requests\Store\Cart\CartItemRequest ;
+use App\Http\Requests\Store\Cart\OrderRequest ;
+use App\Repositories\Store\OrdersRepository;
 class OrderController extends Controller
 {
-    public function store(){
-        $user  =  Auth::user();
+    public function finish(OrderRequest $request){
+        // $user  =  Auth::user();
+        $user = User::findOrFail(3);
         if($user  ==  null){
             return response()->json(['Valid' => false, 'Message' => 'Usuário não autenticado']);
         }else{
-            $order  =  $this->getOrder();
-            $orderItems  =  $this->getOrderItems();
-            $order->Status = OrderStateHelper::$finished;
-            $order->save();
-            return response()->json(['Valid' => true, 'Message' => 'Usuário não autenticado']);
+            OrdersRepository::finishOrder($request);
+            return response()->json(['Valid' => true]);
         }
-    }
-
-    private function getOrder(){
-        $cart  = self::getCart();
-        $order =  DB::table('purchaseorders')
-        ->where('Cart' , '=', $cart)
-        ->first();
-        if($order  ==  null){
-            $order  =  $this->storeOrder();
-        }
-        $order  = PurchaseOrder::findOrFail($order->Id);
-        return $order;
     }
 }

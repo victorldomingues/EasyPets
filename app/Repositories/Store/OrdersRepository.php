@@ -9,14 +9,17 @@ use DB;
 use App\Models\PurchaseOrder;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\User;
 use DateTime;
 use App\Http\Requests\Store\Cart\CartItemRequest ;
+use App\Http\Requests\Store\Cart\OrderRequest;
+
 class OrdersRepository 
 {
 
     public static function storeItem(CartItemRequest $request){
         $order  =  self::getOrder();
-        
+
         if($order->state != OrderStateHelper::$shopping){
             $order->state = OrderStateHelper::$shopping;
             $order->save();
@@ -76,8 +79,16 @@ class OrdersRepository
         ->where('purchaseorders.id', '=', $order->Id)
         ->whereIn('purchaseorders.state', [OrderStateHelper::$shopping])
         ->where('purchaseorders.cart', '=', CartHelper::get())
-        ->select('products.Name', 'purchaseorders.id as OrderId', 'orderitems.Quantity', 'orderitems.Id')
+        ->select(
+            'products.Name', 
+            'purchaseorders.id as OrderId', 
+            'orderitems.Quantity', 
+            'orderitems.Id',
+            'orderitems.Total',
+            'orderitems.UnitPrice'
+            )
         ->get();
+
         return $products;
     }
 
@@ -88,7 +99,8 @@ class OrdersRepository
         $order->State  =  OrderStateHelper::$open;
         $order->Delivery  =  false;
         $order->Ip = request()->ip();
-        $order->Total = 0.00;
+
+        $order->Total =  0.00 ;
         $order->Subtotal = 0.00;
         $order->Discount = 0.00;
         if($user !=  null){
@@ -107,5 +119,38 @@ class OrdersRepository
         ->where('OrderId', '=', $orderId)
         ->select('orderitems.*')
         ->first() ?? null;
+    }
+
+    public static function finishOrder(OrderRequest $request){
+        // $user  =  Auth::user();
+        $user = User::findOrFail(3);
+        $order  =  self::getOrder();
+        if(isset($user->Id) && isset($order->Id)){
+            $subtotal =  self::getTotal($orderItems);
+            $orderItems  =  self::getOrderItems();
+            error_log('USER ID '.  $user->Id);
+            $order->CustomerId  =  $user->Id;
+            $order->State = OrderStateHelper::$finished;
+            $order->ClosedDate = new DateTime();
+            $order->Discount = isset($request->discount) ? $request->discount : 0;
+            $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
+            $order->Subtotal = $subtotal;
+            $order->save();
+        }
+    }
+
+    private static function getTotal($items){
+        $sum  = 0;
+        
+        if(isset($items)){
+        
+            foreach($items as $item){
+                error_log('GET TOTAL ' . $item->Total);
+                if(isset($item->UnitPrice) && isset($item->Quantity)){
+                    $sum += $item->UnitPrice * $item->Quantity;
+                }
+            }
+        }
+        return $sum;
     }
 }
