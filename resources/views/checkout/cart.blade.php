@@ -1,6 +1,5 @@
 @extends('layouts.store') @section('content')
 
-<section class="cart row">
 
 	<section class="content-header">
 		<h1>
@@ -17,27 +16,28 @@
 		<hr>
 	</section>
 
-	<div class="form">
 
-		@component('checkout.components.itemsTable') @endcomponent
-
-	</div>
-
-
-	<section class="content-header">
-		<h1 class="text-right">
-        	<small>Total</small>
-			 R$ 100.00
-		
-            <a class="btn btn-success checkout pull-left" href="checkoutSucesso.jsp" role="button">Finalizar compra</a>
-		</h1>
-		
-		<hr>
-	</section>
+	@include('checkout.components.itemsTable', ['products' => $products])
 
 
 
+
+<section class="content-header">
+	<h1 style="font-size:50px" class="text-right">
+		<small>Total</small>
+		@empty($products)
+		<a class="btn btn-info checkout pull-left" href="{{route('welcome')}}" role="button">Continuar comprando</a>
+		@endempty @isset($products) {{ 'R$ '.number_format(($products->sum('Total')), 2, ',', '.') }}
+		<a class="btn btn-warning btn-lg checkout pull-left" href="{{route('checkout')}}" role="button">Finalizar compra</a>
+		@endisset
+	</h1>
+
+	<hr>
 </section>
+
+
+
+
 
 <section class="products row">
 

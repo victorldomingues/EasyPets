@@ -85,7 +85,8 @@ class OrdersRepository
             'orderitems.Quantity', 
             'orderitems.Id',
             'orderitems.Total',
-            'orderitems.UnitPrice'
+            'orderitems.UnitPrice',
+            'products.Id as ProductId'
             )
         ->get();
 

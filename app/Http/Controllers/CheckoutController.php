@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ProductsController;
-
+use App\Repositories\Store\OrdersRepository;
 class CheckoutController extends Controller
 {
     //
     public function index()
     {
-        return view('checkout.checkout');
+        $products  =  OrdersRepository::getOrderItems();
+        $order  =  OrdersRepository::getOrder();
+        return view('checkout.checkout', ['products'=> $products, 'order' => $order]);
     }
     public function cart()
     {

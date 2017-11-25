@@ -1,12 +1,13 @@
+@isset($products)
 <div class="panel">
 
 	<div class="box">
 		<div class="box-header with-border">
-			<div class="box-title"> Itens da commpra</div>
+			<div class="box-title"> Itens da compra</div>
 		</div>
 
 		<div class="box-body">
-			<table class="table">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th> # Código</th>
@@ -18,18 +19,21 @@
 					</tr>
 				</thead>
 				<tbody id="cart-list">
+					@foreach($products as $product)
 					<tr>
-						<td> 0001</td>
-						<td> Produto 0001 </td>
-						<td> 1 </td>
-						<td> R$ 20,00  </td>
-						<th> R$ 20,00 </th>
+						<td> # {{$product->ProductId}}</td>
+						<td> {{$product->Name}}</td>
+						<td> {{$product->Quantity}} </td>
+						<td> {{ 'R$ '.number_format($product->UnitPrice, 2, ',', '.') }} </td>
+						<th>{{ 'R$ '.number_format(($product->UnitPrice * $product->Quantity), 2, ',', '.') }}</th>
 						<td class="text-center">
 							<em class="fa fa-trash"></em>
 						</td>
 					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+@endisset
