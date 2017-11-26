@@ -21,13 +21,13 @@
 		<li class="user-body">
 			<div class="row">
 				<div class="col-xs-4 text-center">
-					<a href="{{asset('')}}">Loja</a>
+					<a href="{{route('home')}}">Loja</a>
 				</div>
 				<div class="col-xs-4 text-center">
-					<a href="">Carrinho</a>
+					<a href="{{route('cart')}}">Carrinho</a>
 				</div>
 				<div class="col-xs-4 text-center">
-					<a href="">Compras</a>
+					<a href="{{route('manager.orders')}}">Compras</a>
 				</div>
 
 			</div>
