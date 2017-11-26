@@ -50,7 +50,7 @@
                             <i class="fa fa-circle-o"></i> Visão Geral</a>
                     </li>
                     <li>
-                        <a href="index.html">
+                        <a href="{{route('manager.orders')}}">
                             <i class="fa fa-circle-o"></i> Minhas compras </a>
                     </li>
                 </ul>

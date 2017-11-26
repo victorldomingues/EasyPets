@@ -58,6 +58,7 @@ Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
 // Store Order
 
 Route::post('/order/finish', 'OrderController@finish')->name('order.finish');
+Route::post('/order/pay', 'OrderController@pay')->name('order.pay');
 
 // Manager
 
@@ -190,6 +191,20 @@ Route::get('/manager/adoptions/{id}/edit', 'Manager\Adoptions\AdoptionsControlle
 Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsController@update')->name('manager.adoptions.update');
 
 Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
+
+
+// Manager purchases or orders
+
+Route::get('/manager/orders', 'Manager\Orders\OrdersController@index')->name('manager.orders');
+
+Route::get('/manager/orders/{id}', 'Manager\Orders\OrdersController@show')->name('manager.orders.show');
+
+Route::get('/manager/orders/{id}/edit', 'Manager\Orders\OrdersController@edit')->name('manager.orders.edit');
+
+Route::post('/manager/orders/{id}/update', 'Manager\Orders\OrdersController@update')->name('manager.orders.update');
+
+Route::post('/manager/orders/{id}/destory', 'Manager\Orders\OrdersController@destroy')->name('manager.orders.destroy');
+
 
 
 // Manager Employees

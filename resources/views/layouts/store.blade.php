@@ -33,6 +33,7 @@
 
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
@@ -140,6 +141,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{asset('')}}template/dist/js/demo.js"></script>
 	<script src="{{asset('')}}store/cart/js/cart.js"></script>
+	@yield('scripts')
 	{{ csrf_field() }}
 </body>
 
