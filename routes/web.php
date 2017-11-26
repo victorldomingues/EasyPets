@@ -18,6 +18,7 @@ Auth::routes();
 // Store products
 
 Route::get('/products', 'ProductsController@index')->name('products');
+Route::get('/product/{id}', 'ProductsController@detail')->name('product');
 
 
 // Store Serviçes
