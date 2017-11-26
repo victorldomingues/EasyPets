@@ -12,7 +12,7 @@ class CheckoutController extends Controller
     //
     public function index()
     {
-        $products  =  OrdersRepository::getOrderItems();
+        $products  =  OrdersRepository::getOrderFinishedItems();
         $order  =  OrdersRepository::getFinishedOrder();
         $customer  =  CustomersRepository::getById(Auth::user()->id);
         return view('checkout.checkout', ['products'=> $products, 'order' => $order, 'customer' => $customer]);

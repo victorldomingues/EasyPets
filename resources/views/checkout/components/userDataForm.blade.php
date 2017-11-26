@@ -29,10 +29,14 @@
 			<address>
 				<strong>{{$customer->Name}}</strong>
 				@isset($customer->PublicPlace)
-				<br> 795 Folsom Ave, Suite 600
-				<br> San Francisco, CA 94107 @endisset {{--
-				<br> Telefone: (555) 539-1037 --}}
-				<br> E-mail: {{$customer->Email}} @empty($customer->PublicPlace)
+				<br> {{$customer->PublicPlace}} , {{$customer->Number}}
+				<br> {{$customer->City}}, {{$customer->State}} - {{$customer->Country}} - {{$customer->ZipCode}}
+				<br> E-mail: {{$customer->Email}}
+				<br>
+				<label style="cursor:pointer" data-target="#modal-address" data-toggle="modal" class="label label-info"> Alterar meus dados </label>
+				@endisset {{--
+				<br> Telefone: (555) 539-1037 --}} @empty($customer->PublicPlace)
+				<br> E-mail: {{$customer->Email}}
 				<br> Você precisa informar o endereço
 				<br>
 				<label style="cursor:pointer" data-target="#modal-address" data-toggle="modal" class="label label-info"> Informar </label>

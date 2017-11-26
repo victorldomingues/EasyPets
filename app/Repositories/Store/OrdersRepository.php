@@ -72,6 +72,7 @@ class OrdersRepository
         $order =  DB::table('purchaseorders')
         ->where('Cart' , '=', $cart)
         ->whereIn('State' , [OrderStateHelper::$finished])
+        ->orderBy('purchaseorders.created_at', 'desc')
         ->first();
         $order  = PurchaseOrder::findOrFail($order->Id);
         return $order;
@@ -89,6 +90,27 @@ class OrdersRepository
         ->where('purchaseorders.id', '=', $order->Id)
         ->whereIn('purchaseorders.state', [OrderStateHelper::$shopping])
         ->where('purchaseorders.cart', '=', CartHelper::get())
+        ->select(
+            'products.Name', 
+            'purchaseorders.id as OrderId', 
+            'orderitems.Quantity', 
+            'orderitems.Id',
+            'orderitems.Total',
+            'orderitems.UnitPrice',
+            'products.Id as ProductId'
+            )
+        ->get();
+
+        return $products;
+    }
+
+    public static function getOrderFinishedItems(){
+        $order = self::getFinishedOrder();
+        $products  =  DB::table("purchaseorders")
+        ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
+        ->join("products", "orderitems.productid" , "=", "products.id" )
+        ->where('purchaseorders.id', '=', $order->Id)
+        ->whereIn('purchaseorders.state', [OrderStateHelper::$finished])
         ->select(
             'products.Name', 
             'purchaseorders.id as OrderId', 

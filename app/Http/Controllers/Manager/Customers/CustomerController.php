@@ -58,7 +58,7 @@ class CustomerController extends Controller
         $user  =  self::saveUser($request, $password);
 
         self::saveCustomer($request, $user);
-        
+
         try{
 
             // try code
@@ -108,12 +108,12 @@ class CustomerController extends Controller
   
     public function update(CustomerRequest $request, $id)
     {
+        error_log('update');
         $user = User::findOrFail($id);   
-        $customer = Customer::findOrFail($id);        
-        if(  $customer == null){
+        $customer = Customer::find($id);  
+        if(  $customer == null || !isset($customer)){
             $customer = self::saveCustomer($request, $user);
-        }
-        $user = User::findOrFail($id);        
+        }       
         $user->name              = $request->name;
         $user->save();
         $customer->birthday          = $request->birthday;
@@ -129,7 +129,8 @@ class CustomerController extends Controller
         $customer->long              = $request->long;        
         $customer->save();
         if(isset($request->backto)){
-            return redirect()->route($request->backto)->with('message', 'Cliente atualizado com sucesso!');
+            error_log('redirect to route '.$request->backto);
+            return redirect()->route(''.$request->backto.'')->with('message', 'Cliente atualizado com sucesso!');
         }
         return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');
     }
