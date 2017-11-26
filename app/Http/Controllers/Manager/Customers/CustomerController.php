@@ -132,11 +132,11 @@ class CustomerController extends Controller
         $customer->updated_by    = Auth::user()->id;
         $customer->deleted_at    = new DateTime();
         $customer->save();
-        return redirect()->route('manager.costumers')->with('alert-success', 'Cliente removidoo com sucesso!');
+        return redirect()->route('manager.customers')->with('alert-success', 'Cliente removidoo com sucesso!');
     }
 
     private static function saveUser(CustomerRequest $request, $password){
-        $user = new User;
+         $user = new User;
          $user->name              = $request->name;
          $user->email             = $request->email;
          $user->password          = Hash::make($password);
