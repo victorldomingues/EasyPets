@@ -141,7 +141,6 @@ class OrdersRepository
             $order->customerId  = $user->id;
         }
         $order->created_at = new Datetime();
-        $order->created_at = new Datetime();
         $order->save();
         return $order;
     }

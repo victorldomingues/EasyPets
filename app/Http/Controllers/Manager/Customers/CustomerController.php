@@ -17,6 +17,8 @@ use App\Helpers\GuidHelper;
 // Import the Postmark Client Class:
 use Postmark\PostmarkClient;
 
+use App\Repositories\Store\CustomersRepository;
+
 class CustomerController extends Controller
 {
     /**
@@ -85,30 +87,20 @@ class CustomerController extends Controller
   
     public function show($id)
     {
-        $customer = DB::table('customers')
-        ->join('users', 'users.id', '=', 'customers.id')
-        ->select('users.Id', 'users.Name' ,'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
-    
-        ->where('users.id', '=', $id)
-        ->first();
-
+        $customer = CustomersRepository::getById($id);
         return view('manager.customers.customers-show', ['customer' => $customer]);
     }
   
     public function edit($id)
     {
-        $customer = DB::table('customers')
-        ->join('users', 'users.id', '=', 'customers.id')
-        ->select('users.Id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
-        ->where('users.id', '=', $id)
-        ->first();
+        $customer = CustomersRepository::getById($id);
 
         return view('manager.customers.customers-new', ['customer' => $customer]);
     }
   
     public function update(CustomerRequest $request, $id)
     {
-        error_log('update');
+        
         $user = User::findOrFail($id);   
         $customer = Customer::find($id);  
         if(  $customer == null || !isset($customer)){
@@ -129,7 +121,6 @@ class CustomerController extends Controller
         $customer->long              = $request->long;        
         $customer->save();
         if(isset($request->backto)){
-            error_log('redirect to route '.$request->backto);
             return redirect()->route(''.$request->backto.'')->with('message', 'Cliente atualizado com sucesso!');
         }
         return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');

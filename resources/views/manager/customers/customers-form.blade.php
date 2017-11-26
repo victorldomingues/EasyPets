@@ -20,6 +20,7 @@
 	<label for="">Data de Nascimento</label>
 	<input type="date" class="form-control" id="birthday" name="birthday" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Birthday}}"
 	 @endisset required>
+     
 </div>
 
 <div class="form-group">
