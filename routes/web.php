@@ -57,6 +57,7 @@ Route::get('/checkout/payment', 'CheckoutController@payment')->name('payment');
 // Store Order
 
 Route::post('/order/finish', 'OrderController@finish')->name('order.finish');
+Route::post('/order/pay', 'OrderController@pay')->name('order.pay');
 
 // Manager
 

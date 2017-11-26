@@ -48,7 +48,7 @@ class OrdersRepository
         $cartItem->productid = $request->productid;
         $cartItem->Total  =  $product->UnitPrice * $cartItem->quantity;
         if($user !=  null){
-            $order->created_by  = $user->Id;
+            $order->created_by  =$user->id;
         } 
         $cartItem ->save();
         return  $cartItem;
@@ -63,6 +63,16 @@ class OrdersRepository
         if($order  ==  null){
             $order  =  self::storeOrder();
         }
+        $order  = PurchaseOrder::findOrFail($order->Id);
+        return $order;
+    }
+
+    public static function getFinishedOrder(){
+        $cart  = self::getCart();
+        $order =  DB::table('purchaseorders')
+        ->where('Cart' , '=', $cart)
+        ->whereIn('State' , [OrderStateHelper::$finished])
+        ->first();
         $order  = PurchaseOrder::findOrFail($order->Id);
         return $order;
     }
@@ -105,14 +115,16 @@ class OrdersRepository
         $order->Subtotal = 0.00;
         $order->Discount = 0.00;
         if($user !=  null){
-            $order->created_by  = $user->Id;
-            $order->customerId  = $user->Id;
+            $order->created_by  = $user->id;
+            $order->customerId  = $user->id;
         }
         $order->created_at = new Datetime();
         $order->created_at = new Datetime();
         $order->save();
         return $order;
     }
+
+    
 
     public static function getOrderItemByProductId ($productId, $orderId){
         return   DB::table("orderitems")
@@ -123,15 +135,29 @@ class OrdersRepository
     }
 
     public static function finishOrder(OrderRequest $request){
-        // $user  =  Auth::user();
-        $user = User::findOrFail(3);
+        $user  =  Auth::user();
         $order  =  self::getOrder();
-        if(isset($user->Id) && isset($order->Id)){
-            $subtotal =  self::getTotal($orderItems);
+        if(isset($user->id) && isset($order->Id)){
             $orderItems  =  self::getOrderItems();
-            error_log('USER ID '.  $user->Id);
-            $order->CustomerId  =  $user->Id;
-            $order->State = OrderStateHelper::$finished;
+            $subtotal =  self::getTotal($orderItems);
+            $order->CustomerId  = $user->id;
+            $order->State =  OrderStateHelper::$finished;
+            $order->ClosedDate = new DateTime();
+            $order->Discount = isset($request->discount) ? $request->discount : 0;
+            $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
+            $order->Subtotal = $subtotal;
+            $order->save();
+        }
+    }
+
+    public static function pay(){
+        $user  =  Auth::user();
+        $order  =  self::getOrder();
+        if(isset($user->id) && isset($order->Id)){
+            $orderItems  =  self::getOrderItems();
+            $subtotal =  self::getTotal($orderItems);
+            $order->CustomerId  = $user->id;
+            $order->State =  OrderStateHelper::$processingPayment;
             $order->ClosedDate = new DateTime();
             $order->Discount = isset($request->discount) ? $request->discount : 0;
             $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;

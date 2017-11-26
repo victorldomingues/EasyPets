@@ -4,8 +4,9 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h2 class="page-header">
-				<i class="fa fa-globe"></i> AdminLTE, Inc.
-				<small class="pull-right">Date: 2/10/2014</small>
+				<em class="fa fa-shopping-bag"> </em>
+				<b> Easy</b>Pets
+				<small class="pull-right">Data: {{date('d/m/Y')}}</small>
 			</h2>
 		</div>
 		<!-- /.col -->
@@ -13,24 +14,24 @@
 	<!-- info row -->
 	<div class="row invoice-info">
 		<div class="col-sm-4 invoice-col">
-			From
+			De
 			<address>
-				<strong>Admin, Inc.</strong>
-				<br> 795 Folsom Ave, Suite 600
-				<br> San Francisco, CA 94107
-				<br> Phone: (804) 123-5432
-				<br> Email: info@almasaeedstudio.com
+				<strong>EasyPets.</strong>
+				<br> R. Casa do Ator, 275 - Vila Olimpia, 
+				<br> São Paulo - SP, 04546-001. 
+				<br> Telefone: (804) 123-5432
+				<br> E-mail: contato@easypets.com.br
 			</address>
 		</div>
 		<!-- /.col -->
 		<div class="col-sm-4 invoice-col">
-			To
+			Para
 			<address>
-				<strong>John Doe</strong>
+				<strong>{{$customer->Name}}</strong>
 				<br> 795 Folsom Ave, Suite 600
 				<br> San Francisco, CA 94107
-				<br> Phone: (555) 539-1037
-				<br> Email: john.doe@example.com
+				{{--  <br> Telefone: (555) 539-1037  --}}
+				<br> E-mail: {{$customer->Email}}
 			</address>
 		</div>
 		<!-- /.col -->
@@ -40,9 +41,9 @@
 			<br>
 			<b>Compra ID:</b> {{$order->Id}}
 			<br>
-			<b>Payment Due:</b> 2/22/2014
+			<b>Pagamento em :</b>  {{date('d/m/Y')}}
 			<br>
-			<b>Account:</b> 968-34567
+			<b>Conta:</b> {{$customer->Id}}
 		</div>
 		<!-- /.col -->
 	</div>
@@ -82,20 +83,33 @@
 	<div class="row">
 		<!-- accepted payments column -->
 		<div class="col-xs-6">
-			<p class="lead">Payment Methods:</p>
-			<img src="{{asset('')}}template/dist/img/credit/visa.png" alt="Visa">
+			<p class="lead">Formas de pagamento:</p>
+			{{--  <img src="{{asset('')}}template/dist/img/credit/visa.png" alt="Visa">
 			<img src="{{asset('')}}template/dist/img/credit/mastercard.png" alt="Mastercard">
-			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express">
+			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express">  --}}
 			<img src="{{asset('')}}template/dist/img/credit/paypal2.png" alt="Paypal">
 
-			<p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-				Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity
-				jajah plickers sifteo edmodo ifttt zimbra.
-			</p>
+
+
+
+			<div class="form-group">
+				<p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+					<label for="">Inserir cupom de desconto</label>
+					<div class="input-group">
+						<div class="input-group-btn">
+							<span class="btn btn-default">
+								<i class="fa fa-ticket"></i>
+							</span>
+						</div>
+						<input class="form-control" type="text" name="discountcode" placeholder="CÓDIGO DE DESCONTO">
+					</div>
+				</p>
+			</div>
+
 		</div>
 		<!-- /.col -->
 		<div class="col-xs-6">
-			<p class="lead">Amount Due 2/22/2014</p>
+			<p class="lead">Valores a pagar {{date('d/m/Y')}}</p>
 
 			<div class="table-responsive">
 				<table class="table">
@@ -126,10 +140,10 @@
 			<a href="invoice-print.html" target="_blank" class="btn btn-default">
 				<i class="fa fa-print"></i> Imprimir</a>
 			<button type="button" class="btn btn-success pull-right">
-				<i class="fa fa-credit-card"></i> Submit Payment
+				<i class="fa fa-credit-card"></i> Finalizar compra
 			</button>
-			<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-				<i class="fa fa-download"></i> Generate PDF
+			<button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
+				<i class="fa fa-download"></i> Cancelar
 			</button>
 		</div>
 	</div>
