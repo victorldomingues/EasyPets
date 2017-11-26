@@ -150,10 +150,10 @@
 			<a href="invoice-print.html" target="_blank" class="btn btn-default">
 				<i class="fa fa-print"></i> Imprimir</a>
 			<button type="button" class="btn btn-success pull-right">
-				<i class="fa fa-credit-card"></i> Realziar pagamento
+				<i class="fa fa-credit-card"></i> Realizar pagamento
 			</button>
 			<button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
-				<i class="fa fa-download"></i> Cancelar
+				<i class="fa fa-trash-o"></i> Cancelar
 			</button>
 		</div>
 	</div>

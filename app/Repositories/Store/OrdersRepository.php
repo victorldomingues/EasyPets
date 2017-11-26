@@ -68,10 +68,10 @@ class OrdersRepository
     }
 
     public static function getFinishedOrder(){
-        $cart  = self::getCart();
+        $user  =  Auth::user();
         $order =  DB::table('purchaseorders')
-        ->where('Cart' , '=', $cart)
         ->whereIn('State' , [OrderStateHelper::$finished])
+        ->where('purchaseorders.customerId', '=', $user->id)
         ->orderBy('purchaseorders.created_at', 'desc')
         ->first();
         $order  = PurchaseOrder::findOrFail($order->Id);
@@ -168,12 +168,13 @@ class OrdersRepository
             $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
             $order->Subtotal = $subtotal;
             $order->save();
+            CartHelper::destory();
         }
     }
 
     public static function pay(){
         $user  =  Auth::user();
-        $order  =  self::getOrder();
+        $order  =  self::getFinishedOrder();
         if(isset($user->id) && isset($order->Id)){
             $orderItems  =  self::getOrderItems();
             $subtotal =  self::getTotal($orderItems);
