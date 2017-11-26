@@ -73,7 +73,8 @@ class OrdersRepository
         ->whereIn('State' , [OrderStateHelper::$finished])
         ->where('purchaseorders.customerId', '=', $user->id)
         ->orderBy('purchaseorders.created_at', 'desc')
-        ->first();
+        ->first() ?? null;
+        if($order ==  null) return null;
         $order  = PurchaseOrder::findOrFail($order->Id);
         return $order;
     }
@@ -106,6 +107,7 @@ class OrdersRepository
 
     public static function getOrderFinishedItems(){
         $order = self::getFinishedOrder();
+        if( $order  == null) return null;
         $products  =  DB::table("purchaseorders")
         ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
         ->join("products", "orderitems.productid" , "=", "products.id" )
@@ -172,15 +174,13 @@ class OrdersRepository
         }
     }
 
-    public static function pay(){
+    public static function pay(OrderRequest $request){
         $user  =  Auth::user();
         $order  =  self::getFinishedOrder();
         if(isset($user->id) && isset($order->Id)){
             $orderItems  =  self::getOrderItems();
             $subtotal =  self::getTotal($orderItems);
-            $order->CustomerId  = $user->id;
             $order->State =  OrderStateHelper::$processingPayment;
-            $order->ClosedDate = new DateTime();
             $order->Discount = isset($request->discount) ? $request->discount : 0;
             $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
             $order->Subtotal = $subtotal;

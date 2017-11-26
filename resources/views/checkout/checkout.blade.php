@@ -14,19 +14,18 @@
 		<li class="active">Checkout</li>
 	</ol>
 </section>
-
+@isset($order)
+@isset($products[0])
 <div class="pad margin no-print">
 	<div class="callout callout-info" style="margin-bottom: 0!important;">
 		<h4>
 			<i class="fa fa-info"></i> Parabéns:</h4>
-		Muito obrigado pela preferncia: Clique em realizar pagamento.
+		Muito obrigado pela preferência: Clique em <button label style="cursor:none"  disabled class="btn btn-sm btn-outline" for="">  PayPal Checkout </button> no canto inferior direito para efetuar o pagamento.
 	</div>
 </div>
-
-
 @include('checkout.components.userDataForm', ['products' => $products, 'order'=> $order])
-
-
+@endisset
+@endisset
 <section class="products row">
 
 	<section class="content-header">

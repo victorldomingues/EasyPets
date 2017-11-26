@@ -14,6 +14,9 @@ class CheckoutController extends Controller
     {
         $products  =  OrdersRepository::getOrderFinishedItems();
         $order  =  OrdersRepository::getFinishedOrder();
+        if( $order == null){
+            return redirect()->route('cart')->withErrors(['Não existem compra']);
+        }
         $customer  =  CustomersRepository::getById(Auth::user()->id);
         return view('checkout.checkout', ['products'=> $products, 'order' => $order, 'customer' => $customer]);
     }

@@ -35,9 +35,10 @@ class OrderController extends Controller
         $user  =  Auth::user();
         // $user = User::findOrFail(3);
         if($user  ==  null){
-            return redirect()->route('order.finish')->withErrors('message', 'Usuário deve estar logado');
+             return response()->json(['Valid' => false]);
         }else{
-            return  redirect()->route('welcome')->with('message', 'compra finalizada com sucesso');
+            OrdersRepository::pay($request);
+             return response()->json(['Valid' => true]);
         }
     }
 }

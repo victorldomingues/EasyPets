@@ -93,14 +93,10 @@
 		<!-- accepted payments column -->
 		<div class="col-xs-6">
 			<p class="lead">Formas de pagamento:</p>
-			{{--
 			<img src="{{asset('')}}template/dist/img/credit/visa.png" alt="Visa">
 			<img src="{{asset('')}}template/dist/img/credit/mastercard.png" alt="Mastercard">
-			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express"> --}}
+			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express">
 			<img src="{{asset('')}}template/dist/img/credit/paypal2.png" alt="Paypal">
-
-
-
 
 			<div class="form-group">
 				<p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
@@ -149,9 +145,12 @@
 		<div class="col-xs-12">
 			<a href="invoice-print.html" target="_blank" class="btn btn-default">
 				<i class="fa fa-print"></i> Imprimir</a>
+			{{--
 			<button type="button" class="btn btn-success pull-right">
 				<i class="fa fa-credit-card"></i> Realizar pagamento
-			</button>
+			</button> --}}
+			<div id="paypal-button" class="pull-right"></div>
+
 			<button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
 				<i class="fa fa-trash-o"></i> Cancelar
 			</button>
@@ -186,3 +185,66 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+@section('scripts')
+
+<script>
+	paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                production: '<insert production client id>'
+            },
+
+			  style: {
+					label: 'checkout',
+					size:  'small',    // small | medium | large | responsive
+					shape: 'pill',     // pill | rect
+					color: 'blue'      // gold | blue | silver | black
+				},
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '{{$order->Total}}', currency: 'BRL' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+					var token = $("body input[name='_token'").val();
+					$.post(
+						"/order/pay",
+						{
+							_token: token
+						},
+						function(data) {
+						  window.alert('Pagamento efetuado!');
+						  window.location.href = "{{route('home')}}";
+						}
+					);
+                });
+            }
+
+        }, '#paypal-button');
+
+</script>
+@endsection
