@@ -21,6 +21,14 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
     ];
 
+
+    protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'cors' => \App\Http\Middleware\Cors::class, // <<< add this line
+    ];
+
     /**
      * The application's route middleware groups.
      *
