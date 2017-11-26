@@ -1,0 +1,51 @@
+.product-details .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.product-details .header .price {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.product-details .header .price li{
+    margin: 0;
+}
+
+.product-details .header .price .current {
+    font-weight: 700;
+    color: #17a2b8;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.product-details .header .price .original {
+    font-weight: 300;
+    color: #aaa;
+    display: inline-block;
+    text-decoration: line-through;
+}
+
+.product-details .header .review {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+}
+
+.product-details .header .review .rate {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.product-details .header .review span{
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.product-details .cta-buy i {
+    margin-right: 10px;
+}

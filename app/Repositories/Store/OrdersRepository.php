@@ -48,7 +48,7 @@ class OrdersRepository
         $cartItem->productid = $request->productid;
         $cartItem->Total  =  $product->UnitPrice * $cartItem->quantity;
         if($user !=  null){
-            $order->created_by  = $user->Id;
+            $order->created_by  =$user->id;
         } 
         $cartItem ->save();
         return  $cartItem;
@@ -67,10 +67,21 @@ class OrdersRepository
         return $order;
     }
 
+    public static function getFinishedOrder(){
+        $user  =  Auth::user();
+        $order =  DB::table('purchaseorders')
+        ->whereIn('State' , [OrderStateHelper::$finished])
+        ->where('purchaseorders.customerId', '=', $user->id)
+        ->orderBy('purchaseorders.created_at', 'desc')
+        ->first() ?? null;
+        if($order ==  null) return null;
+        $order  = PurchaseOrder::findOrFail($order->Id);
+        return $order;
+    }
+
     public static function getCart(){
         return CartHelper::get();
     }
-
     public static function getOrderItems(){
         $order = self::getOrder();
         $products  =  DB::table("purchaseorders")
@@ -79,6 +90,28 @@ class OrdersRepository
         ->where('purchaseorders.id', '=', $order->Id)
         ->whereIn('purchaseorders.state', [OrderStateHelper::$shopping])
         ->where('purchaseorders.cart', '=', CartHelper::get())
+        ->select(
+            'products.Name', 
+            'purchaseorders.id as OrderId', 
+            'orderitems.Quantity', 
+            'orderitems.Id',
+            'orderitems.Total',
+            'orderitems.UnitPrice',
+            'products.Id as ProductId'
+            )
+        ->get();
+
+        return $products;
+    }
+
+    public static function getOrderFinishedItems(){
+        $order = self::getFinishedOrder();
+        if( $order  == null) return null;
+        $products  =  DB::table("purchaseorders")
+        ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
+        ->join("products", "orderitems.productid" , "=", "products.id" )
+        ->where('purchaseorders.id', '=', $order->Id)
+        ->whereIn('purchaseorders.state', [OrderStateHelper::$finished])
         ->select(
             'products.Name', 
             'purchaseorders.id as OrderId', 
@@ -105,10 +138,9 @@ class OrdersRepository
         $order->Subtotal = 0.00;
         $order->Discount = 0.00;
         if($user !=  null){
-            $order->created_by  = $user->Id;
-            $order->customerId  = $user->Id;
+            $order->created_by  = $user->id;
+            $order->customerId  = $user->id;
         }
-        $order->created_at = new Datetime();
         $order->created_at = new Datetime();
         $order->save();
         return $order;
@@ -123,16 +155,29 @@ class OrdersRepository
     }
 
     public static function finishOrder(OrderRequest $request){
-        // $user  =  Auth::user();
-        $user = User::findOrFail(3);
+        $user  =  Auth::user();
         $order  =  self::getOrder();
-        if(isset($user->Id) && isset($order->Id)){
-            $subtotal =  self::getTotal($orderItems);
+        if(isset($user->id) && isset($order->Id)){
             $orderItems  =  self::getOrderItems();
-            error_log('USER ID '.  $user->Id);
-            $order->CustomerId  =  $user->Id;
-            $order->State = OrderStateHelper::$finished;
+            $subtotal =  self::getTotal($orderItems);
+            $order->CustomerId  = $user->id;
+            $order->State =  OrderStateHelper::$finished;
             $order->ClosedDate = new DateTime();
+            $order->Discount = isset($request->discount) ? $request->discount : 0;
+            $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
+            $order->Subtotal = $subtotal;
+            $order->save();
+            CartHelper::destory();
+        }
+    }
+
+    public static function pay(OrderRequest $request){
+        $user  =  Auth::user();
+        $order  =  self::getFinishedOrder();
+        if(isset($user->id) && isset($order->Id)){
+            $orderItems  =  self::getOrderFinishedItems();
+            $subtotal =  self::getTotal($orderItems);
+            $order->State =  OrderStateHelper::$processingPayment;
             $order->Discount = isset($request->discount) ? $request->discount : 0;
             $order->Total =  $subtotal - (isset( $order->Discount) ? ( ( $subtotal * $order->Discount) / 100)  : 0 ) ;
             $order->Subtotal = $subtotal;
@@ -154,4 +199,49 @@ class OrdersRepository
         }
         return $sum;
     }
+
+    public static function getOrdersByUserId($id){
+        if($id == null){
+            $id  =  Auth::user()->id;
+        }
+        return DB::table('purchaseorders')
+        ->where('purchaseorders.customerid', '=', $id)
+        ->whereNotIn('purchaseorders.state', [OrderStateHelper::$shopping, OrderStateHelper::$open])
+        ->select('purchaseorders.Id',
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%Y-%m-%d') as ClosedDate"),
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%d/%m/%Y') as ClosedDateFormated"),
+        'purchaseorders.Total'
+        )
+        ->get();
+    }
+
+    public static function getOrderById($id){
+        $user  =  Auth::user();
+        return DB::table('purchaseorders')
+        ->where('purchaseorders.customerid', '=', $user->id)
+        ->where('purchaseorders.id', '=', $id)
+        ->first();
+    }
+
+    public static function getOrderItemsByOrderId($id){
+        $products  =  DB::table("purchaseorders")
+        ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
+        ->join("products", "orderitems.productid" , "=", "products.id" )
+        ->where('purchaseorders.id', '=', $id)
+        ->whereNull('purchaseorders.deleted_at')
+        ->select(
+            'products.Name', 
+            'purchaseorders.id as OrderId', 
+            'orderitems.Quantity', 
+            'orderitems.Id',
+            'orderitems.Total',
+            'orderitems.UnitPrice',
+            'products.Id as ProductId'
+            )
+        ->get();
+
+        return $products;
+    }
+
+
 }

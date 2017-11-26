@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="{{asset('')}}template/bower_components/Ionicons/css/ionicons.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="{{asset('')}}template/build/css/products.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/skins/_all-skins.min.css">
@@ -32,6 +33,7 @@
 
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
@@ -139,6 +141,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{asset('')}}template/dist/js/demo.js"></script>
 	<script src="{{asset('')}}store/cart/js/cart.js"></script>
+	@yield('scripts')
 	{{ csrf_field() }}
 </body>
 
