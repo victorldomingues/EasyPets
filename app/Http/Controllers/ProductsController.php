@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Product;
+use App\Models\Productcolor;
+use App\Models\Productcategory;
+use App\Models\Productimage;
+use App\Models\Productmodel;
 
 class ProductsController extends Controller
 {
@@ -82,5 +87,29 @@ class ProductsController extends Controller
         ");
   
         return $products;
+    }
+
+     public function detail($id)
+    {
+        $product = Product::find($id);
+        $category = Productcategory::find($product->ProductCategoryId);
+        $color = Productcolor::find($product->ProductColorId);
+        $images = Productimage::where('ProductId',$id)->get();
+        
+        return view(
+            'products.detail', 
+            array(
+                'product'       => $product, 
+                'title'         => $product->Name,
+                'description'   => $product->Description, 
+                'status'        => $product->Status, 
+                'price'         => $product->UnitPrice,
+                'category'      => $category->Name,
+                'color'         => $color->Name,
+                'images'        => $images
+
+            )
+        );
+    
     }
 }

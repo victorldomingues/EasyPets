@@ -19,9 +19,6 @@
 
 	@include('checkout.components.itemsTable', ['products' => $products])
 
-
-
-
 <section class="content-header">
 	<h1 style="font-size:50px" class="text-right">
 		<small>Total</small>
@@ -34,9 +31,6 @@
 
 	<hr>
 </section>
-
-
-
 
 
 <section class="products row">

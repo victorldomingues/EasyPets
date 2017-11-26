@@ -128,7 +128,7 @@ class ProductsController extends Controller
 
         $this->saveImage($product);
 
-        return redirect()->route('manager.products')->with('message', 'Produto cadastrada com sucesso!');
+        return redirect()->route('manager.products')->with('message', 'Produto cadastrado com sucesso!');
     }
   
     public function show($id)
@@ -180,7 +180,7 @@ class ProductsController extends Controller
         $product->updated_by            = Auth::user()->id;
         $product->save();
         $this->saveImage($product);
-        return redirect()->route('manager.products')->with('message', 'Produto atualizada com sucesso!');
+        return redirect()->route('manager.products')->with('message', 'Produto atualizado com sucesso!');
     }
   
     public function destroy($id)
@@ -191,7 +191,7 @@ class ProductsController extends Controller
         $product->deleted       = 1;
         $product->deleted_at    = new DateTime();
         $product->save();
-        return redirect()->route('manager.products')->with('alert-success', 'Produto removida com sucesso!');
+        return redirect()->route('manager.products')->with('alert-success', 'Produto removido com sucesso!');
     }
 
 }
