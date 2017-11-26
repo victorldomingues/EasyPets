@@ -1,6 +1,4 @@
 @extends('layouts.store') @section('content')
-
-
 <section class="content-header">
 	<h1>
 		Carrinho
