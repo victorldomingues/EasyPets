@@ -143,7 +143,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{route('manager.employees')}}">
                     <i class="fa fa-address-book text-yellow"></i>
                     <span>Funcionários</span>
                 </a>
