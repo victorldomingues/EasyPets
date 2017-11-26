@@ -192,6 +192,20 @@ Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsContro
 Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
 
 
+// Manager purchases or orders
+
+Route::get('/manager/orders', 'Manager\Orders\OrdersController@index')->name('manager.orders');
+
+Route::get('/manager/orders/{id}', 'Manager\Orders\OrdersController@show')->name('manager.orders.show');
+
+Route::get('/manager/orders/{id}/edit', 'Manager\Orders\OrdersController@edit')->name('manager.orders.edit');
+
+Route::post('/manager/orders/{id}/update', 'Manager\Orders\OrdersController@update')->name('manager.orders.update');
+
+Route::post('/manager/orders/{id}/destory', 'Manager\Orders\OrdersController@destroy')->name('manager.orders.destroy');
+
+
+
 // Manager Employees
 
 

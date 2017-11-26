@@ -82,7 +82,6 @@ class OrdersRepository
     public static function getCart(){
         return CartHelper::get();
     }
-
     public static function getOrderItems(){
         $order = self::getOrder();
         $products  =  DB::table("purchaseorders")
@@ -147,8 +146,6 @@ class OrdersRepository
         return $order;
     }
 
-    
-
     public static function getOrderItemByProductId ($productId, $orderId){
         return   DB::table("orderitems")
         ->where('ProductId', '=', $productId)
@@ -178,7 +175,7 @@ class OrdersRepository
         $user  =  Auth::user();
         $order  =  self::getFinishedOrder();
         if(isset($user->id) && isset($order->Id)){
-            $orderItems  =  self::getOrderItems();
+            $orderItems  =  self::getOrderFinishedItems();
             $subtotal =  self::getTotal($orderItems);
             $order->State =  OrderStateHelper::$processingPayment;
             $order->Discount = isset($request->discount) ? $request->discount : 0;
@@ -202,4 +199,49 @@ class OrdersRepository
         }
         return $sum;
     }
+
+    public static function getOrdersByUserId($id){
+        if($id == null){
+            $id  =  Auth::user()->id;
+        }
+        return DB::table('purchaseorders')
+        ->where('purchaseorders.customerid', '=', $id)
+        ->whereNotIn('purchaseorders.state', [OrderStateHelper::$shopping, OrderStateHelper::$open])
+        ->select('purchaseorders.Id',
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%Y-%m-%d') as ClosedDate"),
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%d/%m/%Y') as ClosedDateFormated"),
+        'purchaseorders.Total'
+        )
+        ->get();
+    }
+
+    public static function getOrderById($id){
+        $user  =  Auth::user();
+        return DB::table('purchaseorders')
+        ->where('purchaseorders.customerid', '=', $user->id)
+        ->where('purchaseorders.id', '=', $id)
+        ->first();
+    }
+
+    public static function getOrderItemsByOrderId($id){
+        $products  =  DB::table("purchaseorders")
+        ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
+        ->join("products", "orderitems.productid" , "=", "products.id" )
+        ->where('purchaseorders.id', '=', $id)
+        ->whereNull('purchaseorders.deleted_at')
+        ->select(
+            'products.Name', 
+            'purchaseorders.id as OrderId', 
+            'orderitems.Quantity', 
+            'orderitems.Id',
+            'orderitems.Total',
+            'orderitems.UnitPrice',
+            'products.Id as ProductId'
+            )
+        ->get();
+
+        return $products;
+    }
+
+
 }
