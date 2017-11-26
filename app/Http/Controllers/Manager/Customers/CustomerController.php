@@ -54,29 +54,11 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $password  =  GuidHelper::short();
+        
+        $user  =  self::saveUser($request, $password);
 
-        $user = new User;
-        $customer = new Customer;
-        $user->name              = $request->name;
-        $user->email             = $request->email;
-        $user->password          = Hash::make($password);
-        $user->type              = 1;
-        $user->cpf               = $request->cpf;
-        $user->save();
-        $customer->id                = $user->id;
-        $customer->birthday          = $request->birthday;
-        $customer->publicplace       = $request->publicplace;
-        $customer->zipcode           = $request->zipcode;
-        $customer->number            = $request->number;
-        $customer->neighborhood      = $request->neighborhood;
-        $customer->city              = $request->city;
-        $customer->state             = $request->state;
-        $customer->country           = $request->country;
-        $customer->complement        = $request->complement;
-        $customer->lat               = $request->lat;
-        $customer->long              = $request->long;
-        $customer->save();
-
+        self::saveCustomer($request, $user);
+        
         try{
 
             // try code
@@ -126,15 +108,11 @@ class CustomerController extends Controller
   
     public function update(CustomerRequest $request, $id)
     {
-
-        $customer = DB::table('customers')
-        ->join('users', 'users.id', '=', 'customers.id')
-        ->select('users.id', 'users.Name' , 'users.Email', 'users.Cpf', 'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Country', 'customers.Complement', 'customers.Lat', 'customers.Long', 'customers.PaymentPreference')
-        ->where('users.id', '=', $id)
-        ->first();
-        
+        $user = User::findOrFail($id);   
         $customer = Customer::findOrFail($id);        
-        
+        if(  $customer == null){
+            $customer = self::saveCustomer($request, $user);
+        }
         $user = User::findOrFail($id);        
         $user->name              = $request->name;
         $user->save();
@@ -150,7 +128,9 @@ class CustomerController extends Controller
         $customer->lat               = $request->lat;
         $customer->long              = $request->long;        
         $customer->save();
-        
+        if(isset($request->backto)){
+            return redirect()->route($request->backto)->with('message', 'Cliente atualizado com sucesso!');
+        }
         return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');
     }
   
@@ -161,5 +141,39 @@ class CustomerController extends Controller
         $customer->deleted_at    = new DateTime();
         $customer->save();
         return redirect()->route('manager.costumers')->with('alert-success', 'Cliente removidoo com sucesso!');
+    }
+
+    private static function saveUser(CustomerRequest $request, $password){
+        $user = new User;
+         $user->name              = $request->name;
+         $user->email             = $request->email;
+         $user->password          = Hash::make($password);
+         $user->type              = 1;
+         $user->cpf               = $request->cpf;
+         $user->save();
+         return $user;
+    }
+
+    private static function saveCustomer(CustomerRequest $request, $user){
+        if($user == null){
+            $password  =  GuidHelper::short();
+            $user = self::saveUser($request, $password);
+        }
+        $customer = new Customer;
+        $customer->id                = $user->id;
+        $customer->birthday          = $request->birthday;
+        $customer->publicplace       = $request->publicplace;
+        $customer->zipcode           = $request->zipcode;
+        $customer->number            = $request->number;
+        $customer->neighborhood      = $request->neighborhood;
+        $customer->city              = $request->city;
+        $customer->state             = $request->state;
+        $customer->country           = $request->country;
+        $customer->complement        = $request->complement;
+        $customer->lat               = $request->lat;
+        $customer->long              = $request->long;
+        $customer->save();
+        error_log('SALVANDO CUSTOMER');
+        return $customer;
     }
 }

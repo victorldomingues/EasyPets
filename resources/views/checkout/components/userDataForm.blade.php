@@ -17,8 +17,8 @@
 			De
 			<address>
 				<strong>EasyPets.</strong>
-				<br> R. Casa do Ator, 275 - Vila Olimpia, 
-				<br> São Paulo - SP, 04546-001. 
+				<br> R. Casa do Ator, 275 - Vila Olimpia,
+				<br> São Paulo - SP, 04546-001.
 				<br> Telefone: (804) 123-5432
 				<br> E-mail: contato@easypets.com.br
 			</address>
@@ -28,10 +28,15 @@
 			Para
 			<address>
 				<strong>{{$customer->Name}}</strong>
+				@isset($customer->PublicPlace)
 				<br> 795 Folsom Ave, Suite 600
-				<br> San Francisco, CA 94107
-				{{--  <br> Telefone: (555) 539-1037  --}}
-				<br> E-mail: {{$customer->Email}}
+				<br> San Francisco, CA 94107 @endisset {{--
+				<br> Telefone: (555) 539-1037 --}}
+				<br> E-mail: {{$customer->Email}} @empty($customer->PublicPlace)
+				<br> Você precisa informar o endereço
+				<br>
+				<label style="cursor:pointer" data-target="#modal-address" data-toggle="modal" class="label label-info"> Informar </label>
+				@endempty
 			</address>
 		</div>
 		<!-- /.col -->
@@ -41,7 +46,7 @@
 			<br>
 			<b>Compra ID:</b> {{$order->Id}}
 			<br>
-			<b>Pagamento em :</b>  {{date('d/m/Y')}}
+			<b>Pagamento em :</b> {{date('d/m/Y')}}
 			<br>
 			<b>Conta:</b> {{$customer->Id}}
 		</div>
@@ -84,9 +89,10 @@
 		<!-- accepted payments column -->
 		<div class="col-xs-6">
 			<p class="lead">Formas de pagamento:</p>
-			{{--  <img src="{{asset('')}}template/dist/img/credit/visa.png" alt="Visa">
+			{{--
+			<img src="{{asset('')}}template/dist/img/credit/visa.png" alt="Visa">
 			<img src="{{asset('')}}template/dist/img/credit/mastercard.png" alt="Mastercard">
-			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express">  --}}
+			<img src="{{asset('')}}template/dist/img/credit/american-express.png" alt="American Express"> --}}
 			<img src="{{asset('')}}template/dist/img/credit/paypal2.png" alt="Paypal">
 
 
@@ -140,7 +146,7 @@
 			<a href="invoice-print.html" target="_blank" class="btn btn-default">
 				<i class="fa fa-print"></i> Imprimir</a>
 			<button type="button" class="btn btn-success pull-right">
-				<i class="fa fa-credit-card"></i> Finalizar compra
+				<i class="fa fa-credit-card"></i> Realziar pagamento
 			</button>
 			<button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
 				<i class="fa fa-download"></i> Cancelar
@@ -148,3 +154,31 @@
 		</div>
 	</div>
 </section>
+
+<div class="modal modal-default fade" id="modal-address">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form role="form" method="POST" action="{!! route('manager.customers.update', ['id'=>$customer->Id])  !!}">
+				{{ csrf_field() }}
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">{{$customer->Name}}</h4>
+				</div>
+				<div class="modal-body">
+					@include('manager.customers.customers-form')
+					<input type="hidden" name="backto" value="checkout" />
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger  pull-left" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-info">Salvar</button>
+				</div>
+			</form>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

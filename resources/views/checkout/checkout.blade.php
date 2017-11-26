@@ -19,7 +19,7 @@
 	<div class="callout callout-info" style="margin-bottom: 0!important;">
 		<h4>
 			<i class="fa fa-info"></i> Parabéns:</h4>
-		Muito obrigado pela preferência: Clique em realizar pagamento.
+		Muito obrigado pela preferncia: Clique em realizar pagamento.
 	</div>
 </div>
 

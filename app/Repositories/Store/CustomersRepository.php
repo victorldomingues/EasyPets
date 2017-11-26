@@ -18,6 +18,7 @@ class CustomersRepository
                     'users.Email', 
                     'users.Type', 
                     'users.Cpf', 
+                    'customers.Birthday',
                     'customers.PublicPlace', 
                     'customers.ZipCode', 
                     'customers.Number', 
