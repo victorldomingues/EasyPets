@@ -209,7 +209,19 @@ Route::post('/manager/orders/{id}/destory', 'Manager\Orders\OrdersController@des
 
 // Manager Employees
 
+Route::get('/manager/employees', 'Manager\Employees\EmployeesController@index')->name('manager.employees');
 
+Route::get('/manager/employees/new', 'Manager\Employees\EmployeesController@create')->name('manager.employees.new');
+
+Route::post('/manager/employees/store', 'Manager\Employees\EmployeesController@store')->name('manager.employees.store');
+
+Route::get('/manager/employees/{id}', 'Manager\Employees\EmployeesController@show')->name('manager.employees.show');
+
+Route::get('/manager/employees/{id}/edit', 'Manager\Employees\EmployeesController@edit')->name('manager.employees.edit');
+
+Route::post('/manager/employees/{id}/update', 'Manager\Employees\EmployeesController@update')->name('manager.employees.update');
+
+Route::post('/manager/employees/{id}/destory', 'Manager\Employees\EmployeesController@destroy')->name('manager.employees.destroy');
 
 
 

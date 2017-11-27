@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Manager\Adoptions;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Manager\Adoptions\AdoptionResquest;
+use App\Http\Requests\Manager\Adoptions\AdoptionRequest;
 use Illuminate\Http\Request;
 use App\Models\Adoption;
 use DateTime;
 
 use Illuminate\Support\Facades\Auth;
 
-class AdoptionsController extends Controller
+class AdoptionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,74 +22,70 @@ class AdoptionsController extends Controller
         $this->middleware('auth');
     }
 
-
-
-
     public function index()
     {
-        $adoptions = Adoption::orderBy('created_at', 'desc')->get();
-
         return view('manager.adoptions.adoptions', ['adoptions' => $adoptions]);
-    }
+    }  
 
-    // public function index()
-    // {
-    //     $colors = Productcolor::orderBy('created_at', 'desc')->paginate(10);
-    //     return view('manager.products.colors.index',['manager.products.colors' => $colors]);
-    // }
-  
     public function create()
     {
-        return view('manager.adoptions.adoptions');
+        return view('manager.adoptions.adoptions-new');
     }
   
-    // public function store(Adoptions $request)
-    // {
-    //     $adoptions = new Adoption;
-    //     $adoptions->name          = $request->name;
-    //     $adoptions->race          = $request->race;
-    //     $adoptions->type          = $request->type;
-    //     // $adoptions->description   = $request->description;
-    //     $adoptions->age           = $request->age;
-    //     $adoptions->deleted       = $request->deleted;
-    //     $adoptions->created_by    = Auth::user()->id;
-    //     $adoptions->status        = $request->status;
-    //     $adoptions->save();
-    //     return redirect()->route('manager.adoptions')->with('message', 'Adoção cadastrada com sucesso!');
-    // }
+    public function store(AdoptionRequest $request)
+    {
+        $adoption = new Adoption;
+        $adoption->name           = $request->name;
+        $adoption->documenttype   = $request->documenttype;
+        $adoption->document       = $request->document;
+        $adoption->deleted        = 0;
+        $adoption->created_by     = Auth::user()->id;
+        $adoption->status         = $request->status;
+        $adoption->save();
+        return redirect()->route('manager.adoptions')->with('message', 'Forncedor cadastrado com sucesso!');
+    }
   
     public function show($id)
     {
-        $adoptions = Adoption::findOrFail($id);
-        return view('manager.adoptions.adoptions-show', compact('adoption'));
+        $adoption = AdoptionsRepository::getById($id);
+        return view('manager.adoptions.adoptions-show', ['adoption' => $adoption]);
     }
   
     public function edit($id)
     {
-        $adoption = Adoptions::findOrFail($id);
-        return view('manager.adoptions.adoptions-new', compact('pet'));
-    }
-
-    public function update(PetsRequest $request, $id)
-    {
+        'CustomerId',
+		'PetId',
+		'Status',
+		'Deleted',
+		'MainActivity',
+		'WhoWillSupport',
+		'AdultsInTheHouse',
+        'AllowPets'
+        
         $adoption = Adoption::findOrFail($id);
-        $adoption->deleted       = $request->deleted;
-        $adoption->deleted_at    = null;
-        $adoption->updated_by    = Auth::user()->id;
-        $adoption->status        = $request->status;
-
+        return view('manager.adoptions.adoptions-new', compact('adoption'));
+    }
+  
+    public function update(AdoptionRequest $request, $id)
+    {
+        $adoption = Provider::findOrFail($id);
+        $adoption->name           = $request->name;
+        $adoption->documenttype   = $request->documenttype;
+        $adoption->document       = $request->document;
+        $adoption->updated_by     = Auth::user()->id;
+        $adoption->status         = $request->status;
         $adoption->save();
-        return redirect()->route('manager.adoptions')->with('message', 'Status de adoção atualizado com sucesso!');
+        return redirect()->route('manager.adoptions')->with('message', 'Forncedor atualizado  com sucesso!');
     }
   
     public function destroy($id)
     {
-        $pet = Pet::findOrFail($id);
-        $pet->updated_by    = Auth::user()->id;
-        $pet->deleted_by    = Auth::user()->id;
-        $pet->deleted       = 1;
-        $pet->deleted_at    = new DateTime();
-        $pet->save();
-        return redirect()->route('manager.pets')->with('alert-success', 'Pet removido com sucesso!');
+        $provider = Provider::findOrFail($id);
+        $provider->updated_by    = Auth::user()->id;
+        $provider->deleted_by    = Auth::user()->id;
+        $provider->deleted       = 1;
+        $provider->deleted_at    = new DateTime();
+        $provider->save();
+        return redirect()->route('manager.adoptions')->with('alert-success', 'Forncedor removido com sucesso!');
     }
 }

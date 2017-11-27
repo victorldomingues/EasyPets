@@ -3,15 +3,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Clientes
-		<small>Clientes da loja</small>
+		Funcioários
+		<small>Funcioários da loja</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{route('manager')}}">
 				<i class="fa fa-shopping-bag "></i> Visão Geral</a>
 		</li>
-		<li class="active">Clientes</li>
+		<li class="active">Funcioários</li>
 	</ol>
 </section>
 <section class="content">
@@ -21,10 +21,10 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">Clientes da loja cadastrados </h3>
+					<h3 class="box-title">Funcioários da loja cadastrados </h3>
 					<!-- tools box -->
 					<div class="pull-right box-tools">
-						<a href="{{route('manager.customers.new')}}" type="button" class="btn bg-olive btn-sm" data-toggle="tooltip" title="Cadastrar novo cliente">
+						<a href="{{route('manager.employees.new')}}" type="button" class="btn bg-olive btn-sm" data-toggle="tooltip" title="Cadastrar novo Funcionário">
 							<i class="fa fa-plus"></i> Novo
 						</a>
 					</div>
@@ -34,32 +34,32 @@
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Cliente</th>
+								<th>Funcionário</th>
 								<th style="width:115px">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 
-							@foreach ($customers as $customer)
+							@foreach ($managers as $manager)
 							<tr>
-								<td> {{ $customer->Name }} </td>
+								<td> {{ $manager->Name }} </td>
 								<td>
 									<div class="btn-group">
-										<a href="{!! route('manager.customers.show', ['id'=>$customer->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
+										<a href="{!! route('manager.employees.show', ['id'=>$manager->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
 										<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
-										</button>
+										</button>	
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a href="{!! route('manager.customers.show', ['id'=>$customer->Id])  !!}">Visualizar</a>
+												<a href="{!! route('manager.employees.show', ['id'=>$manager->Id])  !!}">Visualizar</a>
 											</li>
 											<li>
-												<a href="{!! route('manager.customers.edit', ['id'=>$customer->Id])  !!}">Editar</a>
+												<a href="{!! route('manager.employees.edit', ['id'=>$manager->Id])  !!}">Editar</a>
 											</li>
 											<li class="divider"></li>
 											<li>
-												<a href="{!! route('manager.customers.destroy', ['id'=>$customer->Id])  !!}">Excluir</a>
+												<a href="#">Excluir</a>
 											</li>
 
 										</ul>
@@ -71,7 +71,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>Cliente</th>
+								<th>Funcionário</th>
 								<th>Ações</th>
 							</tr>
 						</tfoot>
