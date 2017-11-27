@@ -48,7 +48,7 @@
 	<div class="product-details col-lg-6">
             <div class="header">
               <ul class="price">
-                <li class="current">R$ {{$price}}</li>
+                <li class="current">R$ {{number_format($price, 2, ',', '.')}}</li>
               </ul>
               <div class="review d-flex align-items-center">
                 <ul class="rate list-inline">

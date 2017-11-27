@@ -20,6 +20,7 @@
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="{{asset('')}}template/build/css/products.css">
+	<link rel="stylesheet" href="{{asset('')}}template/build/css/carousel.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/skins/_all-skins.min.css">
@@ -138,6 +139,8 @@
 	<script src="{{asset('')}}template/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="{{asset('')}}template/dist/js/adminlte.min.js"></script>
+	<!-- Form Validator Lib -->
+	<script src="{{asset('')}}js/forms/validator.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{asset('')}}template/dist/js/demo.js"></script>
 	<script src="{{asset('')}}store/cart/js/cart.js"></script>

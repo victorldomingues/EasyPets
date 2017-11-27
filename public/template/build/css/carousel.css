@@ -1,0 +1,12 @@
+.carousel-inner>.item {
+    background: #fff !important;
+}
+
+
+.carousel-inner > .item > img {
+    max-height: auto !important;
+    min-height: 373px !important;
+    width: auto !important;
+    display: block;
+    margin: 0 auto;
+}
