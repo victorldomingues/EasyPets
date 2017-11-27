@@ -3,7 +3,7 @@
 @section('content')
 <p class="login-box-msg">Faça login para iniciar sua sessão</p>
 
-<form method="POST" action="{{ route('login') }}">
+<form method="POST" data-toggle="validator" action="{{ route('login') }}">
     {{ csrf_field() }}
 
     <div class="form-group has-feedback">
@@ -14,6 +14,7 @@
             <strong>{{ $errors->first('email') }}</strong>
         </span>
         @endif
+        <div class="help-block with-errors"></div>
     </div>
     <div class="form-group has-feedback">
         <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
@@ -23,6 +24,7 @@
             <strong>{{ $errors->first('password') }}</strong>
         </span>
         @endif
+        <div class="help-block with-errors"></div>
     </div>
 
 

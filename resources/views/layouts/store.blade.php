@@ -139,6 +139,8 @@
 	<script src="{{asset('')}}template/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="{{asset('')}}template/dist/js/adminlte.min.js"></script>
+	<!-- Form Validator Lib -->
+	<script src="{{asset('')}}js/forms/validator.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{asset('')}}template/dist/js/demo.js"></script>
 	<script src="{{asset('')}}store/cart/js/cart.js"></script>

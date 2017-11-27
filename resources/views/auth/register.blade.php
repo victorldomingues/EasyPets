@@ -1,7 +1,7 @@
 @extends('layouts.sign') 
 @section('content')
 <p class="login-box-msg">Registre um novo cliente</p>
-<form class="form-horizontal" method="POST" action="{{ route('register') }}">
+<form class="form-horizontal" data-toggle="validator" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
 
 
@@ -13,7 +13,7 @@
                 <strong>{{ $errors->first('name') }}</strong>
             </span>
         @endif
-       
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
         <input placeholder="E-mail" id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required> 
@@ -24,6 +24,7 @@
                 <strong>{{ $errors->first('email') }}</strong>
             </span>
         @endif
+        <div class="help-block with-errors"></div>
       </div>
 
       <div class="form-group has-feedback">
@@ -34,7 +35,7 @@
                 <strong>{{ $errors->first('cpf') }}</strong>
             </span>
         @endif
-       
+       <div class="help-block with-errors"></div>
       </div>
 
       <div class="form-group has-feedback">
@@ -45,7 +46,8 @@
             <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>
             </span>
-        @endif        
+        @endif
+        <div class="help-block with-errors"></div>        
       </div>
       <div class="form-group has-feedback">
         <input placeholder="Confirmar senha" id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
