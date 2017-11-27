@@ -20,6 +20,7 @@
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="{{asset('')}}template/build/css/products.css">
+	<link rel="stylesheet" href="{{asset('')}}template/build/css/carousel.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/skins/_all-skins.min.css">

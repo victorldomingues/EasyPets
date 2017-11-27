@@ -1,27 +1,6 @@
 @extends('layouts.store') @section('content')
 
 
-<<<<<<< HEAD
-	<section class="content-header">
-		<h1>
-			Carrinho
-			<small>de Compras</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li>
-				<a href="{{asset('')}}">
-					<i class="fa fa-shopping-bag"></i> Página Inicial</a>
-			</li>
-			<li class="active">Carrinho</li>
-		</ol>
-		<hr>
-	</section>
-
-
-	@include('checkout.components.itemsTable', ['products' => $products])
-
-=======
->>>>>>> a2df4ad07aa1cb00679b634053e33db1dd43763a
 <section class="content-header">
 	<h1>
 		Carrinho

@@ -1,7 +1,8 @@
-<div class="box box-solid">
-	<div class="widget-user-header bg-black" style="
-    background: url('@isset($product->Image){{asset('')}}uploads/products/{{$product->Image}}@endisset @empty($product->Image){{asset('')}}template/dist/img/default-product.jpg @endempty') center center; height:150px">
-	</div>
+<div class="product-single box box-solid">
+	<!-- <div class="widget-user-header bg-black" style="
+    background-image: url('@isset($product->Image){{asset('')}}uploads/products/{{$product->Image}}@endisset @empty($product->Image){{asset('')}}template/dist/img/default-product.jpg @endempty');">
+	</div> -->
+	<div class="widget-user-header"><img src="@isset($product->Image){{asset('')}}uploads/products/{{$product->Image}}@endisset @empty($product->Image){{asset('')}}template/dist/img/default-product.jpg @endempty"/></div>
 	<div class="box-header with-border">
 		<h3 class="box-title" style="padding-right:60px; height:40px"> {{$product->Name}} </h3>
 
