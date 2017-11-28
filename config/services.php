@@ -39,4 +39,8 @@ return [
         'api_key' => env('SENDGRID_API_KEY'),
     ],
 
+    'postmark' => [
+        'api_key' => env('POSTMARK_API_KEY'),
+    ],
+
 ];
