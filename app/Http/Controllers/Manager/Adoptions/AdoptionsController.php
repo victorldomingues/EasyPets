@@ -53,15 +53,6 @@ class AdoptionController extends Controller
   
     public function edit($id)
     {
-        'CustomerId',
-		'PetId',
-		'Status',
-		'Deleted',
-		'MainActivity',
-		'WhoWillSupport',
-		'AdultsInTheHouse',
-        'AllowPets'
-        
         $adoption = Adoption::findOrFail($id);
         return view('manager.adoptions.adoptions-new', compact('adoption'));
     }
