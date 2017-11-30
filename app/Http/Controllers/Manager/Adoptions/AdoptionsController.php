@@ -35,14 +35,22 @@ class AdoptionController extends Controller
     public function store(AdoptionRequest $request)
     {
         $adoption = new Adoption;
-        $adoption->name           = $request->name;
-        $adoption->documenttype   = $request->documenttype;
-        $adoption->document       = $request->document;
-        $adoption->deleted        = 0;
-        $adoption->created_by     = Auth::user()->id;
-        $adoption->status         = $request->status;
+        $customer = new Customer;
+        $pet = new Pet;
+
+        $customer->id                   = $request->id;
+        $customer->save();
+        $pet->id                        = $request->id;
+        $pet->save();        
+        $adoption->status               = $request->status;
+        $adoption->deleted              = 0;
+        $adoption->mainactivity         = $request->mainactivity;
+        $adoption->whowillsupport       = $request->whowillsupport;
+        $adoption->adultsinthehouse     = $request->adultsinthehouse;
+        $adoption->allowpets            = $request->allowpets;
         $adoption->save();
-        return redirect()->route('manager.adoptions')->with('message', 'Forncedor cadastrado com sucesso!');
+        
+        return redirect()->route('manager.adoptions')->with('message', 'Adoção cadastrada com sucesso!');
     }
   
     public function show($id)
@@ -60,13 +68,23 @@ class AdoptionController extends Controller
     public function update(AdoptionRequest $request, $id)
     {
         $adoption = Provider::findOrFail($id);
-        $adoption->name           = $request->name;
-        $adoption->documenttype   = $request->documenttype;
-        $adoption->document       = $request->document;
-        $adoption->updated_by     = Auth::user()->id;
-        $adoption->status         = $request->status;
+        $adoption = new Adoption;
+        $customer = new Customer;
+        $pet = new Pet;
+
+        $customer->id                   = $request->id;
+        $customer->save();
+        $pet->id                        = $request->id;
+        $pet->save();        
+        $adoption->status               = $request->status;
+        $adoption->deleted              = 0;
+        $adoption->mainactivity         = $request->mainactivity;
+        $adoption->whowillsupport       = $request->whowillsupport;
+        $adoption->adultsinthehouse     = $request->adultsinthehouse;
+        $adoption->allowpets            = $request->allowpets;
         $adoption->save();
-        return redirect()->route('manager.adoptions')->with('message', 'Forncedor atualizado  com sucesso!');
+        
+        return redirect()->route('manager.adoptions')->with('message', 'Adoção atualizada  com sucesso!');
     }
   
     public function destroy($id)
@@ -77,6 +95,6 @@ class AdoptionController extends Controller
         $provider->deleted       = 1;
         $provider->deleted_at    = new DateTime();
         $provider->save();
-        return redirect()->route('manager.adoptions')->with('alert-success', 'Forncedor removido com sucesso!');
+        return redirect()->route('manager.adoptions')->with('alert-success', 'Adoção removida com sucesso!');
     }
 }
