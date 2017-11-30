@@ -106,7 +106,7 @@ class CustomerController extends Controller
         if(  $customer == null || !isset($customer)){
             $customer = self::saveCustomer($request, $user);
         }       
-        $user->name              = $request->name;
+        $user->name                  = $request->name;
         $user->save();
         $customer->birthday          = $request->birthday;
         $customer->publicplace       = $request->publicplace;

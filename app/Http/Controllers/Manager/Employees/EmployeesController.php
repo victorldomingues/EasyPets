@@ -61,7 +61,7 @@ class EmployeesController extends Controller
         $user->name              = $request->name;
         $user->email             = $request->email;
         $user->password          = Hash::make($password);
-        $user->type              = 0;
+        $user->type              = 1;
         $user->cpf               = $request->cpf;
         $user->save();
         $manager->id             = $user->id;
