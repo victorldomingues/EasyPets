@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{asset('')}}template/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('')}}template/dist/css/AdminLTE.min.css">
+  	<link rel="stylesheet" href="{{asset('')}}template/build/css/forms.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('')}}template/plugins/iCheck/square/blue.css">
 
@@ -53,6 +54,8 @@
 <script src="{{asset('')}}template/plugins/iCheck/icheck.min.js"></script>
 <!-- Form Validator Lib -->
 <script src="{{asset('')}}js/forms/validator.min.js"></script>
+<script src="{{asset('')}}js/forms/jquery.mask.min.js"></script>
+<script src="{{asset('')}}js/forms/forms.js"></script>
 <script>
   $(function () {
     $('input').iCheck({

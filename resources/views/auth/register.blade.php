@@ -1,7 +1,7 @@
 @extends('layouts.sign') 
 @section('content')
 <p class="login-box-msg">Registre um novo cliente</p>
-<form class="form-horizontal" data-toggle="validator" method="POST" action="{{ route('register') }}">
+<form class="form-horizontal form-register" data-toggle="validator" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
 
 
@@ -28,7 +28,7 @@
       </div>
 
       <div class="form-group has-feedback">
-        <input placeholder="CPF" id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required>
+        <input placeholder="CPF" id="cpf" type="text" class="form-control" name="cpf" pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" value="{{ old('cpf') }}" required>
         <span class="glyphicon glyphicon-file form-control-feedback"></span>
         @if ($errors->has('cpf'))
             <span class="help-block">
@@ -50,8 +50,9 @@
         <div class="help-block with-errors"></div>        
       </div>
       <div class="form-group has-feedback">
-        <input placeholder="Confirmar senha" id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+        <input placeholder="Confirmar senha" data-match="#password" data-match-error="As senhas não são iguais" id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="row">
         <div class="col-xs-8">

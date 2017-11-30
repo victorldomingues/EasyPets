@@ -48,22 +48,23 @@
 </section>
 
 
-<section class="products row">
+@isset($similars[0])
+	<section class="products row">
+		<section class="content-header ">
+			<h1>
+				Compre
+				<small>Também</small>
+			</h1>
+		</section>
 
-	<section class="content-header ">
-		<h1>
-			Compre
-			<small>Também</small>
-		</h1>
+		@foreach($similars as $similar)
+		<div class="col-md-3">
+			@include('products.components.card', array('product'=> $similar))
+		</div>
+		@endforeach
+
 	</section>
-
-	{{-- @foreach($products as $product)
-	<div class="col-md-3">
-		@include('products.components.card', array('product'=> $product))
-	</div>
-	@endforeach --}}
-
-</section>
+@endisset
 
 
 
