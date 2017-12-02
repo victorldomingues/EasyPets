@@ -58,6 +58,7 @@ class ProductsController extends Controller
         $category = Productcategory::find($product->ProductCategoryId);
         $color = Productcolor::find($product->ProductColorId);
         $images = Productimage::where('ProductId',$id)->get();
+        $similarProducts = self::similarProducts($product);
         
         return view(
             'products.detail', 
@@ -69,10 +70,38 @@ class ProductsController extends Controller
                 'price'         => $product->UnitPrice,
                 'category'      => $category->Name,
                 'color'         => $color->Name,
-                'images'        => $images
+                'images'        => $images,
+                'similar'       => $similarProducts
 
             )
         );
-    
+    }
+
+    public function similarProducts($product)
+    {
+        $id = $product->Id;
+        $color = $product->ProductColorId;
+        $cat = $product->ProductCategoryId;
+
+        $similar = Product::where('Id','!=',$id)->where('ProductCategoryId','=',$cat)->where('ProductColorId','=',$color)->get();
+        $all = [];
+
+        foreach($similar as $product){
+
+            $image = Productimage::where('ProductId',$product->ProductId)->get();
+
+            $all[] = (object) array(
+                'Id' => $product->Productid,
+                'Name' => $product->Name,
+                'Description' => $product->Description,
+                'ColorName' => Productcolor::find($product->ProductColorId)->Name,
+                'CategoryName' => Productcategory::find($product->ProductCategoryId)->Name,
+                'UnitPrice' => $product->UnitPrice,
+                'Image' => Productimage::where('ProductId',$product->Id)->get()[0]->ServerName
+            );
+        }
+
+        
+        return $all;
     }
 }

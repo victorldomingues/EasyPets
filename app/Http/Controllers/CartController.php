@@ -17,7 +17,7 @@ class CartController extends Controller
     {
         $products  =  OrdersRepository::getOrderItems();
         $similarProducts = self::similarProducts($products);
-        return view('checkout.cart', ['products'=> $products, 'similars' => $similarProducts]);
+        return view('checkout.cart', ['products'=> $products, 'similar' => $similarProducts]);
     }
 
     public function similarProducts($products)
@@ -25,6 +25,7 @@ class CartController extends Controller
         $ids = [];
         $colors = [];
         $cats = [];
+        $all = [];
 
         foreach($products as $product){
             $orderProduct = Product::find($product->ProductId);
@@ -33,8 +34,26 @@ class CartController extends Controller
             $colors[] = $orderProduct->ProductColorId;   
         }
 
-        $similars = Product::whereNotIn('Id',$ids)->whereIn('ProductCategoryId',$cats)->whereIn('ProductColorId',$colors)->get();
+        $similar = Product::whereNotIn('Id',$ids)->whereIn('ProductCategoryId',$cats)->whereIn('ProductColorId',$colors)->get();
+
+        if(count($similar) > 0){
+            foreach($similar as $product){
+
+            $image = Productimage::where('ProductId',$product->ProductId)->get();
+
+                $all[] = (object) array(
+                    'Id' => $product->Productid,
+                    'Name' => $product->Name,
+                    'Description' => $product->Description,
+                    'ColorName' => Productcolor::find($product->ProductColorId)->Name,
+                    'CategoryName' => Productcategory::find($product->ProductCategoryId)->Name,
+                    'UnitPrice' => $product->UnitPrice,
+                    'Image' => Productimage::where('ProductId',$product->Id)->get()[0]->ServerName
+                );
+            }
+
+        }
         
-        return $similars;
+        return $all;
     }
 }

@@ -66,4 +66,21 @@
             
           </div>
 </section>
+
+@isset($similar)
+	<section class="products row">
+		<section class="content-header ">
+			<h1>
+				Compre
+				<small>Também</small>
+			</h1>
+		</section>
+		@foreach($similar as $item)
+		<div class="col-md-3">
+			@include('products.components.card', array('product'=> $item))
+		</div>
+		@endforeach
+
+	</section>
+@endisset
 @endsection
