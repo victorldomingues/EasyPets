@@ -20,6 +20,7 @@ class EmployeesRepository
         'users.Cpf', 
         'managers.Role')
         ->where('users.id', "=", $id)
+        ->where('users.Type', "=", 0)
         ->first();
         return $manager;
     }

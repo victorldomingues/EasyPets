@@ -30,82 +30,53 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				
+
 				@if(Auth::user()->type == 0)
-						
-						@if(Auth::user()->role == null)
-						<form role="form" method="POST" @isset($manager) action="{!! route('manager.employees.update', ['id'=>$manager->Id])  !!}"
-						@endisset @empty($manager) action="{{route('manager.employees.store')}}" @endempty>
+				<form role="form" method="POST" @isset($manager) action="{!! route('manager.employees.update', ['id'=>$manager->Id])  !!}"
+				 @endisset @empty($manager) action="{{route('manager.employees.store')}}" @endempty>
 
 
-							<div class="box-body">
+					<div class="box-body">
 
-								{{ csrf_field() }}
+						{{ csrf_field() }}
 
-								<div class="form-group">
-									<label for="">Nome</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Name}}"
-									@endisset required>
-								</div>
+						<div class="form-group">
+							<label for="">Nome</label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Name}}"
+							 @endisset required>
+						</div>
 
-								<div class="form-group">
-									<label for="">Email</label>
-									<input type="text" class="form-control" id="email" name="email" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Email}}"
-									@endisset required>
-								</div>
+						<div class="form-group">
+							<label for="">Email</label>
+							<input type="text" class="form-control" id="email" name="email" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Email}}"
+							 @endisset required>
+						</div>
 
-								<div class="form-group">
-									<label for="">CPF</label>
-									<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Cpf}}"
-									@endisset required>
-								</div>
-
-
-								<div class="form-group">
-									<label>Tipo</label>
-									<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="type">
-										<option value="0" selected="selected">Atendente</option>
-										<option value="1">Gerente</option>
-										<option value="2">Administrador</option>
-									</select>
-								</div>
+						<div class="form-group">
+							<label for="">CPF</label>
+							<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($manager) value="{{$manager->Cpf}}"
+							 @endisset required>
+						</div>
 
 
+						<div class="form-group">
+							<label>Tipo</label>
+							<select class="form-control select2" id="role" name="role" style="width: 100%;" >
+								<option value="0" selected="selected">Gerente</option>
+								<option value="1">Adminstrador</option>
+							</select>
+						</div>
 
-								{{--
-								<div class="form-group">
-									<label for="">Latitude</label>
-									<input type="text" class="form-control" id="lat" name="lat" placeholder="(Opcional)" @isset($customer) value="{{$customer->Lat}}"
-									@endisset>
-								</div>
+					</div>
 
-								<div class="form-group">
-									<label for="">Longitude</label>
-									<input type="text" class="form-control" id="long" name="long" placeholder="(Opcional)" @isset($customer) value="{{$customer->Long}}"
-									@endisset>
-								</div> --}}
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						@isset($customer)
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"> Remover </button>
+						@endisset
+					</div>
 
-								<!-- <div class="form-group">						
-									<label for="">Forma de Pagamento</label>
-									<input type="text" class="form-control" id="paymentpreference" name="paymentpreference" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->PaymentPreference}}"
-									@endisset required>
-								</div> -->
-
-							</div>
-
-							<div class="box-footer">
-								<button type="submit" class="btn btn-primary">Salvar</button>
-								@isset($customer)
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"> Remover </button>
-								@endisset
-							</div>
-
-						</form>
-					@endif
-				@else 
-				Você não possui permissão para acessar essa página
-					
-
+				</form>
 				@endif
 			</div>
 

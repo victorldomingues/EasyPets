@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Pet;
 use DateTime;
 use App\Models\Petimage;
-
+use App\Helpers\PetsStateHelper;
+use App\Repositories\Store\PetsRepository;
 use  App\Helpers\GuidHelper;
 
 
@@ -56,17 +57,10 @@ class PetsController extends Controller
 
     public function index()
     {
-        $pets = Pet::orderBy('created_at', 'desc')->get();
-
+        $pets = PetsRepository::getPets();
         return view('manager.adoptions.pets', ['pets' => $pets]);
     }
 
-    // public function index()
-    // {
-    //     $colors = Productcolor::orderBy('created_at', 'desc')->paginate(10);
-    //     return view('manager.products.colors.index',['manager.products.colors' => $colors]);
-    // }
-  
     public function create()
     {
         return view('manager.adoptions.pets-new');
@@ -93,13 +87,15 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        return view('manager.adoptions.pets-show', compact('pet'));
+        $images  =  Petimage::where("PetId", "=", $id)->get();
+        return view('manager.adoptions.pets-show', ['pet' => $pet, 'images' => $images]);
     }
   
     public function edit($id)
     {
         $pet = Pet::findOrFail($id);
-        return view('manager.adoptions.pets-new', compact('pet'));
+        $images  =  Petimage::where("PetId", "=", $id)->whereNull('deleted_at')->get();
+        return view('manager.adoptions.pets-new', ['pet' => $pet, 'images' => $images]);
     }
 
     public function update(PetsRequest $request, $id)
@@ -130,5 +126,14 @@ class PetsController extends Controller
         $pet->deleted_at    = new DateTime();
         $pet->save();
         return redirect()->route('manager.pets')->with('alert-success', 'Pet removido com sucesso!');
+    }
+
+    public function removeImage($id)
+    {
+        $product = PetImage::findOrFail($id);
+        $product->deleted       = 1;
+        $product->deleted_at    = new DateTime();
+        $product->save();
+        return response()->json('{"isValid": true}');
     }
 }

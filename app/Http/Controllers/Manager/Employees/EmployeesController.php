@@ -9,6 +9,7 @@ use App\Models\Manager;
 use App\Models\User;
 use DateTime;
 use Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,15 +56,14 @@ class EmployeesController extends Controller
     public function store(EmployeeRequest $request)
     {
         $password  =  GuidHelper::short();
-
         $user = new User;
-        $manager = new Manager;
         $user->name              = $request->name;
         $user->email             = $request->email;
         $user->password          = Hash::make($password);
-        $user->type              = 1;
+        $user->type              = 0;
         $user->cpf               = $request->cpf;
         $user->save();
+        $manager = new Manager;
         $manager->id             = $user->id;
         $manager->role           = $request->role;
         $manager->save();
@@ -86,7 +86,7 @@ class EmployeesController extends Controller
 
         } 
         catch(\Exception $e){
-        // catch code
+            
         }
 
         return redirect()->route('manager.employees')->with('message', 'Funcionario cadastrado com sucesso!');

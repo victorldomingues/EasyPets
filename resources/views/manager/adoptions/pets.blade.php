@@ -1,5 +1,4 @@
-@extends('layouts.app') 
-@section('content')
+@extends('layouts.app') @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
@@ -15,7 +14,7 @@
 	</ol>
 </section>
 <section class="content">
-<!-- Small boxes (Stat box) -->
+	<!-- Small boxes (Stat box) -->
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-12">
@@ -42,9 +41,20 @@
 
 							@foreach ($pets as $pet)
 							<tr>
-								<td> 
-                                {{ $pet->Name }} 
-                                </td>
+								<td>
+									<img class="direct-chat-img" style="max-width: 25px; max-height: 25px; margin-right: 10px;" 
+									@isset($pet->Image) 
+									src="{{asset('')}}uploads/pets/{{$pet->Image}}" 
+									@endisset 
+									@empty($pet->Image) 
+									@if($pet->Type  == 0)
+									src="{{asset('')}}template/dist/img/default-dog.jpg"
+									@else
+									src="{{asset('')}}template/dist/img/default-cat.jpg"
+									@endif
+									@endempty > 
+									{{ $pet->Name }}
+								</td>
 								<td>
 									<div class="btn-group">
 										<a href="{!! route('manager.pets.show', ['id'=>$pet->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
@@ -84,7 +94,7 @@
 
 		</div>
 	</div>
-<!-- /.row -->
+	<!-- /.row -->
 </section>
 
 

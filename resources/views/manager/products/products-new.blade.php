@@ -49,7 +49,7 @@
 
 									<p class="help-block">clique para adicionar uma nova imagem</p>
 								</div>
-								@isset($images)
+								@if(isset($images) && count($images) > 0)
 								<div class="form-group">
 
 									<label for="">Imagens</label>
@@ -87,7 +87,14 @@
 
 
 								</div>
-								@endisset
+								@else 
+									<div class="form-group">
+											<img  style="width:100%;"
+
+											src="{{asset('')}}template/dist/img/default-product.jpg"
+											>
+									</div>
+								@endif
 
 							</div>
 

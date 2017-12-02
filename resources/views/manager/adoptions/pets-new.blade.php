@@ -11,7 +11,7 @@
 				<i class="fa fa-shopping-bag "></i> Visão Geral</a>
 		</li>
 		<li>
-			<a href="{{route('manager.categories')}}">
+			<a href="{{route('manager.pets')}}">
 				Pets
 			</a>
 		</li>
@@ -38,7 +38,6 @@
 
 						<div class="row">
 							<div class="col-md-4">
-								<br>
 
 								<div class="form-group">
 									<label for="">Nova imagem</label>
@@ -46,27 +45,32 @@
 
 									<p class="help-block">clique para adicionar uma nova imagem</p>
 								</div>
-
+								@if(isset($images) && count($images) > 0)
 								<div class="form-group">
-									<label for="">Imagens</label>
 
+									<label for="">Imagens</label>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 										<ol class="carousel-indicators">
-											<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-											{{--
-											<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-											<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li> --}}
+											@foreach($images as $image)
+											<li data-target="#carousel-example-generic" data-slide-to="{{$loop->iteration}}" class=" circle-image circle-image-{{$image->Id}} @if($loop->iteration == 1) active @endif  "></li>
+											@endforeach
 										</ol>
 										<div class="carousel-inner">
-											<div class="item active">
-												<img src="{{asset('')}}template/dist/img/photo1.png" alt="First slide">
+											@foreach($images as $image )
+											<div class="item element-image element-image-{{$image->Id}}  @if($loop->iteration == 1)  active @endif">
+
+												<img src="{{asset('')}}uploads/pets/{{$image->ServerName}}">
 
 												<div class="carousel-caption">
-													<button type="button" class="btn btn-small btn-danger">
-														<em class="fa fa-trash-o"></em>
+													<button type="button" e-id="{{$image->Id}}" class="btn btn-small btn-danger remove-image">
+														<em class=" fa fa-trash-o"></em>
+														<div style="display:  none" class="spin">
+															<em class="fa fa-refresh fa-spin" style="color:#fff; font-size:14px"></em>
+														</div>
 													</button>
 												</div>
 											</div>
+											@endforeach
 
 										</div>
 										<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -77,16 +81,20 @@
 										</a>
 									</div>
 
+
 								</div>
+								@else
+								<div class="form-group">
+									<img style="width:100%;" @if($pet->Type == 0) src="{{asset('')}}template/dist/img/default-dog.jpg" @else src="{{asset('')}}template/dist/img/default-cat.jpg"
+									@endif >
+								</div>
+								@endif
 
 							</div>
-
-
 
 							<div class="col-md-8">
 
 								<div class="form-group">
-									<br>
 									<label for="">Nome</label>
 									<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Name}}"
 									 @endisset required>
@@ -102,8 +110,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">Idade</label>
-											<input type="text" class="form-control" id="age" name="age" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Age}}" @endisset
-											 required>
+											<input type="text" class="form-control" id="age" name="age" placeholder="(Obrigatório)" @isset($pet) value="{{$pet->Age}}"
+											 @endisset required>
 										</div>
 									</div>
 
@@ -131,57 +139,7 @@
 
 						</div>
 
-						{{--
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="">Descrição</label>
-									<input type="text" class="form-control" id="description" name="description" placeholder="(Opcional)" @isset($pet) value="{{$pet->Name}}"> @endisset required>
-								</div>
-
-
-							</div>
-						</div> --}} {{--
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="">Endereco</label>
-									<input type="text" class="form-control" id="adress" name="address" placeholder="(Opcional)">
-								</div>
-
-								<div class="form-group">
-									<label for="">Cidade</label>
-									<input type="text" class="form-control" id="city" name="city" placeholder="(Opcional)">
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="">Bairro</label>
-									<input type="text" class="form-control" id="race" name="race" placeholder="(Opcional)">
-								</div>
-
-								<div class="form-group">
-									<label for="">Estado</label>
-									<input type="text" class="form-control" id="district" name="district" placeholder="(Opcional)">
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="">Numero</label>
-									<input type="text" class="form-control" id="number" name="number" placeholder="(Opcional)">
-								</div>
-							</div>
-						</div> --}}
-
-
-
-
 						<!-- radio -->
-
-
-
 
 						<!-- /.box-body -->
 
@@ -214,7 +172,7 @@
 					<h4 class="modal-title">Atenção !!!</h4>
 				</div>
 				<div class="modal-body">
-					<p>Deseja realmente remover a cor " {{ $pet->Name }} "</p>
+					<p>Deseja realmente remover o Pet " {{ $pet->Name }} "</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
@@ -252,7 +210,42 @@ $('.select2').select2();
       radioClass   : 'iradio_flat-green'
     })
 
-   
+   	$('body').on('click', '.remove-image', function(e){
+		e.preventDefault();
+
+		var t =  $(this);
+		var id  =  t.attr("e-id");
+
+		$(".remove-image .fa-trash-o").attr("style", "display: none");
+
+		$(".remove-image .spin").attr("style", "");
+
+		$.get("{{asset('')}}manager/pets/" + id + "/remove-image", function( data ) {
+
+			$(".remove-image .spin ").attr("style", "display: none");
+
+			$(".remove-image .fa-trash-o ").attr("style", "");
+
+			$('.element-image-' + id).remove();
+			$('.circle-image-' + id).remove();
+
+			$(".circle-image").each(function(a , e) {
+				if(a == 0){
+					$(e).addClass('active');
+					return;
+				}
+			});
+			$(".element-image").each(function(a , e) {
+				if(a == 0){
+					$(e).addClass('active');
+					return;
+				}
+			});
+
+		});
+		
+	});
+
   })
 
 </script>

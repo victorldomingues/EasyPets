@@ -173,7 +173,7 @@ Route::post('/manager/pets/{id}/update', 'Manager\Adoptions\PetsController@updat
 
 Route::post('/manager/pets/{id}/destory', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');
 
-
+Route::get('/manager/pets/{id}/remove-image', 'Manager\Adoptions\PetsController@removeImage')->name('manager.pets.removeImage');
 
 
 // Manager adoptions
