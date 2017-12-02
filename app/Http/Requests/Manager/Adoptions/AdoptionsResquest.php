@@ -4,7 +4,7 @@ namespace App\Http\Requests\Manager\Adoptions;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PetsRequest extends FormRequest
+class AdoptionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,6 @@ class PetsRequest extends FormRequest
     }
 
     protected $fillable = [
-		'CustomerId',
-		'PetId',
 		'Status',
 		'Deleted',
 		'MainActivity',

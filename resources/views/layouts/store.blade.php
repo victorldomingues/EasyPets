@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +23,8 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/skins/_all-skins.min.css">
-
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="{{asset('')}}template/plugins/iCheck/all.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -53,29 +53,29 @@
 						</button>
 					</div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="{{ Request::is('/') ? 'active' : null }}">
-                                <a href="{{asset('')}}">Página inicial
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                             <li class="{{ App\Helpers\ActiveLink::isActiveRoute('products') }}">
-                            
-                                <a href="{{route('products')}}">Produtos
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="{{ App\Helpers\ActiveLink::isActiveRoute('services') }}">
-                                <a href="{{route('services')}}">Serviços </a>
-                            </li>
-                            <li class="{{ App\Helpers\ActiveLink::isActiveRoute('adoption') }}">
-                                <a href="{{route('adoption')}}">Adoção
-                                    <em class="fa fa-paw"></em>
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="{{ Request::is('/') ? 'active' : null }}">
+								<a href="{{asset('')}}">Página inicial
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li class="{{ App\Helpers\ActiveLink::isActiveRoute('products') }}">
+
+								<a href="{{route('products')}}">Produtos
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li class="{{ App\Helpers\ActiveLink::isActiveRoute('services') }}">
+								<a href="{{route('services')}}">Serviços </a>
+							</li>
+							<li class="{{ App\Helpers\ActiveLink::isActiveRoute('adoption') }}">
+								<a href="{{route('adoption')}}">Adoção
+									<em class="fa fa-paw"></em>
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
 
 						</ul>
 						<form class="navbar-form navbar-left" role="search">
@@ -102,9 +102,7 @@
 								</a>
 							</li>
 
-							@else
-							
-							@component('shared.header.profile') @endcomponent @endguest
+							@else @component('shared.header.profile') @endcomponent @endguest
 						</ul>
 					</div>
 					<!-- /.navbar-custom-menu -->
@@ -139,13 +137,15 @@
 	<script src="{{asset('')}}template/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="{{asset('')}}template/dist/js/adminlte.min.js"></script>
+
+	<!-- iCheck 1.0.1 -->
+	<script src="{{asset('')}}template/plugins/iCheck/icheck.min.js"></script>
 	<!-- Form Validator Lib -->
 	<script src="{{asset('')}}js/forms/validator.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{asset('')}}template/dist/js/demo.js"></script>
 	<script src="{{asset('')}}store/cart/js/cart.js"></script>
-	@yield('scripts')
-	{{ csrf_field() }}
+	@yield('scripts') {{ csrf_field() }}
 </body>
 
 </html>

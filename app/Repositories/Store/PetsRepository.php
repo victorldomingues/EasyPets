@@ -4,7 +4,7 @@ namespace App\Repositories\Store;
 
 use Illuminate\Support\Facades\Auth;
 use DB;
-use App\Models\Adopation;
+use App\Models\Adoption;
 use App\Models\PetImage;
 use App\Models\Pet;
 use App\User;
@@ -46,5 +46,9 @@ class PetsRepository
             AND pets.State == ".PetsStateHelper::availableforadoption."
             ORDER BY Id DESC
         ");
+    }
+
+    public static function getImages($petId){
+        return Petimage::where("PetId", "=", $petId)->whereNull('deleted_at')->get();
     }
 }

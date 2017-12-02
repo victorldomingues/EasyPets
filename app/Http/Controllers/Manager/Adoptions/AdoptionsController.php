@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Manager\Adoptions;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Manager\Adoptions\AdoptionRequest;
+use App\Http\Requests\Manager\Adoptions\AdoptionsRequest;
 use Illuminate\Http\Request;
 use App\Models\Adoption;
 use DateTime;
+use App\Repositories\Store\AdoptionsRepository;
+
 
 use Illuminate\Support\Facades\Auth;
 
-class AdoptionController extends Controller
+class AdoptionsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,6 +26,12 @@ class AdoptionController extends Controller
 
     public function index()
     {
+        $user  =  Auth::user();
+        if($user->Type == 0){
+            $adoptions = AdoptionsRepository::getForEmployees();
+        }else{
+            $adoptions = AdoptionsRepository::getForCustomers();
+        }
         return view('manager.adoptions.adoptions', ['adoptions' => $adoptions]);
     }  
 

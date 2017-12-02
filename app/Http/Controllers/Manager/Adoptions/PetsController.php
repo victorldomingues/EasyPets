@@ -87,7 +87,7 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        $images  =  Petimage::where("PetId", "=", $id)->get();
+        $images  =  Petimage::where("PetId", "=", $id)->whereNull('deleted_at')->get();
         return view('manager.adoptions.pets-show', ['pet' => $pet, 'images' => $images]);
     }
   
