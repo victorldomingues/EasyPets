@@ -22,18 +22,18 @@ class CartController extends Controller
 
     public function similarProducts($products)
     {
-        $similarProducts = [];
-        $orderProduct = [];
-        $color = [];
-        $cat = [];
+        $ids = [];
+        $colors = [];
+        $cats = [];
 
         foreach($products as $product){
             $orderProduct = Product::find($product->ProductId);
-            $cat[] = $orderProduct->ProductCategoryId;
-            $color[] = $orderProduct->ProductColorId;   
+            $ids[] = $product->ProductId;
+            $cats[] = $orderProduct->ProductCategoryId;
+            $colors[] = $orderProduct->ProductColorId;   
         }
 
-        $similars = Product::whereIn('ProductCategoryId',$cat)->whereIn('ProductColorId',$color)->get();
+        $similars = Product::whereNotIn('Id',$ids)->whereIn('ProductCategoryId',$cats)->whereIn('ProductColorId',$colors)->get();
         
         return $similars;
     }
