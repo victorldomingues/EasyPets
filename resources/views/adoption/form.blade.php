@@ -49,7 +49,7 @@
 
 			@if(isset(Auth::user()->id))
 
-			<form role="form" method="POST" action="">
+			<form role="form" method="POST"  action="{!! route('adoption.store',['id'=>$pet->Id])  !!}">
 
 
 				<div class="box-body">
@@ -134,7 +134,7 @@
 		</div>
 	</div>
 </section>
-
+@isset($customer)
 <div class="modal modal-default fade" id="modal-address">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -162,6 +162,8 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
+
+@endisset
 
 @endsection @section('scripts')
 <!-- Page script -->

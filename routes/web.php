@@ -30,6 +30,8 @@ Route::get('/services', 'ServicesController@index')->name('services');
 
 Route::get('/adoption/{id}/form', 'AdoptionFormController@index')->name('adoption.form');
 
+Route::post('/adoption/{id}/store', 'AdoptionFormController@store')->name('adoption.store');
+
 Route::get('/adoption', 'PetsController@index')->name('adoption');
 
 
@@ -153,8 +155,6 @@ Route::get('/manager/providers/{id}/edit', 'Manager\Providers\ProvidersControlle
 Route::post('/manager/providers/{id}/update', 'Manager\Providers\ProvidersController@update')->name('manager.providers.update');
 
 Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
-
-
 
 
 // Manager pets

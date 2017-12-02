@@ -21,12 +21,6 @@
 			<div class="box box-primary">
 				<div class="box-header">
 					<h3 class="box-title">Adoções cadastradas </h3>
-					<!-- tools box -->
-					<div class="pull-right box-tools">
-						<a href="{{route('manager.adoptions.new')}}" type="button" class="btn bg-olive btn-sm" data-toggle="tooltip" title="Cadastrar novo adoção">
-							<i class="fa fa-plus"></i> Novo
-						</a>
-					</div>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -39,10 +33,10 @@
 						</thead>
 						<tbody>
 
-							{{--  @foreach ($adoptions as $adoption)
+							@foreach ($adoptions as $adoption)
 							<tr>
 								<td>
-									{{ $adoption->Name }}
+									{{ $adoption->PetName }}
 								</td>
 								<td>
 									<div class="btn-group">
@@ -67,7 +61,7 @@
 									</div>
 								</td>
 							</tr>
-							@endforeach  --}}
+							@endforeach
 
 						</tbody>
 						<tfoot>
