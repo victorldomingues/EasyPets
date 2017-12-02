@@ -28,9 +28,9 @@ Route::get('/services', 'ServicesController@index')->name('services');
 
 // Store Adoption
 
-Route::get('/adoption', 'AdoptionFormController@index')->name('adoption');
+Route::get('/adoption/form', 'AdoptionFormController@index')->name('adoption.form');
 
-Route::get('/adoption/pets', 'PetsController@index')->name('pets');
+Route::get('/adoption', 'PetsController@index')->name('adoption');
 
 
 // Store Cart
