@@ -121,6 +121,9 @@ class CustomerController extends Controller
         $customer->long              = $request->long;        
         $customer->save();
         if(isset($request->backto)){
+            if($request->backto == 'adoption.form'){
+                return redirect()->route(''.$request->backto.'', ['id'=>$request->id]);
+            }
             return redirect()->route(''.$request->backto.'')->with('message', 'Cliente atualizado com sucesso!');
         }
         return redirect()->route('manager.customers')->with('message', 'Cliente atualizado com sucesso!');

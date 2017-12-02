@@ -28,7 +28,7 @@ Route::get('/services', 'ServicesController@index')->name('services');
 
 // Store Adoption
 
-Route::get('/adoption/form', 'AdoptionFormController@index')->name('adoption.form');
+Route::get('/adoption/{id}/form', 'AdoptionFormController@index')->name('adoption.form');
 
 Route::get('/adoption', 'PetsController@index')->name('adoption');
 

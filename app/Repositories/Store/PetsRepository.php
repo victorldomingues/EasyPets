@@ -47,4 +47,8 @@ class PetsRepository
             ORDER BY Id DESC
         ");
     }
+
+    public static function getImages($petId){
+        return Petimage::where("PetId", "=", $petId)->whereNull('deleted_at')->get();
+    }
 }
