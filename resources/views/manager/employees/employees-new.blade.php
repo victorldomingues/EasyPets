@@ -63,7 +63,7 @@
 							<label>Tipo</label>
 							<select class="form-control select2" id="role" name="role" style="width: 100%;" >
 								<option value="0" selected="selected">Gerente</option>
-								<option value="1">Adminstrador</option>
+								<option value="1">Administrador</option>
 							</select>
 						</div>
 
