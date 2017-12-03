@@ -3,15 +3,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Funcioários
-		<small>Funcioários da loja</small>
+		Funcionários
+		<small>Funcionários da loja</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{route('manager')}}">
 				<i class="fa fa-shopping-bag "></i> Visão Geral</a>
 		</li>
-		<li class="active">Funcioários</li>
+		<li class="active">Funcionários</li>
 	</ol>
 </section>
 <section class="content">
@@ -21,7 +21,7 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">Funcioários da loja cadastrados </h3>
+					<h3 class="box-title">Funcionários da loja cadastrados </h3>
 					<!-- tools box -->
 					<div class="pull-right box-tools">
 						<a href="{{route('manager.employees.new')}}" type="button" class="btn bg-olive btn-sm" data-toggle="tooltip" title="Cadastrar novo Funcionário">
