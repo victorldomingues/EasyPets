@@ -28,7 +28,11 @@
 						<thead>
 							<tr>
 								<th>Adoção</th>
-								<th style="width:115px">Ações</th>
+								<th>Animal</th>
+								<th>Solicitante</th>
+								<th>Status</th>
+								@if(Auth::user()->Type == 0)
+								<th>Ações</th> @endif
 							</tr>
 						</thead>
 						<tbody>
@@ -36,30 +40,42 @@
 							@foreach ($adoptions as $adoption)
 							<tr>
 								<td>
+									{{ $adoption->Id }}
+								</td>
+								<td>
 									{{ $adoption->PetName }}
 								</td>
 								<td>
+									{{ $adoption->CustomerName }}
+								</td>
+								<td>
+									@if($adoption->Status == \App\Helpers\AdoptionsStateHelper::open) Aberto @elseif($adoption->Status == \App\Helpers\AdoptionsStateHelper::canceled)
+									Cancelado @else Adotado @endif
+								</td>
+								@if(Auth::user()->Type == 0)
+
+								<td>
 									<div class="btn-group">
-										<a href="{!! route('manager.adoptions.show', ['id'=>$adoption->Id])  !!}" class="btn btn-sm btn-default">Visualizar</a>
+										<a href="{!! route('manager.adoptions.edit', ['id'=>$adoption->Id])  !!}" class="btn btn-sm btn-default">Editar</a>
 										<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a href="{!! route('manager.adoptions.show', ['id'=>$adoption->Id])  !!}">Visualizar</a>
-											</li>
-											<li>
 												<a href="{!! route('manager.adoptions.edit', ['id'=>$adoption->Id])  !!}">Editar</a>
 											</li>
 											<li class="divider"></li>
 											<li>
-												<a href="#">Excluir</a>
+												<a href="{!! route('manager.adoptions.destroy', ['id'=>$adoption->Id])  !!}">Excluir</a>
 											</li>
 
 										</ul>
 									</div>
 								</td>
+
+								@endif
+
 							</tr>
 							@endforeach
 
@@ -67,7 +83,12 @@
 						<tfoot>
 							<tr>
 								<th>Adoção</th>
-								<th>Ações</th>
+								<th>Animal</th>
+								<th>Solicitante</th>
+								<th>Status</th>
+								@if(Auth::user()->Type == 0)
+								<th>Ações</th> @endif
+
 							</tr>
 						</tfoot>
 					</table>

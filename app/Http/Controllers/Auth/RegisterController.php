@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Postmark\PostmarkClient;
 class RegisterController extends Controller
 {
     /*
@@ -63,11 +63,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        self::sendEmail($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'cpf' => $data['cpf'],
             'password' => bcrypt($data['password']),
+        ]);
+    }
+    private static function sendEmail(array $data){
+
+        
+        $client = new PostmarkClient(env("POSTMARK_API_KEY"));
+        
+        // Send an email:
+        $sendResult = $client->sendEmailWithTemplate(
+          "victor@atrace.com.br",
+          $data['email'],
+          4125083,
+          [
+          "first_name" =>  $data['name'],
+          "email" =>  $data['email'],
+          "host" => env("APP_URL").'/',
         ]);
     }
 }

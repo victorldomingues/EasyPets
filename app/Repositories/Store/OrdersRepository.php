@@ -214,8 +214,19 @@ class OrdersRepository
         'purchaseorders.Total'
         )
         ->get();
-    }
 
+    }
+ public static function getOrders(){
+        return DB::table('purchaseorders')
+        ->whereNotIn('purchaseorders.state', [OrderStateHelper::$shopping, OrderStateHelper::$open])
+        ->select('purchaseorders.Id',
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%Y-%m-%d') as ClosedDate"),
+        DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%d/%m/%Y') as ClosedDateFormated"),
+        'purchaseorders.Total'
+        )
+        ->get();
+        
+    }
     public static function getOrderById($id){
         $user  =  Auth::user();
         return DB::table('purchaseorders')

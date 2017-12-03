@@ -36,26 +36,6 @@
 				</a>
 			</li>
 
-			<li class="treeview">
-				<a href="#">
-					<i class="fa fa-shopping-basket"></i>
-					<span> Compras </span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li class="active">
-						<a href="index.html">
-							<i class="fa fa-circle-o"></i> Visão Geral</a>
-					</li>
-					<li>
-						<a href="{{route('manager.orders')}}">
-							<i class="fa fa-circle-o"></i> Minhas compras </a>
-					</li>
-				</ul>
-			</li>
-
 			@if(\App\Repositories\Store\UsersRepository::loggedUser()->Type == 0)
 
 
@@ -71,12 +51,8 @@
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li class="active">
-						<a href="index.html">
-							<i class="fa fa-circle-o"></i> Visão Geral</a>
-					</li>
 					<li>
-						<a href="index.html">
+						<a href="{{route('manager.orders')}}">
 							<i class="fa fa-circle-o"></i> Ordens</a>
 					</li>
 				</ul>
@@ -93,10 +69,6 @@
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li class="active">
-						<a href="index.html">
-							<i class="fa fa-circle-o"></i> Visão Geral</a>
-					</li>
 					<li>
 						<a href="{{route('manager.products')}}">
 							<i class="fa fa-circle-o"></i> Produtos</a>
@@ -112,30 +84,6 @@
 					<li>
 						<a href="{{route('manager.models')}}">
 							<i class="fa fa-circle-o"></i> Modelos</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="treeview">
-				<a href="#">
-					<i class="fa fa-paw"></i>
-					<span>Adoções</span>
-					<span class="pull-right-container">
-						<span class="label label-warning pull-right">4</span>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li class="active">
-						<a href="index.html">
-							<i class="fa fa-circle-o"></i> Visão Geral</a>
-					</li>
-					<li>
-						<a href="{{route('manager.adoptions')}}">
-							<i class="fa fa-circle-o"></i> Adoções</a>
-					</li>
-					<li>
-						<a href="{{route('manager.pets')}}">
-							<i class="fa fa-circle-o"></i> Pets</a>
 					</li>
 				</ul>
 			</li>
@@ -161,7 +109,47 @@
 				</a>
 			</li>
 
+			@else
+
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-shopping-basket"></i>
+					<span> Compras </span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<li>
+						<a href="{{route('manager.orders')}}">
+							<i class="fa fa-circle-o"></i> Minhas compras </a>
+					</li>
+				</ul>
+			</li>
+
 			@endif
+
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-paw"></i>
+					<span>Adoções</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<li>
+						<a href="{{route('manager.adoptions')}}">
+							<i class="fa fa-circle-o"></i> Adoções</a>
+					</li>
+					@if(\App\Repositories\Store\UsersRepository::loggedUser()->Type == 0)
+					<li>
+						<a href="{{route('manager.pets')}}">
+							<i class="fa fa-circle-o"></i> Pets</a>
+					</li>
+					@endif
+				</ul>
+			</li>
 
 		</ul>
 	</section>

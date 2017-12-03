@@ -11,6 +11,7 @@ use App\Http\Requests\Manager\Adoptions\AdoptionsRequest;
 use Illuminate\Support\Facades\Auth;
 use Postmark\PostmarkClient;
 use DateTime;
+use  App\Helpers\AdoptionsStateHelper;
 class AdoptionFormController extends Controller
 {
     public function index($id)
@@ -28,7 +29,7 @@ class AdoptionFormController extends Controller
 
     public function store(AdoptionsRequest $request, $id){
         $adoption = new Adoption;  
-        $adoption->status               = $request->status;
+        $adoption->status               = AdoptionsStateHelper::open;
         $adoption->deleted              = 0;
         $adoption->mainactivity         = $request->mainactivity;
         $adoption->whowillsupport       = $request->whowillsupport;

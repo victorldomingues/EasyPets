@@ -7,12 +7,20 @@ use App\Repositories\Store\OrdersRepository;
 use App\Repositories\Store\CustomersRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Store\Cart\OrderRequest;
+use App\Models\Purchaseorder;
+use DateTime;
+use DB;
 class OrdersController extends Controller
 {
-    //
+    
     public function index()
     {
-        $orders = OrdersRepository::getOrdersByUserId(Auth::user()->id);
+        if(Auth::user()->Type == 0){
+            $orders = OrdersRepository::getOrders();
+        }else{
+            $orders = OrdersRepository::getOrdersByUserId(Auth::user()->id);
+        }
+
         return view('manager.orders.orders', ['orders'=> $orders]);
     }
     public function show($id){
@@ -33,7 +41,15 @@ class OrdersController extends Controller
         
     }
 
-    public function destroy(OrderRequest $request, $id){
-        
+  
+    public function destroy($id)
+    {
+        $order = Purchaseorder::findOrFail(intval($id))->get();
+        // $order->updated_by    = Auth::user()->id;
+        // $order->deleted_by    = Auth::user()->id;
+        // $order->deleted       = 1;
+        // $order->deleted_at    = new DateTime();
+        // $order->save();
+        return redirect()->route('manager.orders')->with('alert-success', 'Ordem removida com sucesso!');
     }
 }

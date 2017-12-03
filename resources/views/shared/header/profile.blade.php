@@ -14,7 +14,13 @@
 
 			<p>
 				{{ Auth::user()->name }}
-				<small>Cliente</small>
+				<small>
+				@if(Auth::user()->Type  == 0)
+				Funcionário
+				@else
+				Cliente
+				@endif
+				</small>
 			</p>
 		</li>
 		<!-- Menu Body -->

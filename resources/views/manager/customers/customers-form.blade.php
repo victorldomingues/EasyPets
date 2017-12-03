@@ -6,21 +6,21 @@
 
 <div class="form-group">
 	<label for="">Email</label>
-	<input type="text" class="form-control" id="email" name="email" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Email}}" disabled
-	 @endisset required>
+	<input type="text" class="form-control" id="email" name="email" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Email}}"
+	 disabled @endisset required>
 </div>
 
 <div class="form-group">
 	<label for="">CPF</label>
-	<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Cpf}}"  disabled
-	 @endisset required>
+	<input type="text" class="form-control" id="cpf" name="cpf" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Cpf}}"
+	 disabled @endisset required>
 </div>
 
 <div class="form-group">
 	<label for="">Data de Nascimento</label>
 	<input type="date" class="form-control" id="birthday" name="birthday" placeholder="(Obrigatório)" @isset($customer) value="{{$customer->Birthday}}"
 	 @endisset required>
-     
+
 </div>
 
 <div class="form-group">

@@ -52,13 +52,9 @@
 											<li>
 												<a href="{!! route('manager.orders.show', ['id'=>$order->Id])  !!}">Visualizar</a>
 											</li>
-											<li>
+											{{--  <li>
 												<a href="{!! route('manager.orders.edit', ['id'=>$order->Id])  !!}">Editar</a>
-											</li>
-											<li class="divider"></li>
-											<li>
-												<a href="#">Excluir</a>
-											</li>
+											</li>  --}}
 
 										</ul>
 									</div>
