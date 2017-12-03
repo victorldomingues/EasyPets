@@ -34,7 +34,7 @@
 
 
 		<div class="box-tools">
-			<a href="{!! route('adoption.form', ['id'=>$pet->Id])  !!}" class="btn btn-box-tool add-to-cart" pet="{{$pet->Id}}" type="button">
+			<a href="{!! route('adoption.form', ['id'=>$pet->Id])  !!}" class="btn btn-box-tool add-to-cart" pet="{{$pet->Id}}" >
 				<i class="fa fa-heart "></i> Adotar
 			</a>
 		</div>
