@@ -218,7 +218,9 @@ class OrdersRepository
     }
  public static function getOrders(){
         return DB::table('purchaseorders')
-        ->whereNotIn('purchaseorders.state', [OrderStateHelper::$shopping, OrderStateHelper::$open])
+        ->whereNotIn('purchaseorders.state', [OrderStateHelper::$open, OrderStateHelper::$closed])
+        ->whereNotNull('purchaseorders.customerId')
+        ->whereNull('purchaseorders.deleted_at')
         ->select('purchaseorders.Id',
         DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%Y-%m-%d') as ClosedDate"),
         DB::raw("DATE_FORMAT(purchaseorders.ClosedDate, '%d/%m/%Y') as ClosedDateFormated"),

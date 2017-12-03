@@ -47,7 +47,7 @@
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/skins/_all-skins.min.css">
 
-  	<!-- Theme style -->
+	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('')}}template/dist/css/AdminLTE.min.css">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -85,15 +85,8 @@
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 
-						@component('shared.header.cart') @endcomponent
+						@component('shared.header.cart') @endcomponent @component('shared.header.profile') @endcomponent
 
-						@component('shared.header.profile') @endcomponent
-						<!-- Control Sidebar Toggle Button -->
-						<li>
-							<a href="#" data-toggle="control-sidebar">
-								<i class="fa fa-gears"></i>
-							</a>
-						</li>
 					</ul>
 				</div>
 			</nav>
@@ -150,11 +143,12 @@
 	<script src="{{asset('')}}template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="{{asset('')}}template/bower_components/fastclick/lib/fastclick.js"></script>
+
 	<!-- AdminLTE App -->
 	<script src="{{asset('')}}template/dist/js/adminlte.min.js"></script>
 
-<!-- iCheck 1.0.1 -->
-<script src="{{asset('')}}template/plugins/iCheck/icheck.min.js"></script>
+	<!-- iCheck 1.0.1 -->
+	<script src="{{asset('')}}template/plugins/iCheck/icheck.min.js"></script>
 
 	<!-- Select2 -->
 	<script src="{{asset('')}}template/bower_components/select2/dist/js/select2.full.min.js"></script>
@@ -170,7 +164,7 @@
 	<!-- bootstrap time picker -->
 	<script src="{{asset('')}}template/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
-  	@yield('scripts')
+	@yield('scripts')
 
 
 </body>
