@@ -9,6 +9,8 @@ use App\Repositories\Store\PetsRepository;
 use App\Repositories\Store\CustomersRepository;
 use App\Http\Requests\Manager\Adoptions\AdoptionsRequest;
 use Illuminate\Support\Facades\Auth;
+use Postmark\PostmarkClient;
+use DateTime;
 class AdoptionFormController extends Controller
 {
     public function index($id)
@@ -36,6 +38,22 @@ class AdoptionFormController extends Controller
         $adoption->petid                = $id;
         $adoption->created_by           = Auth::user()->id;
         $adoption->save();
+        self::sendEmail(Pet::findOrFail($id), Auth::user());
         return redirect()->route('manager.adoptions')->with('message', 'Adoção cadastrada com sucesso!');
+    }
+
+    public static function sendEmail($pet, $user){
+
+        
+        $client = new PostmarkClient(env("POSTMARK_API_KEY"));
+        
+        // Send an email:
+        $sendResult = $client->sendEmailWithTemplate(
+          "victor@atrace.com.br",
+          $user->email,
+          4125041,
+          [
+          "pet_name" => $pet->Name,
+        ]);
     }
 }

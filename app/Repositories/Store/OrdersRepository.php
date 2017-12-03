@@ -169,6 +169,7 @@ class OrdersRepository
             $order->save();
             CartHelper::destory();
         }
+        return $order ;
     }
 
     public static function pay(OrderRequest $request){
@@ -183,6 +184,7 @@ class OrdersRepository
             $order->Subtotal = $subtotal;
             $order->save();
         }
+        return $order;
     }
 
     private static function getTotal($items){
@@ -191,7 +193,6 @@ class OrdersRepository
         if(isset($items)){
         
             foreach($items as $item){
-                error_log('GET TOTAL ' . $item->Total);
                 if(isset($item->UnitPrice) && isset($item->Quantity)){
                     $sum += $item->UnitPrice * $item->Quantity;
                 }
