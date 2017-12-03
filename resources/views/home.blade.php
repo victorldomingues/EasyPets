@@ -41,7 +41,13 @@
 			<!-- small box -->
 			<div class="small-box bg-green">
 				<div class="inner">
-					<h3>{{$dashboard->Orders * 100 / $dashboard->AllOrders }}
+				
+					<h3>
+					@if($dashboard->AllOrders  != 0)
+						{{$dashboard->Orders * 100 / $dashboard->AllOrders }}
+						@else
+						0
+						@endif
 						<sup style="font-size: 20px">%</sup>
 					</h3>
 
