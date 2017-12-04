@@ -52,7 +52,7 @@
 			</li>
 			<li>
 				<a href="#">
-					<i class=" fa fa-calendar "></i> {{$pet->Age}} @if($pet->Age > 1) Anos @else Ano @endif </a>
+					<i class=" fa fa-calendar "></i> {{$pet->Age}} </a>
 			</li>
 			<li style="text-align: right" pet="{{$pet->Id}}">
 
