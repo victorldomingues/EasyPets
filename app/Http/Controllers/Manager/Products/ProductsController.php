@@ -83,11 +83,11 @@ class ProductsController extends Controller
                 SELECT pi.ServerName from productimages pi where pi.deleted_at is null and pi.`Status` = 1 and pi.ProductId = p.Id LIMIT 1
             )as 'Image'
         from 
-            Products p 
-            left join Productmodels pm on pm.id = p.ProductModelId 
+            products p 
+            left join productmodels pm on pm.id = p.ProductModelId 
             left join productcategories pc on pc.id = p.ProductCategoryId
             left join productcolors pco on pco.id = p.ProductColorId
-            left join Providers pv on pv.id = p.ProviderId
+            left join providers pv on pv.id = p.ProviderId
         where 
             p.deleted_at is null 
         order by 
