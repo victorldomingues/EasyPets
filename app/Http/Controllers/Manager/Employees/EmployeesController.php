@@ -35,6 +35,7 @@ class EmployeesController extends Controller
     {
         $managers = DB::table('managers')
         ->join('users', 'users.id', '=', 'managers.id')
+        ->whereNull('users.deleted_at')
         ->select('managers.Role','users.Name','users.Email','users.Password','users.Type','users.Cpf','users.Id')
         ->orderBy('users.created_at', 'desc')
         ->get();
@@ -81,7 +82,7 @@ class EmployeesController extends Controller
             "first_name" => $request->name,
             "email" => $request->email,
             "password" => $password,
-            "host" => $request->getSchemeAndHttpHost(),
+            "host" =>  env("APP_URL").'/',
             ]);
 
         } 

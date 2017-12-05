@@ -143,7 +143,7 @@
 	<!-- this row will not appear when printing -->
 	<div class="row no-print">
 		<div class="col-xs-12">
-			<a href="invoice-print.html" target="_blank" class="btn btn-default">
+			<a onClick="window.print();return false" target="_blank" class="btn btn-default">
 				<i class="fa fa-print"></i> Imprimir</a>
 			{{--
 			<button type="button" class="btn btn-success pull-right">

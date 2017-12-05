@@ -81,7 +81,9 @@ Route::get('/manager/products/{id}/edit', 'Manager\Products\ProductsController@e
 
 Route::post('/manager/products/{id}/update', 'Manager\Products\ProductsController@update')->name('manager.products.update');
 
-Route::post('/manager/products/{id}/destory', 'Manager\Products\ProductsController@destroy')->name('manager.products.destroy');
+Route::post('/manager/products/{id}/destroy', 'Manager\Products\ProductsController@destroy')->name('manager.products.destroy');
+
+Route::get('/manager/products/{id}/destroy', 'Manager\Products\ProductsController@destroy')->name('manager.products.destroy');
 
 
 
@@ -99,7 +101,9 @@ Route::get('/manager/colors/{id}/edit', 'Manager\Products\ColorsController@edit'
 
 Route::post('/manager/colors/{id}/update', 'Manager\Products\ColorsController@update')->name('manager.colors.update');
 
-Route::post('/manager/colors/{id}/destory', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
+Route::post('/manager/colors/{id}/destroy', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
+
+Route::get('/manager/colors/{id}/destroy', 'Manager\Products\ColorsController@destroy')->name('manager.colors.destroy');
 
 
 
@@ -117,7 +121,9 @@ Route::get('/manager/models/{id}/edit', 'Manager\Products\ModelsController@edit'
 
 Route::post('/manager/models/{id}/update', 'Manager\Products\ModelsController@update')->name('manager.models.update');
 
-Route::post('/manager/models/{id}/destory', 'Manager\Products\ModelsController@destroy')->name('manager.models.destroy');
+Route::post('/manager/models/{id}/destroy', 'Manager\Products\ModelsController@destroy')->name('manager.models.destroy');
+
+Route::get('/manager/models/{id}/destroy', 'Manager\Products\ModelsController@destroy')->name('manager.models.destroy');
 
 
 
@@ -136,7 +142,9 @@ Route::get('/manager/categories/{id}/edit', 'Manager\Products\CategoriesControll
 
 Route::post('/manager/categories/{id}/update', 'Manager\Products\CategoriesController@update')->name('manager.categories.update');
 
-Route::post('/manager/categories/{id}/destory', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
+Route::post('/manager/categories/{id}/destroy', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
+
+Route::get('/manager/categories/{id}/destroy', 'Manager\Products\CategoriesController@destroy')->name('manager.categories.destroy');
 
 
 
@@ -154,7 +162,9 @@ Route::get('/manager/providers/{id}/edit', 'Manager\Providers\ProvidersControlle
 
 Route::post('/manager/providers/{id}/update', 'Manager\Providers\ProvidersController@update')->name('manager.providers.update');
 
-Route::post('/manager/providers/{id}/destory', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
+Route::post('/manager/providers/{id}/destroy', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
+
+Route::get('/manager/providers/{id}/destroy', 'Manager\Providers\ProvidersController@destroy')->name('manager.providers.destroy');
 
 
 // Manager pets
@@ -171,7 +181,9 @@ Route::get('/manager/pets/{id}/edit', 'Manager\Adoptions\PetsController@edit')->
 
 Route::post('/manager/pets/{id}/update', 'Manager\Adoptions\PetsController@update')->name('manager.pets.update');
 
-Route::post('/manager/pets/{id}/destory', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');
+Route::post('/manager/pets/{id}/destroy', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');
+
+Route::get('/manager/pets/{id}/destroy', 'Manager\Adoptions\PetsController@destroy')->name('manager.pets.destroy');
 
 Route::get('/manager/pets/{id}/remove-image', 'Manager\Adoptions\PetsController@removeImage')->name('manager.pets.removeImage');
 
@@ -190,7 +202,9 @@ Route::get('/manager/adoptions/{id}/edit', 'Manager\Adoptions\AdoptionsControlle
 
 Route::post('/manager/adoptions/{id}/update', 'Manager\Adoptions\AdoptionsController@update')->name('manager.adoptions.update');
 
-Route::post('/manager/adoptions/{id}/destory', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
+Route::post('/manager/adoptions/{id}/destroy', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
+
+Route::get('/manager/adoptions/{id}/destroy', 'Manager\Adoptions\AdoptionsController@destroy')->name('manager.adoptions.destroy');
 
 
 // Manager purchases or orders
@@ -203,7 +217,9 @@ Route::get('/manager/orders/{id}/edit', 'Manager\Orders\OrdersController@edit')-
 
 Route::post('/manager/orders/{id}/update', 'Manager\Orders\OrdersController@update')->name('manager.orders.update');
 
-Route::post('/manager/orders/{id}/destory', 'Manager\Orders\OrdersController@destroy')->name('manager.orders.destroy');
+Route::post('/manager/orders/{id}/destroy', 'Manager\Orders\OrdersController@destroy')->name('manager.orders.destroy');
+
+Route::get('/manager/orders/{id}/destroy', 'Manager\Orders\OrdersController@destroy')->name('manager.orders.destroy');
 
 
 
@@ -221,7 +237,9 @@ Route::get('/manager/employees/{id}/edit', 'Manager\Employees\EmployeesControlle
 
 Route::post('/manager/employees/{id}/update', 'Manager\Employees\EmployeesController@update')->name('manager.employees.update');
 
-Route::post('/manager/employees/{id}/destory', 'Manager\Employees\EmployeesController@destroy')->name('manager.employees.destroy');
+Route::post('/manager/employees/{id}/destroy', 'Manager\Employees\EmployeesController@destroy')->name('manager.employees.destroy');
+
+Route::get('/manager/employees/{id}/destroy', 'Manager\Employees\EmployeesController@destroy')->name('manager.employees.destroy');
 
 
 
@@ -239,5 +257,7 @@ Route::get('/manager/customers/{id}/edit', 'Manager\Customers\CustomerController
 
 Route::post('/manager/customers/{id}/update', 'Manager\Customers\CustomerController@update')->name('manager.customers.update');
 
-Route::post('/manager/customers/{id}/destory', 'Manager\Customers\CustomerController@destroy')->name('manager.customers.destroy');
+Route::post('/manager/customers/{id}/destroy', 'Manager\Customers\CustomerController@destroy')->name('manager.customers.destroy');
+
+Route::get('/manager/customers/{id}/destroy', 'Manager\Customers\CustomerController@destroy')->name('manager.customers.destroy');
 

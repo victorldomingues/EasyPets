@@ -84,11 +84,11 @@ class ProductsController extends Controller
                 SELECT pi.ServerName from productimages pi where pi.deleted_at is null and pi.`Status` = 1 and pi.ProductId = p.Id LIMIT 1
             )as 'Image'
         from 
-            Products p 
-            left join Productmodels pm on pm.id = p.ProductModelId 
+            products p 
+            left join productmodels pm on pm.id = p.ProductModelId 
             left join productcategories pc on pc.id = p.ProductCategoryId
             left join productcolors pco on pco.id = p.ProductColorId
-            left join Providers pv on pv.id = p.ProviderId
+            left join providers pv on pv.id = p.ProviderId
         where 
             p.deleted_at is null 
         order by 
@@ -120,7 +120,7 @@ class ProductsController extends Controller
         $product->productmodelid        = $request->productmodelid;
         $product->productcolorid        = $request->productcolorid;
         $product->providerid            = $request->providerid;
-        $product->unitprice             = $request->unitprice;
+        $product->unitprice             = floatval(str_replace(",",".", $request->unitprice));
 
         $product->deleted               = 0;
 
@@ -180,7 +180,7 @@ class ProductsController extends Controller
         $product->productmodelid        = $request->productmodelid;
         $product->productcolorid        = $request->productcolorid;
         $product->providerid            = $request->providerid;
-        $product->unitprice             = $request->unitprice;
+        $product->unitprice             = floatval(str_replace(",",".", $request->unitprice));
         $product->updated_by            = Auth::user()->id;
         $product->save();
         $this->saveImage($product);

@@ -1,5 +1,5 @@
 <div class="pet-single box box-solid">
-	<div class="widget-user-header">
+	<div class="widget-user-header" style=" min-height: 200px; max-height: 200px; overflow: hidden; height: 200px;">
 		@if(isset($images) && count($images) > 0)
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -34,7 +34,7 @@
 
 
 		<div class="box-tools">
-			<a href="{!! route('adoption.form', ['id'=>$pet->Id])  !!}" class="btn btn-box-tool add-to-cart" pet="{{$pet->Id}}" type="button">
+			<a href="{!! route('adoption.form', ['id'=>$pet->Id])  !!}" class="btn btn-box-tool add-to-cart" pet="{{$pet->Id}}" >
 				<i class="fa fa-heart "></i> Adotar
 			</a>
 		</div>
@@ -52,7 +52,7 @@
 			</li>
 			<li>
 				<a href="#">
-					<i class=" fa fa-calendar "></i> {{$pet->Age}} @if($pet->Age > 1) Anos @else Ano @endif </a>
+					<i class=" fa fa-calendar "></i> {{$pet->Age}} </a>
 			</li>
 			<li style="text-align: right" pet="{{$pet->Id}}">
 

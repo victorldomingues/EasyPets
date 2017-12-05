@@ -45,6 +45,7 @@
 
 									<p class="help-block">clique para adicionar uma nova imagem</p>
 								</div>
+								@isset($pet)
 								@if(isset($images) && count($images) > 0)
 								<div class="form-group">
 
@@ -89,7 +90,7 @@
 									@endif >
 								</div>
 								@endif
-
+									@endisset
 							</div>
 
 							<div class="col-md-8">

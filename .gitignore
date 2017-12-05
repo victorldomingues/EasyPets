@@ -15,3 +15,5 @@ yarn-error.log
 /nbproject/private/
 /layout
 .env
+.env.prod
+/config/database.prod.php

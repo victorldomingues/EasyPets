@@ -35,6 +35,7 @@ class CustomerController extends Controller
     {
         $customers = DB::table('customers')
         ->join('users', 'users.id', '=', 'customers.id')
+        ->whereNull('users.deleted_at')
         ->select('users.Id', 'users.Name' ,'customers.Birthday', 'customers.PublicPlace', 'customers.ZipCode', 'customers.Number', 'customers.Neighborhood', 'customers.City', 'customers.State', 'customers.Complement', 'customers.Lat', 'customers.Long')
         ->orderBy('users.created_at', 'desc')
         ->get();
@@ -74,7 +75,7 @@ class CustomerController extends Controller
             "first_name" => $request->name,
             "email" => $request->email,
             "password" => $password,
-            "host" => $request->getSchemeAndHttpHost(),
+            "host" => env("APP_URL").'/',
             ]);
 
         } 
@@ -131,7 +132,7 @@ class CustomerController extends Controller
   
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
+        $customer  =  User::findOrFail($id);
         $customer->updated_by    = Auth::user()->id;
         $customer->deleted_at    = new DateTime();
         $customer->save();
@@ -168,7 +169,6 @@ class CustomerController extends Controller
         $customer->lat               = $request->lat;
         $customer->long              = $request->long;
         $customer->save();
-        error_log('SALVANDO CUSTOMER');
         return $customer;
     }
 }

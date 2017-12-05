@@ -56,6 +56,6 @@ class AdoptionsRepository
             AND  adoptions.Id  = ".$id."
             ORDER BY Id DESC
             LIMIT 1
-        ");
+        ")[0];
     }
 }

@@ -43,10 +43,6 @@
 						@endif
 
 						@if( $manager->Role == 1 ) 
-						Estagiário						 
-						@endif
-
-						@if( $manager->Role == 2 ) 
 						Administrador						 
 						@endif
 						
@@ -54,7 +50,7 @@
 
 					<p class="text-muted text-center">
 
-						@if( $manager->Role == 0 || $manager->Role == 2)
+						@if($manager->Role == 1 || $manager->Role == 1)
 							<i class="fa fa-circle text-success"></i> 
 							Habilitado para alterações no sistema 
 						@else

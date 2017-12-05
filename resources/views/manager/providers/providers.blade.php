@@ -59,7 +59,7 @@
 											</li>
 											<li class="divider"></li>
 											<li>
-												<a href="#">Excluir</a>
+												<a href="{!! route('manager.providers.destroy', ['id'=>$provider->Id])  !!}">Excluir</a>
 											</li>
 
 										</ul>

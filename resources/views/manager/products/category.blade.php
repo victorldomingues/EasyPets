@@ -62,7 +62,7 @@
 											</li>
 											<li class="divider"></li>
 											<li>
-												<a href="#">Excluir</a>
+												<a href="{!! route('manager.categories.destroy', ['id'=>$category->Id])  !!}">Excluir</a>
 											</li>
 
 										</ul>

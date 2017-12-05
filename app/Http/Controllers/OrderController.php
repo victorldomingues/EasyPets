@@ -16,6 +16,7 @@ use DateTime;
 use App\Http\Requests\Store\Cart\CartItemRequest ;
 use App\Http\Requests\Store\Cart\OrderRequest ;
 use App\Repositories\Store\OrdersRepository;
+use Postmark\PostmarkClient;
 class OrderController extends Controller
 {
     public function finish(OrderRequest $request){
@@ -24,10 +25,8 @@ class OrderController extends Controller
             return redirect()->back()->withErrors(['Usuário não cadastrdo']);
             // return response()->json(['Valid' => false, 'Message' => 'Usuário não autenticado']);
         }else{
-          
-            OrdersRepository::finishOrder($request);
-          
             // return response()->json(['Valid' => true]);
+            $order = OrdersRepository::finishOrder($request);
             return  redirect()->route('checkout')->with('message', 'Compra finalizada escolha a forma de pagamento');
         }
     }
@@ -37,8 +36,38 @@ class OrderController extends Controller
         if($user  ==  null){
              return response()->json(['Valid' => false]);
         }else{
-            OrdersRepository::pay($request);
+            $order = OrdersRepository::pay($request);
+            self::sendEmail(Auth::user(), $order,  OrdersRepository::getOrderItemsByOrderId($order->Id));
              return response()->json(['Valid' => true]);
         }
     }
+
+    private static function sendEmail($user, $order, $orderItems){
+        $client = new PostmarkClient(env("POSTMARK_API_KEY"));
+        $date =  new DateTime();
+
+        $orderDetail = [];
+
+        foreach($orderItems as  $item){
+            array_push($orderDetail, [
+                "quantity" => $item->Quantity,
+                "name" => $item->Name,
+                "id" => $item->Id,
+                "subtotal" => number_format(($item->UnitPrice * $item->Quantity), 2, ',', '.')  ,
+            ]);
+        }
+    
+        // Send an email:
+        $sendResult = $client->sendEmailWithTemplate(
+          "victor@atrace.com.br",
+          $user->email,
+          4124843,
+          [
+          "date" =>  $date->format('d/m/Y'),
+          "user_name" => $user->name,
+          "order" => $order->Id,
+          "order_detail" =>  $orderDetail ,
+          "total" => number_format(($order->Total), 2, ',', '.'),
+        ]);
+    } 
 }
