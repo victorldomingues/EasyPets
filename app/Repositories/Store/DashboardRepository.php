@@ -20,7 +20,7 @@ class DashboardRepository
                 select COUNT(*) from  adoptions where adoptions.deleted_at is null 
             ) as Adoptions,
             (
-                select COUNT(customers.Id) from  customers inner join users on users.id  = customers.id   where  users.deleted_at is null and users.Type  =  1
+                select COUNT(customers.Id) from  customers inner join users on users.id  = customers.id
             ) as Customers
     ";
 

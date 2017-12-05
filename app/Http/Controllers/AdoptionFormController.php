@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Pet;
-use App\Models\PetImage;
+use App\Models\Petimage;
 use App\Models\Adoption;
 use Illuminate\Http\Request;
 use App\Repositories\Store\PetsRepository;

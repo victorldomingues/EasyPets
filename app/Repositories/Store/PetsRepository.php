@@ -5,7 +5,7 @@ namespace App\Repositories\Store;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Models\Adoption;
-use App\Models\PetImage;
+use App\Models\Petimage;
 use App\Models\Pet;
 use App\User;
 use DateTime;
