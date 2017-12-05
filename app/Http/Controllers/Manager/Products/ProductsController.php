@@ -118,7 +118,7 @@ class ProductsController extends Controller
         $product->productmodelid        = $request->productmodelid;
         $product->productcolorid        = $request->productcolorid;
         $product->providerid            = $request->providerid;
-        $product->unitprice             = $request->unitprice;
+        $product->unitprice             = floatval(str_replace(",",".", $request->unitprice));
 
         $product->deleted               = 0;
 
@@ -176,7 +176,7 @@ class ProductsController extends Controller
         $product->productmodelid        = $request->productmodelid;
         $product->productcolorid        = $request->productcolorid;
         $product->providerid            = $request->providerid;
-        $product->unitprice             = $request->unitprice;
+        $product->unitprice             = floatval(str_replace(",",".", $request->unitprice));
         $product->updated_by            = Auth::user()->id;
         $product->save();
         $this->saveImage($product);

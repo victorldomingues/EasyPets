@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\CartHelper;
 use App\Helpers\OrderStateHelper;
 use DB;
-use App\Models\PurchaseOrder;
-use App\Models\OrderItem;
+use App\Models\Purchaseorder;
+use App\Models\Orderitem;
 use App\Models\Product;
 use App\User;
 use DateTime;
@@ -27,14 +27,14 @@ class OrdersRepository
         $user  =  Auth::user();
         $product  = Product::findOrFail($request->productid);
         $quantity  =  ($request->quantity != null && $request->quantity > 0 ) ? $request->quantity : 1;
-       $currentCartItem  = self::getOrderItemByProductId($product->Id, $order->Id);
-       $cartItem  =  new OrderItem;
+       $currentCartItem  = self::getOrderitemByProductId($product->Id, $order->Id);
+       $cartItem  =  new Orderitem;
        if($currentCartItem  !=  null){
-        $cartItem  =  OrderItem::FindOrFail($currentCartItem->Id);
+        $cartItem  =  Orderitem::FindOrFail($currentCartItem->Id);
        }
     
         if($cartItem == null){
-            $cartItem  =  new OrderItem;
+            $cartItem  =  new Orderitem;
             $cartItem->deleted = 0;
             $cartItem->quantity =  $quantity;
         }else{
@@ -63,7 +63,7 @@ class OrdersRepository
         if($order  ==  null){
             $order  =  self::storeOrder();
         }
-        $order  = PurchaseOrder::findOrFail($order->Id);
+        $order  = Purchaseorder::findOrFail($order->Id);
         return $order;
     }
 
@@ -75,14 +75,14 @@ class OrdersRepository
         ->orderBy('purchaseorders.created_at', 'desc')
         ->first() ?? null;
         if($order ==  null) return null;
-        $order  = PurchaseOrder::findOrFail($order->Id);
+        $order  = Purchaseorder::findOrFail($order->Id);
         return $order;
     }
 
     public static function getCart(){
         return CartHelper::get();
     }
-    public static function getOrderItems(){
+    public static function getOrderitems(){
         $order = self::getOrder();
         $products  =  DB::table("purchaseorders")
         ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
@@ -128,7 +128,7 @@ class OrdersRepository
 
     public static function storeOrder(){
         $user  =  Auth::user();
-        $order  =  new PurchaseOrder;
+        $order  =  new Purchaseorder;
         $order->Cart  =  self::getCart();
         $order->State  =  OrderStateHelper::$open;
         $order->Delivery  =  false;
@@ -146,7 +146,7 @@ class OrdersRepository
         return $order;
     }
 
-    public static function getOrderItemByProductId ($productId, $orderId){
+    public static function getOrderitemByProductId ($productId, $orderId){
         return   DB::table("orderitems")
         ->where('ProductId', '=', $productId)
         ->where('OrderId', '=', $orderId)
@@ -158,7 +158,7 @@ class OrdersRepository
         $user  =  Auth::user();
         $order  =  self::getOrder();
         if(isset($user->id) && isset($order->Id)){
-            $orderItems  =  self::getOrderItems();
+            $orderItems  =  self::getOrderitems();
             $subtotal =  self::getTotal($orderItems);
             $order->CustomerId  = $user->id;
             $order->State =  OrderStateHelper::$finished;
@@ -237,7 +237,7 @@ class OrdersRepository
         ->first();
     }
 
-    public static function getOrderItemsByOrderId($id){
+    public static function getOrderitemsByOrderId($id){
         $products  =  DB::table("purchaseorders")
         ->join("orderitems", "orderitems.orderid" , "=", "purchaseorders.id" )
         ->join("products", "orderitems.productid" , "=", "products.id" )

@@ -1,5 +1,5 @@
 <div class="pet-single box box-solid">
-	<div class="widget-user-header">
+	<div class="widget-user-header" style=" min-height: 200px; max-height: 200px; overflow: hidden; height: 200px;">
 		@if(isset($images) && count($images) > 0)
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
