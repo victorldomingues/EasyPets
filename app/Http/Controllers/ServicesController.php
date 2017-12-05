@@ -14,6 +14,7 @@ class ServicesController extends Controller
         select 
             p.Id,
             p.Name,
+            p.SLug,
             p.Description,
             p.created_at,
             p.updated_at,

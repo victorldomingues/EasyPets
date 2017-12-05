@@ -20,6 +20,7 @@ class ProductsController extends Controller
         select 
             p.Id,
             p.Name,
+            p.Slug,
             p.Description,
             p.created_at,
             p.updated_at,
@@ -54,10 +55,13 @@ class ProductsController extends Controller
 
     public function detail($id)
     {
-        $product = Product::find($id);
+        $matches = array();
+        preg_match('/--p(\d)/', $id, $matches);
+
+        $product = Product::find($matches[1]);
         $category = Productcategory::find($product->ProductCategoryId);
         $color = Productcolor::find($product->ProductColorId);
-        $images = Productimage::where('ProductId',$id)->get();
+        $images = Productimage::where('ProductId',$matches[1])->get();
         $similarProducts = self::similarProducts($product);
         
         return view(
@@ -65,6 +69,7 @@ class ProductsController extends Controller
             array(
                 'product'       => $product, 
                 'title'         => $product->Name,
+                'slug'          => $product->Slug,
                 'description'   => $product->Description, 
                 'status'        => $product->Status, 
                 'price'         => $product->UnitPrice,
@@ -93,6 +98,7 @@ class ProductsController extends Controller
             $all[] = (object) array(
                 'Id' => $product->Productid,
                 'Name' => $product->Name,
+                'Slug' => $product->Slug,
                 'Description' => $product->Description,
                 'ColorName' => Productcolor::find($product->ProductColorId)->Name,
                 'CategoryName' => Productcategory::find($product->ProductCategoryId)->Name,

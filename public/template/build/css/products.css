@@ -1,66 +1,76 @@
 
 .product-single .widget-user-header{
-    height: 150px;
-    width: 100%;
-    background: #fff;
-    padding: 5px;
+	height: 150px;
+	width: 100%;
+	background: #fff;
+	padding: 5px 0;
 }
 
 .product-single .widget-user-header img {
-    display: block;
-    width: auto;
-    max-height: 150px;
-    margin: 0 auto;
+	display: block;
+	width: auto;
+	max-height: 150px;
+	margin: 0 auto;
+}
+
+.product-single .description a{
+	padding:10px;
+	font-size: 14px;
+	height: 40px;
+	text-overflow: ellipsis;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .product-details .header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	display: flex;
 }
 
 .product-details .header .price {
-    font-size: 1.5em;
-    margin: 0;
-    padding: 0;
+	font-size: 1.5em;
+	margin: 0;
+	padding: 0;
 }
 
 .product-details .header .price li{
-    margin: 0;
+	margin: 0;
 }
 
 .product-details .header .price .current {
-    font-weight: 700;
-    color: #17a2b8;
-    margin-right: 5px;
-    display: inline-block;
+	font-weight: 700;
+	color: #17a2b8;
+	margin-right: 5px;
+	display: inline-block;
 }
 
 .product-details .header .price .original {
-    font-weight: 300;
-    color: #aaa;
-    display: inline-block;
-    text-decoration: line-through;
+	font-weight: 300;
+	color: #aaa;
+	display: inline-block;
+	text-decoration: line-through;
 }
 
 .product-details .header .review {
-    flex-direction: row;
-    align-items: center;
-    display: flex;
+	flex-direction: row;
+	align-items: center;
+	display: flex;
 }
 
 .product-details .header .review .rate {
-    margin: 0;
-    margin-right: 10px;
+	margin: 0;
+	margin-right: 10px;
 }
 
 .product-details .header .review span{
-    text-transform: uppercase;
-    font-size: 0.8em;
-    font-weight: 500;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	font-weight: 500;
 }
 
 .product-details .cta-buy i {
-    margin-right: 10px;
+	margin-right: 10px;
 }

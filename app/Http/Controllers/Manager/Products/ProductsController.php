@@ -67,6 +67,7 @@ class ProductsController extends Controller
         select 
             p.Id,
             p.Name,
+            p.Slug,
             p.Description,
             p.created_at,
             p.updated_at,
@@ -112,6 +113,7 @@ class ProductsController extends Controller
         $product = new Product;
 
         $product->name                  = $request->name;
+        $product->slug                  = $request->slug;
         $product->description           = $request->description;
         $product->status                = $request->status;
         $product->productcategoryid     = $request->productcategoryid;
@@ -141,6 +143,7 @@ class ProductsController extends Controller
         ->leftJoin('providers', 'providers.id', '=', 'products.providerid')
         ->select(   'products.Id',
                     'products.Name', 
+                    'products.Slug', 
                     'products.Description', 
                     'products.Status', 
                     'products.UnitPrice', 
@@ -170,6 +173,7 @@ class ProductsController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->name                  = $request->name;
+        $product->slug                  = $request->slug;
         $product->description           = $request->description;
         $product->status                = $request->status;
         $product->productcategoryid     = $request->productcategoryid;

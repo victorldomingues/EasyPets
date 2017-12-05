@@ -15,6 +15,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $Id
  * @property string $Name
  * @property string $Description
+ * @property string $Slug
  * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property int $updated_by
@@ -59,6 +60,7 @@ class Product extends Eloquent
 		'deleted_by',
 		'Status',
 		'Deleted',
+		'Slug',
 		'ProductCategoryId',
 		'ProductModelId',
 		'ProductColorId',

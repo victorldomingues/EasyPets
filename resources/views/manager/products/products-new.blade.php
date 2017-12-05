@@ -99,11 +99,22 @@
 							</div>
 
 							<div class="col-md-8">
-
-								<div class="form-group">
-									<label for="">Nome do produto</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($product) value="{{$product->Name}}"
-									 @endisset required>
+							
+								<div class="row">
+									<div class="col-sm-8">
+										<div class="form-group">
+											<label for="">Nome do produto</label>
+											<input type="text" class="form-control" id="name" name="name" placeholder="(Obrigatório)" @isset($product) value="{{$product->Name}}"
+											@endisset required>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="">URL do produto</label>
+											<input type="text" class="form-control" id="slug" name="slug" placeholder="(Obrigatório)" @isset($product) value="{{$product->Slug}}"
+											@endisset required>
+										</div>
+									</div>
 								</div>
 
 								<div class="row">
@@ -278,6 +289,26 @@
 @endisset @endsection @section('scripts')
 <!-- Page script -->
 <script>
+
+	function slugfy(param) {
+		var str = param.replace(/^\s+|\s+$/g, ''); // trim
+		str = str.toLowerCase();
+
+		// remove accents, swap ñ for n, etc
+		var from = "àáäâãèéëêìíïîòóöôõùúüûñç·/_,:;";
+		var to   = "aaaaaeeeeiiiiooooouuuunc------";
+
+		for (var i=0, l=from.length ; i<l ; i++)
+			str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+
+
+		str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+			.replace(/\s+/g, '-') // collapse whitespace and replace by -
+			.replace(/-+/g, '-'); // collapse dashes
+
+		return str;
+	}
+
 	$(function () {
     
     $('.select2').select2()
@@ -297,6 +328,14 @@
       checkboxClass: 'icheckbox_flat-green',
       radioClass   : 'iradio_flat-green'
     })
+
+	$('input#name').change(function(val) {
+		$('input#slug').val(slugfy($(this).val()));
+	})
+
+	$( "input#name" ).keyup(function() {
+		$('input#slug').attr('placeholder',slugfy($(this).val()));
+	})
 
 	$('body').on('click', '.remove-image', function(e){
 		e.preventDefault();

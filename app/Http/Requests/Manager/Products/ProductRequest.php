@@ -31,6 +31,7 @@ class ProductRequest extends FormRequest
 
     protected $fillable = [
 		'Name',
+		'Slug',
 		'Description',
 		'Status',
 		'Deleted',

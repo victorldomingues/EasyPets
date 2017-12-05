@@ -51,10 +51,10 @@
 @isset($similars[0])
 	<section class="products row">
 		<section class="content-header ">
-			<h1>
+			<h3>
 				Compre
 				<small>Também</small>
-			</h1>
+			</h3>
 		</section>
 
 		@foreach($similars as $similar)

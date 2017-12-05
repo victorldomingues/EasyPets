@@ -15,8 +15,10 @@
 	</div>
 	<div class="box-body no-padding">
 		<ul class="nav nav-pills nav-stacked">
-			<li style="padding:10px; font-size: 10px; height: 40px">
-				{{$product->Description}}
+			<li class="description">
+				<a href="@isset($product->Image)/product/{{$product->Slug}}--p{{$product->Id}}@endisset" title="Saiba mais" >
+					{{$product->Description}} 
+				</a>
 			</li>
 			<li>
 				<a href="#">

@@ -14,6 +14,7 @@ class WelcomeController extends Controller
         select 
             p.Id,
             p.Name,
+            p.Slug,
             p.Description,
             p.created_at,
             p.updated_at,
@@ -45,6 +46,7 @@ class WelcomeController extends Controller
         select 
             p.Id,
             p.Name,
+            p.Slug,
             p.Description,
             p.created_at,
             p.updated_at,
